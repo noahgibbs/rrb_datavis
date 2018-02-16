@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Discourse Full-Run Times w/ Rails Ruby Bench by Ruby Version and Random Seed </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+var graph_data = [
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234, 0%",
+        "fill": "#ecb796",
+        "time": 30.014246886999988
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234, 10%",
+        "fill": "#ecb796",
+        "time": 33.2846258264
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234, 50%",
+        "fill": "#ecb796",
+        "time": 35.314509905999984
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234, 90%",
+        "fill": "#ecb796",
+        "time": 36.13216516609997
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234, 100%",
+        "fill": "#ecb796",
+        "time": 36.85245255200002
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234, 0%",
+        "fill": "#e7cbe6",
+        "time": 29.438268398999995
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234, 10%",
+        "fill": "#e7cbe6",
+        "time": 32.51860599119999
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234, 50%",
+        "fill": "#e7cbe6",
+        "time": 34.5680301365
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234, 90%",
+        "fill": "#e7cbe6",
+        "time": 35.74119401379999
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234, 100%",
+        "fill": "#e7cbe6",
+        "time": 36.75729554599998
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222, 0%",
+        "fill": "#dc8f70",
+        "time": 31.381098419999994
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222, 10%",
+        "fill": "#dc8f70",
+        "time": 34.18083207589999
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222, 50%",
+        "fill": "#dc8f70",
+        "time": 35.8993937665
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222, 90%",
+        "fill": "#dc8f70",
+        "time": 36.81432995120002
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222, 100%",
+        "fill": "#dc8f70",
+        "time": 37.55827859399999
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222, 0%",
+        "fill": "#d8aad6",
+        "time": 29.716029910000003
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222, 10%",
+        "fill": "#d8aad6",
+        "time": 33.07951513690001
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222, 50%",
+        "fill": "#d8aad6",
+        "time": 35.04456184100001
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222, 90%",
+        "fill": "#d8aad6",
+        "time": 36.25249924009997
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222, 100%",
+        "fill": "#d8aad6",
+        "time": 37.45165828000001
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333, 0%",
+        "fill": "#b2a470",
+        "time": 30.83652144900001
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333, 10%",
+        "fill": "#b2a470",
+        "time": 34.093134290699986
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333, 50%",
+        "fill": "#b2a470",
+        "time": 35.89984557649999
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333, 90%",
+        "fill": "#b2a470",
+        "time": 36.89693191190001
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333, 100%",
+        "fill": "#b2a470",
+        "time": 38.031552618
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333, 0%",
+        "fill": "#a888c2",
+        "time": 29.386365274000024
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333, 10%",
+        "fill": "#a888c2",
+        "time": 33.039585870299994
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333, 50%",
+        "fill": "#a888c2",
+        "time": 34.73574401950001
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333, 90%",
+        "fill": "#a888c2",
+        "time": 36.19106472789998
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333, 100%",
+        "fill": "#a888c2",
+        "time": 37.28920840699999
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678, 0%",
+        "fill": "#92875a",
+        "time": 30.48560240299999
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678, 10%",
+        "fill": "#92875a",
+        "time": 33.228406438200004
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678, 50%",
+        "fill": "#92875a",
+        "time": 35.2097231235
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678, 90%",
+        "fill": "#92875a",
+        "time": 36.20605386560002
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678, 100%",
+        "fill": "#92875a",
+        "time": 37.34157837600001
+      },
+    
+  
+
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678, 0%",
+        "fill": "#9dc2d3",
+        "time": 29.490305410000005
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678, 10%",
+        "fill": "#9dc2d3",
+        "time": 32.655963970300014
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678, 50%",
+        "fill": "#9dc2d3",
+        "time": 34.66509053849998
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678, 90%",
+        "fill": "#9dc2d3",
+        "time": 35.694689764
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678, 100%",
+        "fill": "#9dc2d3",
+        "time": 36.485080489
+      },
+    
+  
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([28.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Full-Run Times by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "tc_runs/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys
+  #cohorts = ["ext-mri-2.5.0", "ext-mri-jemalloc-2.5.0"]
+  #cohorts = ["ext-mri-2.5.0,,", "ext-mri-2.5.0,/usr/lib/libtcmalloc_minimal.so.4,", "ext-mri-jemalloc-2.5.0,,", "ext-mri-jemalloc-2.5.0,/usr/lib/tcmalloc_minimal.so.4,800000"]
+  cohort_aliases = {
+    "ext-mri-2.5.0,," => "plain-ruby",
+    "ext-mri-2.5.0,/usr/lib/libtcmalloc_minimal.so.4," => "tcmalloc",
+    #"ext-mri-jemalloc-2.5.0,/usr/lib/tcmalloc_minimal.so.4,800000" => "tcmalloc-tuned",
+    "ext-mri-jemalloc-2.5.0,," => "jemalloc",
+  }
+  cohorts = ["ext-mri-2.5.0,,", "ext-mri-2.5.0,/usr/lib/libtcmalloc_minimal.so.4,", "ext-mri-jemalloc-2.5.0,,"]
+
+  percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  %>
+
+<%
+fill_by_ruby_and_percentile = {
+  "plain-ruby" => {
+    # From Rickshaw Spectrum2000 palette
+    "0" => '#57306f',
+    "10" => '#514c76',
+    "50" => '#646583',
+    "90" => '#738394',
+    "100" => '#6b9c7d',
+  },
+  "tcmalloc" => {
+    "0" => '#84b665',
+    "10" => '#a7ca50',
+    "50" => '#bfe746',
+    "90" => '#e2f528',
+    "100" => '#fff726',
+  },
+  "tcmalloc-tuned" => {
+    "0" => '#ecdd00',
+    "10" => '#d4b11d',
+    "50" => '#de8800',
+    "90" => '#de4800',
+    "100" => '#57306f',
+  },
+  "jemalloc" => {
+    "0" => '#c91515',
+    "10" => '#9a0000',
+    "50" => '#7b0429',
+    "90" => '#580839',
+    "100" => '#31082b',
+  },
+}
+
+def format_speedup(speedup)
+  basic = "%.2f" % speedup
+  color = ""
+  if speedup < 0
+    color = "red"
+  else
+    color = "green"
+  end
+  "&lt;font color=\"#{color}\"&gt;#{basic}%&lt;/font&gt;"
+end
+%>
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+    <% percentiles.each do |percentile| %>
+      {
+        "col_title": "<%= cohort_aliases[cohort] %>, <%= percentile %>%",
+        "fill": <%= fill_by_ruby_and_percentile[cohort_aliases[cohort]][percentile].inspect %>,
+        "time": <%= cohort_data["processed"]["cohort"][cohort]["run_percentiles"][percentile].inspect %>
+      },
+    <% end %>
+    {
+      "col_title": "<%= cohort_aliases[cohort] %> ------",
+    },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([0.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>
+
+<p></p><p></p><p></p><p></p>
+<hr/>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt;Percentile&lt;/th&gt;
+      &lt;th&gt;CRuby 2.5.0&lt;/th&gt;
+      &lt;th&gt;2.5.0 w/ jemalloc&lt;/th&gt;
+      &lt;th&gt;2.5.0 w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;speedup w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;speedup w/ jemalloc&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      <% percentiles.each do |percentile|
+           baseline = cohort_data["processed"]["cohort"]["ext-mri-2.5.0,,"]["run_percentiles"][percentile]
+           jemalloc = cohort_data["processed"]["cohort"]["ext-mri-jemalloc-2.5.0,,"]["run_percentiles"][percentile]
+           tcmalloc = cohort_data["processed"]["cohort"]["ext-mri-2.5.0,/usr/lib/libtcmalloc_minimal.so.4,"]["run_percentiles"][percentile]
+           jemalloc_speedup = (baseline - jemalloc.to_f) * 100.0 / baseline
+           tcmalloc_speedup = (baseline - tcmalloc.to_f) * 100.0 / baseline
+      %>
+        &lt;tr&gt;
+          &lt;td&gt; <%= percentile %>% &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % baseline %> sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % jemalloc %> sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % tcmalloc %> sec &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(tcmalloc_speedup) %> &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(jemalloc_speedup) %> &lt;/td&gt;
+        &lt;/tr&gt;
+      <% end %>
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;CRuby 2.5.0&lt;/th&gt;
+      &lt;th&gt;jemalloc&lt;/th&gt;
+      &lt;th&gt;tcmalloc&lt;/th&gt;
+      &lt;th&gt;increase w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;increase w/ jemalloc&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      <% 
+           baseline = cohort_data["processed"]["cohort"]["ext-mri-2.5.0,,"]["throughput_median"]
+           jemalloc = cohort_data["processed"]["cohort"]["ext-mri-jemalloc-2.5.0,,"]["throughput_median"]
+           tcmalloc = cohort_data["processed"]["cohort"]["ext-mri-2.5.0,/usr/lib/libtcmalloc_minimal.so.4,"]["throughput_median"]
+           jemalloc_speedup = (jemalloc.to_f - baseline) * 100.0 / baseline
+           tcmalloc_speedup = (tcmalloc.to_f - baseline) * 100.0 / baseline
+      %>
+        &lt;tr&gt;
+          &lt;td&gt; Median Throughput &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % baseline %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % jemalloc %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % tcmalloc %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(tcmalloc_speedup) %> &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(jemalloc_speedup) %> &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>

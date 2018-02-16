@@ -1,0 +1,222 @@
+<!-- Embeddable, not full-page -->
+
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/graph.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/detail.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/legend.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/extensions.css"> -->
+
+<!-- Note: Rickshaw uses D3.js version 3, not 4 -->
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.shutterstock.com/rickshaw/rickshaw.min.js"></script>
+
+<!-- Also older versions for this example. TODO: see if we can remove or update these... -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+<div class="ruby_graphs"></div>
+
+<h1>Request Speed After Warmup For Ruby 2.0.0</h1>
+<div class="chart" id="chart20"></div>
+<div class="legend" id="legend20"></div>
+
+<h1>Request Speed After Warmup For Ruby 2.1.10</h1>
+<div class="chart" id="chart21"></div>
+<div class="legend" id="legend21"></div>
+
+<h1>Request Speed After Warmup For Ruby 2.2.7</h1>
+<div class="chart" id="chart22"></div>
+<div class="legend" id="legend22"></div>
+
+<h1>Request Speed After Warmup For Ruby 2.3.4</h1>
+<div class="chart" id="chart23"></div>
+<div class="legend" id="legend23"></div>
+
+<style media="screen" type="text/css">
+.chart {
+        display: inline-block;
+}
+.legend {
+        display: inline-block;
+        position: relative;
+        left: 8px;
+}
+.legend_container {
+        position: absolute;
+        right: 0;
+        bottom: 26px;
+        width: 0;
+}
+.chart_container {
+        position: relative;
+        display: inline-block;
+}
+.rickshaw_graph .detail {
+        left: -1000;
+}
+.chart {
+        border: 1px solid #f0f0f0;
+}
+#side_panel {
+        padding: 0 20px 20px 0;
+        width: 240px;
+        display: inline-block;
+        vertical-align: top;
+}
+#side_panel section {
+        color: #505050;
+        font-size: 12px;
+}
+#side_panel section h6 {
+        margin: 0 0 1em 0;
+        font-size: 12px;
+        font-weight: normal;
+}
+#side_panel .ui-slider-horizontal {
+        height: 1px !important;
+        border-color: #e0e0e0;
+        margin-bottom: 10px;
+}
+#side_panel .ui-slider-handle {
+        border-color: #a0a0a0;
+        height: 9px !important;
+        width: 9px !important;
+        top: -5px !important;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+}
+.legend {
+        background-color: white;
+        margin-left: 0;
+        padding: 0;
+        left: 0;
+}
+.legend .label {
+        color: #404040;
+}
+.legend .action {
+        color: black;
+        opacity: 0.5;
+}
+.legend ul {
+        padding: 0;
+}
+
+section {
+        border: none;
+        border-top: 1px solid #eaeaea;
+        padding: 15px 0;
+}
+label.disabled {
+        opacity: 0.4;
+}
+#renderer_form.toggler {
+        display: block;
+        margin: 0;
+}
+#renderer_form.toggler input[type=radio]:checked {
+        outline: 2px solid steelblue;
+}
+#renderer_form.toggler input[type=radio] {
+        -moz-appearance: button;
+        background: white;
+        margin: 0 7px;
+        width: 39px;
+        height: 26px;
+        position: absolute;
+}
+#renderer_form.toggler label {
+        display: inline-block;
+        padding: 0;
+        width: 39px;
+        padding-top: 27px;
+        text-align: center;
+        font-size: 10px;
+        color: #808080;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 0 7px;
+        cursor: pointer;
+}
+#interpolation_form,
+#offset_form {
+        vertical-align: top;
+        display: inline-block;
+        width: 45%;
+}
+#interpolation_form label,
+#offset_form label {
+        display: block;
+}
+</style>
+
+<script>
+
+var palette = new Rickshaw.Color.Palette();
+var percentile_color = {
+  "0": palette.color(),
+  "1": palette.color(),
+  "5": palette.color(),
+  "10": palette.color(),
+  "25": palette.color(),
+  "50": palette.color(),
+  "75": palette.color(),
+  "90": palette.color(),
+  "95": palette.color(),
+  "99": palette.color(),
+  "100": palette.color()
+};
+
+function ruby_warmup_graph(graph_data) {
+  var top_div = $(".ruby_graphs");
+  var graph_div = top_div.append("<div class=\"chart\"></div>");
+  var legend_div = top_div.append("<div class=\"legend\"></div>");
+
+  var graph = new Rickshaw.Graph( {
+          element: graph_div,
+          width: 640,
+          height: 480,
+          unstack: true,
+          //gapSize: 0.20,
+          renderer: 'bar',
+          series: graph_data
+  } );
+
+  var hoverDetail = new Rickshaw.Graph.HoverDetail( { graph: graph, xFormatter: function(x) { return ""; } } );
+
+  var legend = new Rickshaw.Graph.Legend( { element: legend_div, graph: graph });
+
+  var xAxis = new Rickshaw.Graph.Axis.Time({ graph: graph });
+  var yAxis = new Rickshaw.Graph.Axis.Y({ graph: graph });
+
+  graph.render();
+  xAxis.render();
+  yAxis.render();
+
+};
+
+<%
+   require "json"
+
+   warmup_data = JSON.parse(File.read "warmups/process_output.json")
+
+   #startup_20_15 = startup_data["processed"]["cohort"]["2.0.0,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+   #startup_21_15 = startup_data["processed"]["cohort"]["2.1.10,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+   #startup_22_15 = startup_data["processed"]["cohort"]["2.2.7,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+   #startup_23_15 = startup_data["processed"]["cohort"]["2.3.4,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+
+   %>
+
+graph_data = []
+<% times["1.5"].keys.each_with_index do |ruby_ver, idx| %>
+  graph_data.push({ name: "Discourse 1.5.0 Startup w/ Ruby <%= ruby_ver %>", data: [ { x: <%= idx * 0.4 %>, y: <%= times["1.5"][ruby_ver] %>} ], color: palette.color() });
+<% end %>
+<% times["1.8"].keys.each_with_index do |ruby_ver, idx| %>
+  graph_data.push({ name: "Discourse 1.8.0 Startup w/ Ruby <%= ruby_ver %>", data: [ { x: <%= idx * 0.4 + 2%>, y: <%= times["1.8"][ruby_ver] %>} ], color: palette.color() });
+<% end %>
+
+//Rickshaw.Series.zeroFill(graph_data);
+
+ruby_warmup_graph(graph_data);
+
+</script>

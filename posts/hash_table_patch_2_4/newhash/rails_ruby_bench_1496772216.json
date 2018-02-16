@@ -1,0 +1,52 @@
+{
+  "version": 2,
+  "settings": {
+    "startup_iters": 20,
+    "random_seed": 16541799507913229037,
+    "worker_iterations": 0,
+    "warmup_iterations": 0,
+    "workers": 30,
+    "puma_processes": 10,
+    "puma_threads": 6,
+    "port_num": 4567,
+    "out_dir": "newhash/",
+    "discourse_revision": "02fb86916f5265ad8318c4415229753428c68eaf"
+  },
+  "environment": {
+    "RUBY_VERSION": "2.5.0"
+  },
+  "startup": {
+    "times": [
+      7.231185452,
+      7.209661168,
+      7.327663823,
+      7.216147482,
+      7.273431748,
+      7.284605386,
+      7.33100341,
+      7.245814176,
+      7.316346379,
+      7.208699702,
+      7.381500747,
+      7.29948874,
+      7.286982349,
+      7.419104585,
+      7.335798052,
+      7.255802958,
+      7.268068455,
+      7.2160973,
+      7.24035785,
+      7.281152237
+    ]
+  },
+  "warmup": {
+    "times": [
+
+    ]
+  },
+  "requests": {
+    "times": [
+
+    ]
+  }
+}

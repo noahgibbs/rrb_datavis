@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Full-Run Times by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+var graph_data = [
+  
+    
+      {
+        "col_title": "Ruby ext-mri-2.4.3, 0%",
+        "fill": "#57306f",
+        "time": 29.173658073999988
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.4.3, 10%",
+        "fill": "#514c76",
+        "time": 32.25207935869999
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.4.3, 50%",
+        "fill": "#646583",
+        "time": 33.98352728100002
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.4.3, 90%",
+        "fill": "#738394",
+        "time": 35.147384965
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.4.3, 100%",
+        "fill": "#6b9c7d",
+        "time": 36.772333499000005
+      },
+    
+  
+    
+      {
+        "col_title": "Ruby ext-mri-2.5.0, 0%",
+        "fill": "#c91515",
+        "time": 26.99349284600001
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.5.0, 10%",
+        "fill": "#9a0000",
+        "time": 30.731887479599994
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.5.0, 50%",
+        "fill": "#7b0429",
+        "time": 32.3886380095
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.5.0, 90%",
+        "fill": "#580839",
+        "time": 33.3724537672
+      },
+    
+      {
+        "col_title": "Ruby ext-mri-2.5.0, 100%",
+        "fill": "#31082b",
+        "time": 35.61742162
+      },
+    
+  
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([0.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

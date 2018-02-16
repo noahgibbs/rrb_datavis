@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Discourse Thread Run Times w/ Rails Ruby Bench by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+var ruby_version_data = [
+  
+
+    
+      {
+        "col_title": "Ruby 2.0.0, Disc 1.5.0, 0%",  // "1.5.0" / "2.0.0"
+        "fill": "#ecb796",
+        "time": 17.998009000999996
+      },
+    
+      {
+        "col_title": "Ruby 2.0.0, Disc 1.5.0, 10%",  // "1.5.0" / "2.0.0"
+        "fill": "#dc8f70",
+        "time": 21.237018641100004
+      },
+    
+      {
+        "col_title": "Ruby 2.0.0, Disc 1.5.0, 50%",  // "1.5.0" / "2.0.0"
+        "fill": "#b2a470",
+        "time": 22.468092566999985
+      },
+    
+      {
+        "col_title": "Ruby 2.0.0, Disc 1.5.0, 90%",  // "1.5.0" / "2.0.0"
+        "fill": "#92875a",
+        "time": 23.23975680170001
+      },
+    
+      {
+        "col_title": "Ruby 2.0.0, Disc 1.5.0, 100%",  // "1.5.0" / "2.0.0"
+        "fill": "#716c49",
+        "time": 24.008658151000002
+      },
+    
+    {  // Spacer
+      "col_title": " 2.0.0 / 1.5.0",
+      "time": 0.0
+    },
+  
+
+    
+      {
+        "col_title": "Ruby 2.1.10, Disc 1.5.0, 0%",  // "1.5.0" / "2.1.10"
+        "fill": "#ecb796",
+        "time": 13.529042733
+      },
+    
+      {
+        "col_title": "Ruby 2.1.10, Disc 1.5.0, 10%",  // "1.5.0" / "2.1.10"
+        "fill": "#dc8f70",
+        "time": 15.940012503400007
+      },
+    
+      {
+        "col_title": "Ruby 2.1.10, Disc 1.5.0, 50%",  // "1.5.0" / "2.1.10"
+        "fill": "#b2a470",
+        "time": 17.034812066
+      },
+    
+      {
+        "col_title": "Ruby 2.1.10, Disc 1.5.0, 90%",  // "1.5.0" / "2.1.10"
+        "fill": "#92875a",
+        "time": 17.6454476436
+      },
+    
+      {
+        "col_title": "Ruby 2.1.10, Disc 1.5.0, 100%",  // "1.5.0" / "2.1.10"
+        "fill": "#716c49",
+        "time": 18.203559708000004
+      },
+    
+    {  // Spacer
+      "col_title": " 2.1.10 / 1.5.0",
+      "time": 0.0
+    },
+  
+
+    
+      {
+        "col_title": "Ruby 2.2.7, Disc 1.5.0, 0%",  // "1.5.0" / "2.2.7"
+        "fill": "#ecb796",
+        "time": 12.465653788000004
+      },
+    
+      {
+        "col_title": "Ruby 2.2.7, Disc 1.5.0, 10%",  // "1.5.0" / "2.2.7"
+        "fill": "#dc8f70",
+        "time": 14.159708196499997
+      },
+    
+      {
+        "col_title": "Ruby 2.2.7, Disc 1.5.0, 50%",  // "1.5.0" / "2.2.7"
+        "fill": "#b2a470",
+        "time": 15.285584917999998
+      },
+    
+      {
+        "col_title": "Ruby 2.2.7, Disc 1.5.0, 90%",  // "1.5.0" / "2.2.7"
+        "fill": "#92875a",
+        "time": 15.869591107400005
+      },
+    
+      {
+        "col_title": "Ruby 2.2.7, Disc 1.5.0, 100%",  // "1.5.0" / "2.2.7"
+        "fill": "#716c49",
+        "time": 16.493978557000002
+      },
+    
+    {  // Spacer
+      "col_title": " 2.2.7 / 1.5.0",
+      "time": 0.0
+    },
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.5.0, 0%",  // "1.5.0" / "2.3.4"
+        "fill": "#ecb796",
+        "time": 12.487296515000002
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.5.0, 10%",  // "1.5.0" / "2.3.4"
+        "fill": "#dc8f70",
+        "time": 14.1006319655
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.5.0, 50%",  // "1.5.0" / "2.3.4"
+        "fill": "#b2a470",
+        "time": 15.064300346499998
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.5.0, 90%",  // "1.5.0" / "2.3.4"
+        "fill": "#92875a",
+        "time": 15.623782201100003
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.5.0, 100%",  // "1.5.0" / "2.3.4"
+        "fill": "#716c49",
+        "time": 16.157329806000003
+      },
+    
+    {  // Spacer
+      "col_title": " 2.3.4 / 1.5.0",
+      "time": 0.0
+    },
+  
+
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.8.0beta13, 0%",  // "1.8.0beta13" / "2.3.4"
+        "fill": "#e7cbe6",
+        "time": 14.768409933999994
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.8.0beta13, 10%",  // "1.8.0beta13" / "2.3.4"
+        "fill": "#d8aad6",
+        "time": 17.481154888200006
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.8.0beta13, 50%",  // "1.8.0beta13" / "2.3.4"
+        "fill": "#a888c2",
+        "time": 18.863417819000002
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.8.0beta13, 90%",  // "1.8.0beta13" / "2.3.4"
+        "fill": "#9dc2d3",
+        "time": 19.569377630899993
+      },
+    
+      {
+        "col_title": "Ruby 2.3.4, Disc 1.8.0beta13, 100%",  // "1.8.0beta13" / "2.3.4"
+        "fill": "#649eb9",
+        "time": 20.204580084999993
+      },
+    
+    {  // Spacer
+      "col_title": " 2.3.4 / 1.8.0beta13",
+      "time": 0.0
+    },
+  
+
+    
+      {
+        "col_title": "Ruby 2.4.1, Disc 1.8.0beta13, 0%",  // "1.8.0beta13" / "2.4.1"
+        "fill": "#e7cbe6",
+        "time": 14.639412419999994
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Disc 1.8.0beta13, 10%",  // "1.8.0beta13" / "2.4.1"
+        "fill": "#d8aad6",
+        "time": 16.881559075200006
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Disc 1.8.0beta13, 50%",  // "1.8.0beta13" / "2.4.1"
+        "fill": "#a888c2",
+        "time": 18.327373953
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Disc 1.8.0beta13, 90%",  // "1.8.0beta13" / "2.4.1"
+        "fill": "#9dc2d3",
+        "time": 19.14049162369999
+      },
+    
+      {
+        "col_title": "Ruby 2.4.1, Disc 1.8.0beta13, 100%",  // "1.8.0beta13" / "2.4.1"
+        "fill": "#649eb9",
+        "time": 19.821862603999996
+      },
+    
+    {  // Spacer
+      "col_title": " 2.4.1 / 1.8.0beta13",
+      "time": 0.0
+    },
+  
+  {}
+];
+
+ruby_version_data.pop(); // Remove final empty element
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

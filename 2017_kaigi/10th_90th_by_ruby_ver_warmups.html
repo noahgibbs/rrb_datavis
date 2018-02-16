@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 170, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+var fill_by_percentile = {
+  "0": "steelblue",
+  "1": "red",
+  "5": "brown",
+  "10": "magenta",
+  "50": "orange",
+  "90": "green",
+  "95": "cyan",
+  "99": "yellow",
+  "100": "purple",
+  "": ""
+}
+
+var ruby_version_data = [
+  
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 10th %, 0 warmups",
+      "percentile": "10",
+      "time": 22.066165053299997
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 90th %, 0 warmups",
+      "percentile": "90",
+      "time": 24.140006685799996
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 10th %, 10 warmups",
+      "percentile": "10",
+      "time": 21.632963744099996
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 90th %, 10 warmups",
+      "percentile": "90",
+      "time": 23.819695930600002
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 10th %, 100 warmups",
+      "percentile": "10",
+      "time": 21.237018641100004
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 90th %, 100 warmups",
+      "percentile": "90",
+      "time": 23.23975680170001
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 10th %, 1000 warmups",
+      "percentile": "10",
+      "time": 21.258865648
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 90th %, 1000 warmups",
+      "percentile": "90",
+      "time": 23.224413796099995
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 10th %, 5000 warmups",
+      "percentile": "10",
+      "time": 20.601540020100003
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.0.0, 90th %, 5000 warmups",
+      "percentile": "90",
+      "time": 22.498747340100003
+    },
+  
+    { // Spacer
+      "version_pct": " 2.0.0",
+      "percentile": "0",
+      "time": 0.0
+    },
+  
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 10th %, 0 warmups",
+      "percentile": "10",
+      "time": 16.0714842317
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 90th %, 0 warmups",
+      "percentile": "90",
+      "time": 18.012726758999996
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 10th %, 10 warmups",
+      "percentile": "10",
+      "time": 15.841549532900004
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 90th %, 10 warmups",
+      "percentile": "90",
+      "time": 17.726292682500006
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 10th %, 100 warmups",
+      "percentile": "10",
+      "time": 15.940012503400007
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 90th %, 100 warmups",
+      "percentile": "90",
+      "time": 17.6454476436
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 10th %, 1000 warmups",
+      "percentile": "10",
+      "time": 15.920127976099996
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 90th %, 1000 warmups",
+      "percentile": "90",
+      "time": 17.818387371400007
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 10th %, 5000 warmups",
+      "percentile": "10",
+      "time": 15.366962653900003
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.1.10, 90th %, 5000 warmups",
+      "percentile": "90",
+      "time": 17.2456096904
+    },
+  
+    { // Spacer
+      "version_pct": " 2.1.10",
+      "percentile": "0",
+      "time": 0.0
+    },
+  
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 10th %, 0 warmups",
+      "percentile": "10",
+      "time": 14.616025707199999
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 90th %, 0 warmups",
+      "percentile": "90",
+      "time": 16.355693498800004
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 10th %, 10 warmups",
+      "percentile": "10",
+      "time": 14.353920128599999
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 90th %, 10 warmups",
+      "percentile": "90",
+      "time": 16.1683532674
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 10th %, 100 warmups",
+      "percentile": "10",
+      "time": 14.159708196499997
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 90th %, 100 warmups",
+      "percentile": "90",
+      "time": 15.869591107400005
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 10th %, 1000 warmups",
+      "percentile": "10",
+      "time": 14.0864978025
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 90th %, 1000 warmups",
+      "percentile": "90",
+      "time": 15.5925134051
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 10th %, 5000 warmups",
+      "percentile": "10",
+      "time": 14.201392134199997
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.2.7, 90th %, 5000 warmups",
+      "percentile": "90",
+      "time": 15.671768787899998
+    },
+  
+    { // Spacer
+      "version_pct": " 2.2.7",
+      "percentile": "0",
+      "time": 0.0
+    },
+  
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 10th %, 0 warmups",
+      "percentile": "10",
+      "time": 14.344564072999995
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 90th %, 0 warmups",
+      "percentile": "90",
+      "time": 16.105643055500003
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 10th %, 10 warmups",
+      "percentile": "10",
+      "time": 14.280616389799997
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 90th %, 10 warmups",
+      "percentile": "90",
+      "time": 15.891048924400001
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 10th %, 100 warmups",
+      "percentile": "10",
+      "time": 14.1006319655
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 90th %, 100 warmups",
+      "percentile": "90",
+      "time": 15.623782201100003
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 10th %, 1000 warmups",
+      "percentile": "10",
+      "time": 13.958851751
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 90th %, 1000 warmups",
+      "percentile": "90",
+      "time": 15.492247783600002
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 10th %, 5000 warmups",
+      "percentile": "10",
+      "time": 14.149449602500002
+    },
+  
+
+    {
+      "version_pct": "Ruby 2.3.4, 90th %, 5000 warmups",
+      "percentile": "90",
+      "time": 15.7910331466
+    },
+  
+    { // Spacer
+      "version_pct": " 2.3.4",
+      "percentile": "0",
+      "time": 0.0
+    },
+  
+  {}
+];
+
+ruby_version_data.pop(); // Remove final empty element
+
+x.domain(ruby_version_data.map(function(d) { return d.version_pct; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.version_pct); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return fill_by_percentile[d.percentile] })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,80)rotate(-90)");
+}
+
+</script>

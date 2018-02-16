@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Full-Run Times by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+var graph_data = [
+  
+    
+      {
+        "col_title": "plain-ruby, 0%",
+        "fill": "#57306f",
+        "time": 28.222499549000016
+      },
+    
+      {
+        "col_title": "plain-ruby, 10%",
+        "fill": "#514c76",
+        "time": 31.408993765599988
+      },
+    
+      {
+        "col_title": "plain-ruby, 50%",
+        "fill": "#646583",
+        "time": 33.13007809049999
+      },
+    
+      {
+        "col_title": "plain-ruby, 90%",
+        "fill": "#738394",
+        "time": 34.115127107099994
+      },
+    
+      {
+        "col_title": "plain-ruby, 100%",
+        "fill": "#6b9c7d",
+        "time": 34.873163306999984
+      },
+    
+    {
+      "col_title": "plain-ruby ------",
+    },
+  
+    
+      {
+        "col_title": "tcmalloc, 0%",
+        "fill": "#84b665",
+        "time": 25.452150766000003
+      },
+    
+      {
+        "col_title": "tcmalloc, 10%",
+        "fill": "#a7ca50",
+        "time": 30.02821332569999
+      },
+    
+      {
+        "col_title": "tcmalloc, 50%",
+        "fill": "#bfe746",
+        "time": 31.7156450865
+      },
+    
+      {
+        "col_title": "tcmalloc, 90%",
+        "fill": "#e2f528",
+        "time": 32.699353198200015
+      },
+    
+      {
+        "col_title": "tcmalloc, 100%",
+        "fill": "#fff726",
+        "time": 33.895010840999994
+      },
+    
+    {
+      "col_title": "tcmalloc ------",
+    },
+  
+    
+      {
+        "col_title": "jemalloc, 0%",
+        "fill": "#c91515",
+        "time": 24.445036340000016
+      },
+    
+      {
+        "col_title": "jemalloc, 10%",
+        "fill": "#9a0000",
+        "time": 27.8591914335
+      },
+    
+      {
+        "col_title": "jemalloc, 50%",
+        "fill": "#7b0429",
+        "time": 29.401636337000006
+      },
+    
+      {
+        "col_title": "jemalloc, 90%",
+        "fill": "#580839",
+        "time": 30.276237639599998
+      },
+    
+      {
+        "col_title": "jemalloc, 100%",
+        "fill": "#31082b",
+        "time": 31.170970434000004
+      },
+    
+    {
+      "col_title": "jemalloc ------",
+    },
+  
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([0.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>
+
+<p></p><p></p><p></p><p></p>
+<hr/>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt;Percentile&lt;/th&gt;
+      &lt;th&gt;CRuby 2.5.0&lt;/th&gt;
+      &lt;th&gt;2.5.0 w/ jemalloc&lt;/th&gt;
+      &lt;th&gt;2.5.0 w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;speedup w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;speedup w/ jemalloc&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; 0% &lt;/td&gt;
+          &lt;td&gt; 28.22 sec &lt;/td&gt;
+          &lt;td&gt; 24.45 sec &lt;/td&gt;
+          &lt;td&gt; 25.45 sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;9.82%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;13.38%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; 10% &lt;/td&gt;
+          &lt;td&gt; 31.41 sec &lt;/td&gt;
+          &lt;td&gt; 27.86 sec &lt;/td&gt;
+          &lt;td&gt; 30.03 sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;4.40%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;11.30%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; 50% &lt;/td&gt;
+          &lt;td&gt; 33.13 sec &lt;/td&gt;
+          &lt;td&gt; 29.40 sec &lt;/td&gt;
+          &lt;td&gt; 31.72 sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;4.27%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;11.25%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; 90% &lt;/td&gt;
+          &lt;td&gt; 34.12 sec &lt;/td&gt;
+          &lt;td&gt; 30.28 sec &lt;/td&gt;
+          &lt;td&gt; 32.70 sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;4.15%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;11.25%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; 100% &lt;/td&gt;
+          &lt;td&gt; 34.87 sec &lt;/td&gt;
+          &lt;td&gt; 31.17 sec &lt;/td&gt;
+          &lt;td&gt; 33.90 sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;2.80%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;10.62%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+      
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;CRuby 2.5.0&lt;/th&gt;
+      &lt;th&gt;jemalloc&lt;/th&gt;
+      &lt;th&gt;tcmalloc&lt;/th&gt;
+      &lt;th&gt;increase w/ tcmalloc&lt;/th&gt;
+      &lt;th&gt;increase w/ jemalloc&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      
+        &lt;tr&gt;
+          &lt;td&gt; Median Throughput &lt;/td&gt;
+          &lt;td&gt; 175.13 req/sec &lt;/td&gt;
+          &lt;td&gt; 197.49 req/sec &lt;/td&gt;
+          &lt;td&gt; 183.33 req/sec &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;4.68%&lt;/font&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;font color="green"&gt;12.77%&lt;/font&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>

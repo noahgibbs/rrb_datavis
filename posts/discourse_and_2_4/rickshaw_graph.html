@@ -1,0 +1,216 @@
+<!-- Embeddable, not full-page -->
+
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/graph.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/detail.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/legend.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/extensions.css"> -->
+
+<!-- Note: Rickshaw uses D3.js version 3, not 4 -->
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.shutterstock.com/rickshaw/rickshaw.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+<h1>Request Time Percentiles by Version</h1>
+
+<div id="chart"></div>
+<div id="legend"></div>
+
+<style media="screen" type="text/css">
+#chart {
+        display: inline-block;
+}
+#legend {
+        display: inline-block;
+        position: relative;
+        left: 8px;
+}
+#legend_container {
+        position: absolute;
+        right: 0;
+        bottom: 26px;
+        width: 0;
+}
+#chart_container {
+        position: relative;
+        display: inline-block;
+}
+#smoother {
+        margin: 0 0 10px 16px;
+        width: 100px;
+}
+.rickshaw_graph .detail {
+        left: -1000;
+}
+#chart {
+        border: 1px solid #f0f0f0;
+}
+#side_panel {
+        padding: 0 20px 20px 0;
+        width: 240px;
+        display: inline-block;
+        vertical-align: top;
+}
+#side_panel section {
+        color: #505050;
+        font-size: 12px;
+}
+#side_panel section h6 {
+        margin: 0 0 1em 0;
+        font-size: 12px;
+        font-weight: normal;
+}
+#side_panel .ui-slider-horizontal {
+        height: 1px !important;
+        border-color: #e0e0e0;
+        margin-bottom: 10px;
+}
+#side_panel .ui-slider-handle {
+        border-color: #a0a0a0;
+        height: 9px !important;
+        width: 9px !important;
+        top: -5px !important;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+}
+#legend {
+        background-color: white;
+        margin-left: 0;
+        padding: 0;
+        left: 0;
+}
+#legend .label {
+        color: #404040;
+}
+#legend .action {
+        color: black;
+        opacity: 0.5;
+}
+#legend ul {
+        padding: 0;
+}
+
+section {
+        border: none;
+        border-top: 1px solid #eaeaea;
+        padding: 15px 0;
+}
+#smoother {
+        margin: 5px 0 0 10px;
+        width: 90%;
+}
+label.disabled {
+        opacity: 0.4;
+}
+#renderer_form.toggler {
+        display: block;
+        margin: 0;
+}
+#renderer_form.toggler input[type=radio]:checked {
+        outline: 2px solid steelblue;
+}
+#renderer_form.toggler input[type=radio] {
+        -moz-appearance: button;
+        background: white;
+        margin: 0 7px;
+        width: 39px;
+        height: 26px;
+        position: absolute;
+}
+#renderer_form.toggler label {
+        display: inline-block;
+        padding: 0;
+        width: 39px;
+        padding-top: 27px;
+        text-align: center;
+        font-size: 10px;
+        color: #808080;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 0 7px;
+        cursor: pointer;
+}
+#interpolation_form,
+#offset_form {
+        vertical-align: top;
+        display: inline-block;
+        width: 45%;
+}
+#interpolation_form label,
+#offset_form label {
+        display: block;
+}
+</style>
+
+<script>
+
+var graph_data = [];
+var series = [];
+var series_name = "";
+var palette = new Rickshaw.Color.Palette();
+
+       graph_data.push({ name: "Ruby " + "2.3.4" + ", " + "50" + "th percentile",
+                         data: [{ x: 0, y: 0.1440418685 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.3.4" + ", " + "90" + "th percentile",
+                         data: [{ x: 1, y: 0.40598953880000005 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.3.4" + ", " + "95" + "th percentile",
+                         data: [{ x: 2, y: 0.4793456794000001 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.3.4" + ", " + "99" + "th percentile",
+                         data: [{ x: 3, y: 0.61459815524 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.5.0" + ", " + "50" + "th percentile",
+                         data: [{ x: 4, y: 0.125796131 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.5.0" + ", " + "90" + "th percentile",
+                         data: [{ x: 5, y: 0.3565153028 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.5.0" + ", " + "95" + "th percentile",
+                         data: [{ x: 6, y: 0.41612345860000016 }], color: palette.color() });
+       graph_data.push({ name: "Ruby " + "2.5.0" + ", " + "99" + "th percentile",
+                         data: [{ x: 7, y: 0.5544122476700002 }], color: palette.color() });
+
+//Rickshaw.Series.zeroFill(graph_data);
+
+var graph = new Rickshaw.Graph( {
+        element: document.getElementById("chart"),
+        width: 360,
+        height: 480,
+        unstack: true,
+        //gapSize: 0.2,
+        renderer: 'bar',
+	padding: { left: 0.10, right: 0.10, top: 0.05, bottom: 0.05 },
+        series: graph_data
+} );
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph,
+        xFormatter: function(x) { return ""; }
+} );
+
+var legend = new Rickshaw.Graph.Legend( {
+        element: document.querySelector('#legend'), 
+        graph: graph
+});
+
+//var xAxis = new Rickshaw.Graph.Axis.Time({
+//    graph: graph
+//});
+
+var yAxis = new Rickshaw.Graph.Axis.Y({
+    graph: graph
+});
+
+var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+    graph: graph,
+    legend: legend,
+    disabledColor: function() { return 'rgba(0, 0, 0, 0.2)' }
+});
+
+var highlighter = new Rickshaw.Graph.Behavior.Series.Toggle({
+    graph: graph,
+    legend: legend
+});
+
+graph.render();
+//xAxis.render();
+yAxis.render();
+</script>

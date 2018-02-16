@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Discourse Full-Run Times w/ Rails Ruby Bench by Ruby Version and Random Seed </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys
+  ruby_versions_hash = {}
+  rand_seed_hash = {}
+  discourse_versions_hash = {}
+  cohorts.each do |cohort|
+    ruby_ver, num_warmups, discourse_version, random_seed = cohort.split(",")
+    ruby_versions_hash[ruby_ver] = true
+    rand_seed_hash[random_seed] = true
+  end
+
+  # In this case, the big reason to sort is for ordering the two
+  # different Discourse versions for Ruby 2.3.4.
+  sorted_cohorts = cohorts.sort_by { |c|
+   ruby_ver, num_warmups, discourse_sha, rand_seed = c.split(",")
+  
+   [rand_seed, ruby_ver].join(",")
+  }
+
+  ruby_versions = ruby_versions_hash.keys
+  rand_seeds = rand_seed_hash.keys
+  percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  #startup_20_15 = startup_data["processed"]["cohort"]["2.0.0,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+  %>
+
+<%
+fill_by_ruby_and_seed = {
+  "2.3.4" => {
+    # From Rickshaw Spectrum14 palette
+    "1234" => '#ecb796',
+    "2222" => '#dc8f70',
+    "3333" => '#b2a470',
+    "5678" => '#92875a',
+  },
+  "2.4.1" => {
+    "1234" => '#e7cbe6',
+    "2222" => '#d8aad6',
+    "3333" => '#a888c2',
+    "5678" => '#9dc2d3',
+  },
+}
+%>
+
+var graph_data = [
+  <% sorted_cohorts.each do |cohort|
+       ruby_ver, num_warmups, discourse_sha, random_seed = cohort.split(",")
+       #cohort = [ruby_ver, num_warmups, discourse_version].join(",")
+     %>
+
+    <% percentiles.each do |percentile|
+       column_title =  "Ruby #{ruby_ver}, Seed #{random_seed}, #{percentile}%"
+       %>
+      {
+        "col_title": "<%= column_title %>",
+        "fill": <%= fill_by_ruby_and_seed[ruby_ver][random_seed].inspect %>,
+        "time": <%= cohort_data["processed"]["cohort"][cohort]["run_percentiles"][percentile].inspect %>
+      },
+    <% end %>
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([28.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

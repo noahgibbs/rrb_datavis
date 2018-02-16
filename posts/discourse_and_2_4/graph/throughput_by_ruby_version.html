@@ -1,0 +1,304 @@
+<!-- Embeddable, not full-page -->
+
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/graph.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/detail.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/legend.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/extensions.css"> -->
+
+<!-- Note: Rickshaw uses D3.js version 3, not 4 -->
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.shutterstock.com/rickshaw/rickshaw.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+<h1>Rails Ruby Bench Throughput<br/>by Ruby Version</h1>
+
+<div id="chart"></div>
+<div id="legend"></div>
+
+<style media="screen" type="text/css">
+#chart {
+        display: inline-block;
+}
+#legend {
+        display: inline-block;
+        position: relative;
+        left: 8px;
+}
+#legend_container {
+        position: absolute;
+        right: 0;
+        bottom: 26px;
+        width: 0;
+}
+#chart_container {
+        position: relative;
+        display: inline-block;
+}
+#smoother {
+        margin: 0 0 10px 16px;
+        width: 100px;
+}
+.rickshaw_graph .detail {
+        left: -1000;
+}
+#chart {
+        border: 1px solid #f0f0f0;
+}
+#side_panel {
+        padding: 0 20px 20px 0;
+        width: 240px;
+        display: inline-block;
+        vertical-align: top;
+}
+#side_panel section {
+        color: #505050;
+        font-size: 12px;
+}
+#side_panel section h6 {
+        margin: 0 0 1em 0;
+        font-size: 12px;
+        font-weight: normal;
+}
+#side_panel .ui-slider-horizontal {
+        height: 1px !important;
+        border-color: #e0e0e0;
+        margin-bottom: 10px;
+}
+#side_panel .ui-slider-handle {
+        border-color: #a0a0a0;
+        height: 9px !important;
+        width: 9px !important;
+        top: -5px !important;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+}
+#legend {
+        background-color: white;
+        margin-left: 0;
+        padding: 0;
+        left: 0;
+}
+#legend .label {
+        color: #404040;
+}
+#legend .action {
+        color: black;
+        opacity: 0.5;
+}
+#legend ul {
+        padding: 0;
+}
+
+section {
+        border: none;
+        border-top: 1px solid #eaeaea;
+        padding: 15px 0;
+}
+#smoother {
+        margin: 5px 0 0 10px;
+        width: 90%;
+}
+label.disabled {
+        opacity: 0.4;
+}
+#renderer_form.toggler {
+        display: block;
+        margin: 0;
+}
+#renderer_form.toggler input[type=radio]:checked {
+        outline: 2px solid steelblue;
+}
+#renderer_form.toggler input[type=radio] {
+        -moz-appearance: button;
+        background: white;
+        margin: 0 7px;
+        width: 39px;
+        height: 26px;
+        position: absolute;
+}
+#renderer_form.toggler label {
+        display: inline-block;
+        padding: 0;
+        width: 39px;
+        padding-top: 27px;
+        text-align: center;
+        font-size: 10px;
+        color: #808080;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 0 7px;
+        cursor: pointer;
+}
+#interpolation_form,
+#offset_form {
+        vertical-align: top;
+        display: inline-block;
+        width: 45%;
+}
+#interpolation_form label,
+#offset_form label {
+        display: block;
+}
+</style>
+
+<script>
+
+var graph_data = [];
+var series = [];
+var series_name = "";
+var palette = new Rickshaw.Color.Palette();
+
+
+series_name = "Ruby " + "2.3.4" + ", " + "100" + " warmups";
+series = [
+  {
+    "x": 0.002382622325369088,
+    "y": 145.2429941639442
+  },
+  {
+    "x": 0.004258476334057515,
+    "y": 146.45135260840243
+  },
+  {
+    "x": 0.013783569739662382,
+    "y": 148.99596615731286
+  },
+  {
+    "x": 0.02727611154053311,
+    "y": 149.03803429084198
+  },
+  {
+    "x": 0.027761580444915644,
+    "y": 147.3962072050412
+  },
+  {
+    "x": 0.08020538199256247,
+    "y": 146.93317139508525
+  },
+  {
+    "x": 0.10549796028955775,
+    "y": 147.4343600779691
+  },
+  {
+    "x": 0.17805126335558444,
+    "y": 147.3328093561144
+  },
+  {
+    "x": 0.2324476255247614,
+    "y": 143.65807984547743
+  },
+  {
+    "x": 0.2659144330317361,
+    "y": 144.43361724686704
+  },
+  {
+    "x": 0.2974442302182866,
+    "y": 150.1830557236927
+  }
+];
+
+//graph_data.push({ name: "Ruby " + "2.3.4" + " Mean Throughput", data: [{x: 0, y: 147.0090589155226}], color: palette.color(), renderer: 'bar', opacity: 0.8 })
+graph_data.push({ name: series_name, data: series, color: palette.color(), renderer: 'scatterplot' });
+
+
+series_name = "Ruby " + "2.5.0" + ", " + "100" + " warmups";
+series = [
+  {
+    "x": 0.01233013486776866,
+    "y": 169.93826938097774
+  },
+  {
+    "x": 0.019969544266437645,
+    "y": 172.66013686663834
+  },
+  {
+    "x": 0.04137056892036219,
+    "y": 167.65527970352127
+  },
+  {
+    "x": 0.04612379473600124,
+    "y": 170.24427558900908
+  },
+  {
+    "x": 0.06932312772948847,
+    "y": 159.99817042305457
+  },
+  {
+    "x": 0.08859528584342316,
+    "y": 167.45437059327227
+  },
+  {
+    "x": 0.14998151859707123,
+    "y": 167.44160591649302
+  },
+  {
+    "x": 0.157743642120869,
+    "y": 172.90124434034362
+  },
+  {
+    "x": 0.23047102817763296,
+    "y": 166.71569836484667
+  },
+  {
+    "x": 0.2490580828696923,
+    "y": 171.83660457489876
+  },
+  {
+    "x": 0.27304055914421244,
+    "y": 166.7665080332426
+  }
+];
+
+//graph_data.push({ name: "Ruby " + "2.5.0" + " Mean Throughput", data: [{x: 1, y: 168.51019670784527}], color: palette.color(), renderer: 'bar', opacity: 0.8 })
+graph_data.push({ name: series_name, data: series, color: palette.color(), renderer: 'scatterplot' });
+
+
+//Rickshaw.Series.zeroFill(graph_data);
+
+var graph = new Rickshaw.Graph( {
+        element: document.getElementById("chart"),
+        width: 240,
+        height: 480,
+        unstack: true,
+        //gapSize: 0.2,
+        renderer: 'multi',
+	padding: { left: 0.10, right: 0.10, top: 0.05, bottom: 0.05 },
+        series: graph_data
+} );
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph,
+        xFormatter: function(x) { return ""; }
+} );
+
+var legend = new Rickshaw.Graph.Legend( {
+        element: document.querySelector('#legend'), 
+        graph: graph
+});
+
+//var xAxis = new Rickshaw.Graph.Axis.Time({
+//    graph: graph
+//});
+
+var yAxis = new Rickshaw.Graph.Axis.Y({
+    graph: graph
+});
+
+var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+    graph: graph,
+    legend: legend,
+    disabledColor: function() { return 'rgba(0, 0, 0, 0.2)' }
+});
+
+var highlighter = new Rickshaw.Graph.Behavior.Series.Toggle({
+    graph: graph,
+    legend: legend
+});
+
+graph.render();
+//xAxis.render();
+yAxis.render();
+</script>

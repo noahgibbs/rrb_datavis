@@ -1,0 +1,212 @@
+<!-- Embeddable, not full-page -->
+
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/graph.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/detail.css">
+<link type="text/css" rel="stylesheet" href="http://code.shutterstock.com/rickshaw/src/css/legend.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/extensions.css"> -->
+
+<!-- Note: Rickshaw uses D3.js version 3, not 4 -->
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.shutterstock.com/rickshaw/rickshaw.min.js"></script>
+
+<!-- Also older versions for this example. TODO: see if we can remove or update these... -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+<div id="chart"></div>
+<div id="legend"></div>
+
+<style media="screen" type="text/css">
+#chart {
+        display: inline-block;
+}
+#legend {
+        display: inline-block;
+        position: relative;
+        left: 8px;
+}
+#legend_container {
+        position: absolute;
+        right: 0;
+        bottom: 26px;
+        width: 0;
+}
+#chart_container {
+        position: relative;
+        display: inline-block;
+}
+#smoother {
+        margin: 0 0 10px 16px;
+        width: 100px;
+}
+.rickshaw_graph .detail {
+        left: -1000;
+}
+#chart {
+        border: 1px solid #f0f0f0;
+}
+#side_panel {
+        padding: 0 20px 20px 0;
+        width: 240px;
+        display: inline-block;
+        vertical-align: top;
+}
+#side_panel section {
+        color: #505050;
+        font-size: 12px;
+}
+#side_panel section h6 {
+        margin: 0 0 1em 0;
+        font-size: 12px;
+        font-weight: normal;
+}
+#side_panel .ui-slider-horizontal {
+        height: 1px !important;
+        border-color: #e0e0e0;
+        margin-bottom: 10px;
+}
+#side_panel .ui-slider-handle {
+        border-color: #a0a0a0;
+        height: 9px !important;
+        width: 9px !important;
+        top: -5px !important;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+}
+#legend {
+        background-color: white;
+        margin-left: 0;
+        padding: 0;
+        left: 0;
+}
+#legend .label {
+        color: #404040;
+}
+#legend .action {
+        color: black;
+        opacity: 0.5;
+}
+#legend ul {
+        padding: 0;
+}
+
+section {
+        border: none;
+        border-top: 1px solid #eaeaea;
+        padding: 15px 0;
+}
+#smoother {
+        margin: 5px 0 0 10px;
+        width: 90%;
+}
+label.disabled {
+        opacity: 0.4;
+}
+#renderer_form.toggler {
+        display: block;
+        margin: 0;
+}
+#renderer_form.toggler input[type=radio]:checked {
+        outline: 2px solid steelblue;
+}
+#renderer_form.toggler input[type=radio] {
+        -moz-appearance: button;
+        background: white;
+        margin: 0 7px;
+        width: 39px;
+        height: 26px;
+        position: absolute;
+}
+#renderer_form.toggler label {
+        display: inline-block;
+        padding: 0;
+        width: 39px;
+        padding-top: 27px;
+        text-align: center;
+        font-size: 10px;
+        color: #808080;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 0 7px;
+        cursor: pointer;
+}
+#interpolation_form,
+#offset_form {
+        vertical-align: top;
+        display: inline-block;
+        width: 45%;
+}
+#interpolation_form label,
+#offset_form label {
+        display: block;
+}
+</style>
+
+<script>
+
+var graph_data = [];
+var palette = new Rickshaw.Color.Palette();
+
+      graph_data.push({ name: "Old" + " hash, " + 50 + "th percentile",
+                        data: [{ x: 0.0, y: 0.13360281400000001 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "Old" + " hash, " + 90 + "th percentile",
+                        data: [{ x: 0.05, y: 0.3711118723 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "Old" + " hash, " + 95 + "th percentile",
+                        data: [{ x: 0.1, y: 0.43247015780000003 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "Old" + " hash, " + 99 + "th percentile",
+                        data: [{ x: 0.15000000000000002, y: 0.5660423886200004 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "New" + " hash, " + 50 + "th percentile",
+                        data: [{ x: 0.6, y: 0.12732226400000002 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "New" + " hash, " + 90 + "th percentile",
+                        data: [{ x: 0.65, y: 0.3547012859 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "New" + " hash, " + 95 + "th percentile",
+                        data: [{ x: 0.7, y: 0.4160155311500001 }],
+			color: palette.color()
+                      })
+      graph_data.push({ name: "New" + " hash, " + 99 + "th percentile",
+                        data: [{ x: 0.75, y: 0.5477257812300002 }],
+			color: palette.color()
+                      })
+
+//Rickshaw.Series.zeroFill(graph_data);
+
+var graph = new Rickshaw.Graph( {
+        element: document.getElementById("chart"),
+        width: 640,
+        height: 480,
+        unstack: true,
+        gapSize: 0.3,
+        renderer: 'bar',
+        series: graph_data
+} );
+
+var legend = new Rickshaw.Graph.Legend( {
+        element: document.querySelector('#legend'), 
+        graph: graph
+});
+
+//var xAxis = new Rickshaw.Graph.Axis.Time({
+//    graph: graph
+//});
+
+var yAxis = new Rickshaw.Graph.Axis.Y({
+    graph: graph
+});
+
+graph.render();
+//xAxis.render();
+yAxis.render();
+</script>

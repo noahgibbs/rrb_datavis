@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Randomized Throughput Comparison by Ruby Version and Random Seed </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+var graph_data = [
+  
+      {
+        "col_title": "Ruby 2.0.0, Seed 1234",
+        "fill": "#57306f",
+        "time":
+      128.8535263735883
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 1234",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.0.0, Seed 2222",
+        "fill": "#514c76",
+        "time":
+      129.44429172953141
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 2222",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.0.0, Seed 3333",
+        "fill": "#646583",
+        "time":
+      129.48293853997868
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 3333",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.0.0, Seed 5678",
+        "fill": "#738394",
+        "time":
+      129.5683758355383
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 5678",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.1.10, Seed 1234",
+        "fill": "#6b9c7d",
+        "time":
+      172.4197158445971
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 1234",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.1.10, Seed 2222",
+        "fill": "#84b665",
+        "time":
+      172.1842950721166
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 2222",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.1.10, Seed 3333",
+        "fill": "#a7ca50",
+        "time":
+      172.5860666598539
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 3333",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.1.10, Seed 5678",
+        "fill": "#bfe746",
+        "time":
+      172.8574299268842
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 5678",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.2.7, Seed 1234",
+        "fill": "#e2f528",
+        "time":
+      190.3976137873775
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 1234",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.2.7, Seed 2222",
+        "fill": "#fff726",
+        "time":
+      189.95675436311038
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 2222",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.2.7, Seed 3333",
+        "fill": "#ecdd00",
+        "time":
+      190.58889246822355
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 3333",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.2.7, Seed 5678",
+        "fill": "#d4b11d",
+        "time":
+      190.31061486957768
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 5678",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.3.4, Seed 1234",
+        "fill": "#ecb796",
+        "time":
+      164.9694801533169
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 1234",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.3.4, Seed 2222",
+        "fill": "#dc8f70",
+        "time":
+      162.39720873602272
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 2222",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.3.4, Seed 3333",
+        "fill": "#b2a470",
+        "time":
+      161.77292557933785
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 3333",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.3.4, Seed 5678",
+        "fill": "#92875a",
+        "time":
+      165.02642755215962
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 5678",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.4.1, Seed 1234",
+        "fill": "#e7cbe6",
+        "time":
+      167.64102668421452
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 1234",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.4.1, Seed 2222",
+        "fill": "#d8aad6",
+        "time":
+      165.77334731144916
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 2222",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.4.1, Seed 3333",
+        "fill": "#a888c2",
+        "time":
+      166.38400772092572
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 3333",
+         //  "time": 0.0
+         //},
+      
+  
+      {
+        "col_title": "Ruby 2.4.1, Seed 5678",
+        "fill": "#9dc2d3",
+        "time":
+      167.8608932910786
+      },
+      
+         //{  // Spacer
+         //  "col_title": " 5678",
+         //  "time": 0.0
+         //},
+      
+  
+ {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([120.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

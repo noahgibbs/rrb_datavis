@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Discourse Throughput w/ Rails Ruby Bench by Ruby Version and Number of Warmup Iterations</h1>
+<svg width="960" height="600"></svg>
+<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 220, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+   require "json"
+
+   #warmup_data = JSON.parse(File.read "warmups/process_output.json")
+   warmup_data = JSON.parse(File.read "multiruby_warmups/process_output.json")
+
+  cohorts = warmup_data["processed"]["cohort"].keys
+  warmups_hash = {}
+  ruby_versions_hash = {}
+  discourse_versions_hash = {}
+  cohorts.each do |cohort|
+    ruby_ver, num_warmups, discourse_version = cohort.split(",")
+    warmups_hash[num_warmups] = true
+    ruby_versions_hash[ruby_ver] = true
+    discourse_versions_hash[discourse_version] = true
+  end
+
+  disc_by_sha = {
+    "02fb86916f5265ad8318c4415229753428c68eaf" => "1.8.0beta13",
+    "a6ef10d61374a4d420799e7410a67b0afaeec637" => "1.5.0",
+  }
+
+  sorted_cohorts = cohorts.sort_by { |c|
+    ruby_ver, num_warmups, discourse_sha = c.split(",")
+
+    [ruby_ver, disc_by_sha[discourse_sha], num_warmups].join(",")
+  }
+
+  ruby_versions = ruby_versions_hash.keys
+  warmup_iters = warmups_hash.keys
+  percentiles = warmup_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  # Newer Discourse version: 02fb86916f5265ad8318c4415229753428c68eaf
+  # Older Discourse version: a6ef10d61374a4d420799e7410a67b0afaeec637
+  #startup_20_15 = startup_data["processed"]["cohort"]["2.0.0,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+  %>
+
+<%
+fill_by_disc_warmups = {
+  "1.5.0" => {
+    # From Rickshaw Spectrum14 palette
+    "0" => '#ecb796',
+    "1" => '#dc8f70',
+    "10" => '#b2a470',
+    "100" => '#92875a',
+    "1000" => '#716c49',
+    "5000" => '#d2ed82',
+  },
+  "1.8.0beta13" => {
+    "0" => '#e7cbe6',
+    "1" => '#d8aad6',
+    "10" => '#a888c2',
+    "100" => '#9dc2d3',
+    "1000" => '#649eb9',
+    "5000" => '#387aa3'
+  },
+}
+%>
+
+var ruby_version_data = [
+  <% sorted_cohorts.each do |cohort|
+       ruby_ver, num_warmups, discourse_sha = cohort.split(",")
+       #cohort = [ruby_ver, num_warmups, discourse_version].join(",")
+       discourse_version = disc_by_sha[discourse_sha] || "Unknown"
+       column_title =  "Ruby #{ruby_ver}, Disc #{discourse_version}, #{num_warmups} warmups"
+     %>
+
+    {
+      "col_title": "<%= column_title %>",
+      "fill": <%= fill_by_disc_warmups[discourse_version][num_warmups].inspect %>,
+      "time": <%= warmup_data["processed"]["cohort"][cohort]["throughput_median"].inspect %>
+    },
+  <% if num_warmups == "5000" %>
+    {  // Spacer
+      "col_title": " <%= ruby_ver %> / <%= discourse_version %>",//"Ruby <%= ruby_ver %>, Discourse <%= discourse_version %>",
+      "time": 0.0
+    },
+  <% end; end %>
+  {}
+];
+
+ruby_version_data.pop(); // Remove final empty element
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,110)rotate(-90)");
+}
+
+</script>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Full-Run Times by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "next_runs/process_output.json")
+
+  # These cohorts are "rvm current" - ruby versions, approximately.
+  cohorts = cohort_data["processed"]["cohort"].keys
+
+  percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  %>
+
+<%
+fill_by_ruby_and_seed = {
+  "ext-mri-2.4.3" => {
+    # From Rickshaw Spectrum2000 palette
+    "0" => '#57306f',
+    "10" => '#514c76',
+    "50" => '#646583',
+    "90" => '#738394',
+    "100" => '#6b9c7d',
+  },
+  "ext-mri-2.5.0" => {
+    "0" => '#84b665',
+    "10" => '#a7ca50',
+    "50" => '#bfe746',
+    "90" => '#e2f528',
+    "100" => '#fff726',
+  },
+  "ext-mri-jemalloc-2.5.0" => {
+    "0" => '#c91515',
+    "10" => '#9a0000',
+    "50" => '#7b0429',
+    "90" => '#580839',
+    "100" => '#31082b',
+  },
+}
+
+%>
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+    <% percentiles.each do |percentile| %>
+      {
+        "col_title": "Ruby <%= cohort %>, <%= percentile %>%",
+        "fill": <%= fill_by_ruby_and_seed[cohort][percentile].inspect %>,
+        "time": <%= cohort_data["processed"]["cohort"][cohort]["run_percentiles"][percentile].inspect %>
+      },
+    <% end %>
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+y.domain([0.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>Discourse Request Times w/ Rails Ruby Bench by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+   require "json"
+
+   warmup_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = warmup_data["processed"]["cohort"].keys
+  ruby_versions_hash = {}
+  cohorts.each do |cohort|
+    ruby_ver, num_warmups, discourse_version, rand_seed = cohort.split(",")
+    ruby_versions_hash[ruby_ver] = true
+    num_warmups.to_i == 100  # Only select hundred-warmup cohorts for this graph
+  end
+
+  ruby_versions = ruby_versions_hash.keys
+  percentiles = warmup_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  #startup_20_15 = startup_data["processed"]["cohort"]["2.0.0,0,a6ef10d61374a4d420799e7410a67b0afaeec637"]["startup_median"]
+  %>
+
+<%
+fill_by_ruby_and_percentile = {
+  "2.4.1" => {
+    # From Rickshaw Spectrum14 palette
+    "50" => '#ecb796',
+    "90" => '#dc8f70',
+    "95" => '#b2a470',
+    "99" => '#92875a',
+    #"1000" => '#716c49',
+    #"5000" => '#d2ed82',
+  },
+  "2.5.0" => {
+    "50" => '#e7cbe6',
+    "90" => '#d8aad6',
+    "95" => '#a888c2',
+    "99" => '#9dc2d3',
+    #"1000" => '#649eb9',
+    #"5000" => '#387aa3'
+  },
+}
+%>
+
+var ruby_version_data = [
+  <% cohorts.each do |cohort|
+       ruby_ver, num_warmups, discourse_sha, rand_seed = cohort.split(",")
+       #cohort = [ruby_ver, num_warmups, discourse_version].join(",")
+     %>
+
+    <% ["50","90","95","99"].each do |percentile|
+       column_title =  "Ruby #{ruby_ver}, #{percentile}%"
+       %>
+      {
+        "col_title": "<%= column_title %>",
+        "fill": <%= fill_by_ruby_and_percentile[ruby_ver][percentile].inspect %>,
+        "time": <%= warmup_data["processed"]["cohort"][cohort]["request_percentiles"][percentile].inspect %>
+      },
+    <% end %>
+    {  // Spacer
+      "col_title": " <%= ruby_ver %>",
+      "time": 0.0
+    },
+  <% end %>
+  {}
+];
+
+ruby_version_data.pop(); // Remove final empty element
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>
