@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Single Request Times by Ruby Version </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  cohort_aliases = {
+    "2.5.0,-rbundler/setup" => "Ruby 2.5.0",
+    "2.6.0,-rbundler/setup" => "Ruby 2.6.0pre1 no JIT",
+    "2.6.0,-rbundler/setup --jit" => "Ruby 2.6.0pre1 with JIT",
+  }
+
+  #percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
+  requests = {}
+  cohorts.each do |cohort|
+    d = cohort_data["req_time_by_cohort"][cohort]
+    # Chop out most of the data for speed reasons, for now
+    small_d = (0...(d.size)).step(10).map { |offs| d[offs] }
+    requests[cohort_aliases[cohort]] = small_d
+  end
+  %>
+
+<%
+# From Rickshaw Spectrum2000 palette
+stroke_by_ruby = {
+  "Ruby 2.5.0" => '#57306f',
+  "Ruby 2.6.0pre1 no JIT" => '#84b665',
+  "Ruby 2.6.0pre1 with JIT" => '#ecdd00',
+}
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var line = d3.line()
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+  {
+    name: <%= cohort_aliases[cohort].inspect %>,
+    cohort: <%= cohort.inspect %>,
+    stroke: <%= stroke_by_ruby[cohort_aliases[cohort]].inspect %>,
+    coords: [
+    <% requests[cohort_aliases[cohort]].each_with_index do |req, idx|
+         request_fraction = idx.to_f / requests[cohort_aliases[cohort]].size
+     %>
+      { x: <%= request_fraction.inspect %>, y: <%= req.inspect %> },
+    <% end %>
+    ]
+  },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+var graph_y_max = <%= cohorts.map { |cohort| requests[cohort_aliases[cohort]].max }.max  %>;
+x.domain([0.0, 1.0]);
+// Want a manually-chopped Y domain? Set it here as the first element of the array.
+//y.domain([0.0, graph_y_max]);
+y.domain([0.0, d3.extent(graph_data[0].coords.concat(graph_data[1].coords, graph_data[2].coords), function(d) { return d.y; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+<% cohorts.each_with_index do |cohort, index| %>
+  g.append("path")
+     .attr("class", "linechart<%= index %>")
+     .datum(graph_data[<%= index %>].coords)
+     .attr("fill", "none")
+     .attr("stroke", <%= stroke_by_ruby[cohort_aliases[cohort]].inspect %>)
+     .attr("stroke-linejoin", "round")
+     .attr("stroke-linecap", "round")
+     .attr("d", line);
+<% end %>
+
+// Right now you sometimes have to adjust the bottom-axis label
+// transformation based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>
