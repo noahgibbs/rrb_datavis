@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-
-.axis--x path {
-  display: none;
-}
-
-</style>
-<h1>RRB Single Request Times by Ruby Version </h1>
-<svg width="960" height="600"></svg>
+<h1>RRB Single Request Distribution by Ruby Version </h1>
+<svg width="960" height="500"></svg>
+<ul id="legend">
+</ul>
 <script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
 <script>
 
 <%
@@ -29,34 +25,36 @@
   cohorts.each do |cohort|
     d = cohort_data["req_time_by_cohort"][cohort]
     # Chop out most of the data for speed reasons, for now
-    small_d = (0...(d.size)).step(10).map { |offs| d[offs] }
-    requests[cohort_aliases[cohort]] = small_d
+    #small_d = (0...(d.size)).step(2).map { |offs| d[offs] }
+    #requests[cohort_aliases[cohort]] = small_d
+    requests[cohort_aliases[cohort]] = d
   end
-  %>
 
-<%
-# From Rickshaw Spectrum2000 palette
-stroke_by_ruby = {
-  "Ruby 2.5.0" => '#57306f',
-  "Ruby 2.6.0pre1 no JIT" => '#84b665',
-  "Ruby 2.6.0pre1 with JIT" => '#ecdd00',
-}
+  # From Rickshaw Spectrum2000 palette
+  stroke_by_ruby = {
+    "Ruby 2.5.0" => '#57306f',
+    "Ruby 2.6.0pre1 no JIT" => '#84b665',
+    "Ruby 2.6.0pre1 with JIT" => '#ecdd00',
+  }
 %>
 
 var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom;
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-    y = d3.scaleLinear().rangeRound([height, 0]);
+var parseTime = d3.timeParse("%d-%b-%y");
+
+var x = d3.scaleLinear()
+    .rangeRound([0, width]);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
 
 var line = d3.line()
     .x(function(d) { return x(d.x); })
     .y(function(d) { return y(d.y); });
-
-var g = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var graph_data = [
   <% cohorts.each do |cohort| %>
@@ -76,41 +74,40 @@ var graph_data = [
   {} // Final empty element, added for comma-related convenience.
 ];
 
-graph_data.pop(); // Remove final empty element
+graph_data.pop();
 
-var graph_y_max = <%= cohorts.map { |cohort| requests[cohort_aliases[cohort]].max }.max  %>;
-x.domain([0.0, 1.0]);
-// Want a manually-chopped Y domain? Set it here as the first element of the array.
-//y.domain([0.0, graph_y_max]);
-y.domain([0.0, d3.extent(graph_data[0].coords.concat(graph_data[1].coords, graph_data[2].coords), function(d) { return d.y; })]);
+x.domain(d3.extent(graph_data[0].coords.concat(graph_data[1].coords), function(d) { return d.x; }));
+y.domain(d3.extent(graph_data[0].coords.concat(graph_data[1].coords), function(d) { return d.y; }));
 
 g.append("g")
-   .attr("class", "axis axis--x")
-   .attr("transform", "translate(0," + height + ")")
-   .call(customXaxis);
-   //.call(d3.axisBottom(x));
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
 
 g.append("g")
-   .attr("class", "axis axis--y")
-   .call(d3.axisLeft(y))
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("Request time (sec)");
 
-<% cohorts.each_with_index do |cohort, index| %>
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = stroke_by_ruby[cohort_aliases[cohort]]
+%>
   g.append("path")
-     .attr("class", "linechart<%= index %>")
-     .datum(graph_data[<%= index %>].coords)
-     .attr("fill", "none")
-     .attr("stroke", <%= stroke_by_ruby[cohort_aliases[cohort]].inspect %>)
-     .attr("stroke-linejoin", "round")
-     .attr("stroke-linecap", "round")
-     .attr("d", line);
-<% end %>
+      .datum(graph_data[<%= index %>].coords)
+      .attr("fill", "none")
+      .attr("stroke", <%= stroke_color.inspect %>)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
 
-// Right now you sometimes have to adjust the bottom-axis label
-// transformation based on their textual length. It's a pain.
-function customXaxis(g) {
-  g.call(d3.axisBottom(x));
-  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
-  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
-}
+  $("ul#legend").append("<li><span style='color: <%= stroke_color %>'><%= cohort_aliases[cohort] %></span></li>");
+<% end %>
 
 </script>
