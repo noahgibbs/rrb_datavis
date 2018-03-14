@@ -25,8 +25,9 @@
   cohorts.each do |cohort|
     d = cohort_data["req_time_by_cohort"][cohort]
     # Chop out most of the data for speed reasons, for now
-    small_d = (0...(d.size)).step(100).map { |offs| d[offs] }
-    requests[cohort_aliases[cohort]] = small_d
+    #small_d = (0...(d.size)).step(2).map { |offs| d[offs] }
+    #requests[cohort_aliases[cohort]] = small_d
+    requests[cohort_aliases[cohort]] = d
   end
 
   # From Rickshaw Spectrum2000 palette
