@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<h1>RRB Single Request Distribution by Ruby Version </h1>
+<h1>RRB Full-Run Distribution by Ruby Version </h1>
 <svg width="960" height="500"></svg>
 <ul id="legend">
 </ul>
@@ -20,14 +20,10 @@
     "2.6.0,-rbundler/setup --jit" => "Ruby 2.6.0pre1 with JIT",
   }
 
-  #percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
-  requests = {}
+  runs = {}
   cohorts.each do |cohort|
-    d = cohort_data["req_time_by_cohort"][cohort]
-    # Chop out most of the data for speed reasons, for now
-    #small_d = (0...(d.size)).step(2).map { |offs| d[offs] }
-    #requests[cohort_aliases[cohort]] = small_d
-    requests[cohort_aliases[cohort]] = d
+    d = cohort_data["run_by_cohort"][cohort]
+    runs[cohort_aliases[cohort]] = d.inject([], &:+).sort
   end
 
   # From Rickshaw Spectrum2000 palette
@@ -63,10 +59,10 @@ var graph_data = [
     cohort: <%= cohort.inspect %>,
     stroke: <%= stroke_by_ruby[cohort_aliases[cohort]].inspect %>,
     coords: [
-    <% requests[cohort_aliases[cohort]].each_with_index do |req, idx|
-         request_fraction = idx.to_f / requests[cohort_aliases[cohort]].size
+    <% runs[cohort_aliases[cohort]].each_with_index do |run, idx|
+         fraction = idx.to_f / runs[cohort_aliases[cohort]].size
      %>
-      { x: <%= request_fraction.inspect %>, y: <%= req.inspect %> },
+      { x: <%= fraction.inspect %>, y: <%= run.inspect %> },
     <% end %>
     ]
   },
@@ -76,12 +72,20 @@ var graph_data = [
 
 graph_data.pop();
 
-var all_coords = [];
-graph_data.foreach(function(single_line) {
-  all_coords = all_coords.concat(single_line.coords);
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
 });
-x.domain(d3.extent(all_coords, function(d) { return d.x; }));
-y.domain(d3.extent(all_coords, function(d) { return d.y; }));
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+console.log("X domain", min_x, max_x);
+console.log("Y domain", min_y, max_y);
 
 g.append("g")
     .attr("transform", "translate(0," + height + ")")
