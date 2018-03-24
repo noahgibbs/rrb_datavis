@@ -76,12 +76,18 @@ var graph_data = [
 
 graph_data.pop();
 
-var all_coords = [];
-graph_data.foreach(function(single_line) {
-  all_coords = all_coords.concat(single_line.coords);
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
 });
-x.domain(d3.extent(all_coords, function(d) { return d.x; }));
-y.domain(d3.extent(all_coords, function(d) { return d.y; }));
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
 
 g.append("g")
     .attr("transform", "translate(0," + height + ")")
