@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>RRB Full-Run Distribution by Ruby Version </h1>
+<svg width="960" height="500"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  cohort_aliases = {
+    "ext-mri-2.6.0-preview,-rbundler/setup ,0" => "0 wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100" => "1 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000" => "100 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000" => "10 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000000" => "100 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100000000" => "1 GB wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000000" => "10 GB wasted",
+  }
+
+  runs = {}
+  cohorts.each do |cohort|
+    d = cohort_data["run_by_cohort"][cohort]
+    runs[cohort_aliases[cohort]] = d.inject([], &:+).sort
+  end
+
+  # From Rickshaw palette
+  stroke_by_alias = {
+    "0 wasted" => '#ecb796',
+    "1 kb wasted" => '#dc8f70',
+    "100 kb wasted" => '#b2a470',
+    "10 MM wasted" => '#92875a',
+    "100 MM wasted" => '#716c49',
+    "1 GB wasted" => '#d2ed82',
+    "10 GB wasted" => '#bbe468',
+  }
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime = d3.timeParse("%d-%b-%y");
+
+var x = d3.scaleLinear()
+    .rangeRound([0, width]);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+var line = d3.line()
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+  {
+    name: <%= cohort_aliases[cohort].inspect %>,
+    cohort: <%= cohort.inspect %>,
+    stroke: <%= stroke_by_alias[cohort_aliases[cohort]].inspect %>,
+    coords: [
+    <% runs[cohort_aliases[cohort]].each_with_index do |run, idx|
+         fraction = idx.to_f / runs[cohort_aliases[cohort]].size
+     %>
+      { x: <%= fraction.inspect %>, y: <%= run.inspect %> },
+    <% end %>
+    ]
+  },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("Request time (sec)");
+
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = stroke_by_alias[cohort_aliases[cohort]]
+%>
+  g.append("path")
+      .datum(graph_data[<%= index %>].coords)
+      .attr("fill", "none")
+      .attr("stroke", <%= stroke_color.inspect %>)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: <%= stroke_color %>'><%= cohort_aliases[cohort] %></span></li>");
+<% end %>
+
+</script>

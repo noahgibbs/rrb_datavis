@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<h1>RRB Single Request Distribution by Ruby Version </h1>
+<h1>RRB Single Request Distribution by Wasted Bytes per Worker Process </h1>
 <svg width="960" height="500"></svg>
 <ul id="legend">
 </ul>
@@ -16,12 +16,12 @@
   cohorts = cohort_data["processed"]["cohort"].keys.sort
   cohort_aliases = {
     "ext-mri-2.6.0-preview,-rbundler/setup ,0" => "0 wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,100" => "100 wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,10000" => "10 k wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000" => "1 MM wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,10000000" => "10 MM wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,100000000" => "100 MM wasted",
-    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000000" => "1 B wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100" => "1 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000" => "100 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000" => "10 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000000" => "100 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100000000" => "1 GB wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000000" => "10 GB wasted",
   }
 
   #percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
@@ -30,21 +30,21 @@
     d = cohort_data["req_time_by_cohort"][cohort]
 
     # Chop out most of the data for speed reasons, for now
-    small_d = (0...(d.size)).step(100).map { |offs| d[offs] }
-    requests[cohort_aliases[cohort]] = small_d
+    #small_d = (0...(d.size)).step(100).map { |offs| d[offs] }
+    #requests[cohort_aliases[cohort]] = small_d
 
-    #requests[cohort_aliases[cohort]] = d
+    requests[cohort_aliases[cohort]] = d
   end
 
-  # From Rickshaw Spectrum2000 palette
+  # From Rickshaw palette
   stroke_by_alias = {
     "0 wasted" => '#ecb796',
-    "100 wasted" => '#dc8f70',
-    "10 k wasted" => '#b2a470',
-    "1 MM wasted" => '#92875a',
-    "10 MM wasted" => '#716c49',
-    "100 MM wasted" => '#d2ed82',
-    "1 B wasted" => '#bbe468',
+    "1 kb wasted" => '#dc8f70',
+    "100 kb wasted" => '#b2a470',
+    "10 MM wasted" => '#92875a',
+    "100 MM wasted" => '#716c49',
+    "1 GB wasted" => '#d2ed82',
+    "10 GB wasted" => '#bbe468',
   }
 %>
 
