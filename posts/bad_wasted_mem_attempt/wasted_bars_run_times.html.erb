@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+</style>
+<h1>RRB Full-Run Times by Wasted Memory </h1>
+<svg width="960" height="600"></svg>
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+<%
+  require "json"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  cohort_aliases = {
+    "ext-mri-2.6.0-preview,-rbundler/setup ,0" => "0 wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100" => "1 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000" => "100 kb wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000" => "10 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,10000000" => "100 MM wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,100000000" => "1 GB wasted",
+    "ext-mri-2.6.0-preview,-rbundler/setup ,1000000000" => "10 GB wasted",
+  }
+
+  percentiles = cohort_data["processed"]["cohort"].values.first["run_percentiles"].keys
+
+  %>
+
+<%
+fill_by_ruby_and_percentile = {
+  "Ruby 2.5.0" => {
+    # From Rickshaw Spectrum2000 palette
+    "0" => '#57306f',
+    "10" => '#514c76',
+    "50" => '#646583',
+    "90" => '#738394',
+    "100" => '#6b9c7d',
+  },
+  "Ruby 2.6.0pre1 no JIT" => {
+    "0" => '#84b665',
+    "10" => '#a7ca50',
+    "50" => '#bfe746',
+    "90" => '#e2f528',
+    "100" => '#fff726',
+  },
+  "Ruby 2.6.0pre1 with JIT" => {
+    "0" => '#ecdd00',
+    "10" => '#d4b11d',
+    "50" => '#de8800',
+    "90" => '#de4800',
+    "100" => '#57306f',
+  },
+}
+
+def format_speedup(speedup)
+  basic = "%.2f" % speedup
+  color = ""
+  if speedup < 0
+    color = "red"
+  else
+    color = "green"
+  end
+  "&lt;font color=\"#{color}\"&gt;#{basic}%&lt;/font&gt;"
+end
+%>
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+    <% percentiles.each do |percentile| %>
+      {
+        "col_title": "<%= cohort_aliases[cohort] %>, <%= percentile %>%",
+        "fill": <%= fill_by_ruby_and_percentile[cohort_aliases[cohort]][percentile].inspect %>,
+        "time": <%= cohort_data["processed"]["cohort"][cohort]["run_percentiles"][percentile].inspect %>
+      },
+    <% end %>
+    {
+      "col_title": "<%= cohort_aliases[cohort] %> ------",
+    },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop(); // Remove final empty element
+
+x.domain(graph_data.map(function(d) { return d.col_title; }));
+// Want a manually-chopped Y domain? Set it here as the first element of the array.
+y.domain([0.0, d3.max(graph_data, function(d) { return d.time; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(graph_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.time); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.time); });
+
+// Right now, you have to adjust the bottom-axis label transformation
+// based on their textual length. It's a pain.
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+</script>
+
+<p></p><p></p><p></p><p></p>
+<hr/>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt;Percentile&lt;/th&gt;
+      &lt;th&gt;Ruby 2.5.0&lt;/th&gt;
+      &lt;th&gt;Ruby 2.6.0 w/o JIT&lt;/th&gt;
+      &lt;th&gt;Ruby 2.6.0 w/ JIT&lt;/th&gt;
+      &lt;th&gt;speedup w/ 2.6&lt;/th&gt;
+      &lt;th&gt;speedup w/ 2.6 JIT&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      <% percentiles.each do |percentile|
+           baseline = cohort_data["processed"]["cohort"]["2.5.0,-rbundler/setup"]["run_percentiles"][percentile]
+           ruby_26 = cohort_data["processed"]["cohort"]["2.6.0,-rbundler/setup"]["run_percentiles"][percentile]
+           ruby_mjit = cohort_data["processed"]["cohort"]["2.6.0,-rbundler/setup --jit"]["run_percentiles"][percentile]
+           ruby_26_speedup = (baseline - ruby_26.to_f) * 100.0 / baseline
+           ruby_mjit_speedup = (baseline - ruby_mjit.to_f) * 100.0 / baseline
+      %>
+        &lt;tr&gt;
+          &lt;td&gt; <%= percentile %>% &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % baseline %> sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % ruby_26 %> sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % ruby_mjit %> sec &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(ruby_26_speedup) %> &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(ruby_mjit_speedup) %> &lt;/td&gt;
+        &lt;/tr&gt;
+      <% end %>
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>
+
+<pre>
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr style="text-align: left"&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Ruby 2.5.0&lt;/th&gt;
+      &lt;th&gt;Ruby 2.6.0pre1 w/o JIT&lt;/th&gt;
+      &lt;th&gt;Ruby 2.6.0pre1 w/ JIT&lt;/th&gt;
+      &lt;th&gt;increase w/ 2.6&lt;/th&gt;
+      &lt;th&gt;increase w/ 2.6 JIT&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      <% 
+           baseline = cohort_data["processed"]["cohort"]["2.5.0,-rbundler/setup"]["throughput_median"]
+           ruby26 = cohort_data["processed"]["cohort"]["2.6.0,-rbundler/setup"]["throughput_median"]
+           ruby_mjit = cohort_data["processed"]["cohort"]["2.6.0,-rbundler/setup --jit"]["throughput_median"]
+           ruby26_speedup = (ruby26.to_f - baseline) * 100.0 / baseline
+           ruby_mjit_speedup = (ruby_mjit.to_f - baseline) * 100.0 / baseline
+      %>
+        &lt;tr&gt;
+          &lt;td&gt; Median Throughput &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % baseline %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % ruby26 %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= "%.2f" % ruby_mjit %> req/sec &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(ruby_mjit_speedup) %> &lt;/td&gt;
+          &lt;td&gt; <%= format_speedup(ruby26_speedup) %> &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>
