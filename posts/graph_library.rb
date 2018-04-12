@@ -50,3 +50,24 @@ def simple_gradient_palette(start_color_rgb_hex, end_color_rgb_hex, num_entries:
   entries
 end
 
+def bluegreen_palette(num_entries)
+  return [] if num_entries < 1
+  return [ "#DCEDC8" ] if num_entries == 1
+  return [ "#DCEDC8", "#1A237E" ] if num_entries == 2
+  return [ "#DCEDC8", "#42B3D5", "#1A237E" ] if num_entries == 3
+
+  # We'll always have the three hardcoded colors in any gradient of size 3 or greater.
+  # We'll interpolated num_entries - 3 more colors, divided into two gradients.
+
+  interpolated_entries = num_entries - 3
+  first_interpolated_entries = interpolated_entries / 2
+  second_interpolated_entries = interpolated_entries - first_interpolated_entries  # Either same as first, or one larger
+
+  # To interpolate, add 2 (the first and last) to the number of interpolated colors in each gradient...
+  # Then ignore the first element of the second gradient, because it will be the color #42B3D5 repeated.
+
+  palette = simple_gradient_palette("#DCEDC8", "#42B3D5", num_entries: first_interpolated_entries + 2) +
+    simple_gradient_palette("#42B3D5", "#1A237E", num_entries: second_interpolated_entries + 2)[1..-1]
+
+  palette
+end

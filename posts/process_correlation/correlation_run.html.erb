@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>RRB Full-Run Distribution by Ruby Version </h1>
+<svg width="960" height="500"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require_relative "../graph_library"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  # The names include the 10x for each worker process wasting the bytes
+  cohort_aliases = {
+    "5,4000" => "In-Process Restarts",
+    "1,20000" => "In-Process No Restarts",
+    "1,4000" => "Separate Processes",
+  }
+
+  runs = {}
+  cohorts.each do |cohort|
+    d = cohort_data["run_by_cohort"][cohort]
+    cohort_runs = []
+    runs[cohort_aliases[cohort]] = cohort_runs
+    span = 1.0 / d.size
+    d.each_with_index do |one_run, index|
+      # Each run is normally 30 total times. X is by run and sorted position, y is the time
+      run_coords = (0...one_run.size).each { |run_index|
+        frac = run_index.to_f / one_run.size
+        cohort_runs.concat(one_run.map { |time| { x: index * span + frac * span, y: time } })
+      }
+    end
+  end
+
+  palette = bluegreen_palette(cohort_aliases.size)
+  color_by_alias = {}
+  cohorts.each_with_index do |cohort, index|
+    color_by_alias[cohort_aliases[cohort]] = palette[index]
+  end
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime = d3.timeParse("%d-%b-%y");
+
+var x = d3.scaleLinear()
+    .rangeRound([0, width]);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+var line = d3.line()
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+var graph_data = [
+  <% cohorts.each_with_index do |cohort, index| %>
+  {
+    name: <%= cohort_aliases[cohort].inspect %>,
+    index: <%= index %>,
+    domClass: <%= "data_coords_#{index}".inspect %>,
+    cohort: <%= cohort.inspect %>,
+    fill: <%= color_by_alias[cohort_aliases[cohort]].inspect %>,
+    coords: [
+    <% runs[cohort_aliases[cohort]].each do |point|
+     %>
+          { x: <%= point[:x].inspect %>, y: <%= point[:y].inspect %> },
+    <% end %>
+    ]
+  },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("Request time (sec)");
+
+  graph_data.forEach(function(singleLine) {
+    let dataSequence = g.selectAll("." + singleLine.domClass).data(singleLine.coords);
+    let enter = dataSequence.enter();
+    enter.append("circle")
+        .attr("class", singleLine.domClass)
+        .attr("cx", function(d) { return x(d.x); })
+        .attr("cy", function(d) { return y(d.y); })
+        .attr("r", 0.75)
+        .attr("fill", singleLine.fill)
+        .attr("fill-opacity", 0.5);
+
+    $("ul#legend").append("<li><span style='color: " + singleLine.fill + "'>" + singleLine.name + "</span></li>");
+  });
+
+</script>
