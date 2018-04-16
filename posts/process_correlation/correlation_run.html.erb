@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<h1>RRB Full-Run Distribution by Ruby Version </h1>
-<svg width="960" height="500"></svg>
+<h1>RRB Full-Run Distribution by Process Restarts </h1>
+<svg width="1024" height="768"></svg>
 <ul id="legend">
 </ul>
 <script src="d3.v4.min.js"></script>
@@ -24,6 +24,11 @@
   runs = {}
   cohorts.each do |cohort|
     d = cohort_data["run_by_cohort"][cohort]
+
+    # With no restarts, you just have five times as many requests per run, yielding 5x the runtime.
+    # Both the in-process total restarts and the separate processes avoid this problem.
+    divisor = cohort_aliases[cohort] == "In-Process No Restarts" ? 5.0 : 1.0
+
     cohort_runs = []
     runs[cohort_aliases[cohort]] = cohort_runs
     span = 1.0 / d.size
@@ -31,12 +36,14 @@
       # Each run is normally 30 total times. X is by run and sorted position, y is the time
       run_coords = (0...one_run.size).each { |run_index|
         frac = run_index.to_f / one_run.size
-        cohort_runs.concat(one_run.map { |time| { x: index * span + frac * span, y: time } })
+        cohort_runs.concat(one_run.map { |time| { x: index * span + frac * span, y: time / divisor } })
       }
     end
   end
 
-  palette = bluegreen_palette(cohort_aliases.size)
+  #palette = bluegreen_palette(cohort_aliases.size)
+  palette = [ "#4044FF", "#40170F", "#5aE541" ]
+  #palette = [ "#4044FF", "#FFFFFF", "#FFFFFF" ]
   color_by_alias = {}
   cohorts.each_with_index do |cohort, index|
     color_by_alias[cohort_aliases[cohort]] = palette[index]
@@ -94,6 +101,7 @@ graph_data.forEach(function(single_line) {
 });
 x.domain([min_x, max_x]);
 y.domain([min_y, max_y]);
+//y.domain([22.0, 23.0]);
 
 g.append("g")
     .attr("transform", "translate(0," + height + ")")
