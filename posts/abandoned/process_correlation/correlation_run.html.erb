@@ -24,6 +24,9 @@
   runs = {}
   cohorts.each do |cohort|
     d = cohort_data["run_by_cohort"][cohort]
+    all_cohort_data = d.inject([], &:+)
+    total_size = all_cohort_data.size
+    #total_size = d.map(&:size).inject(0, &:+)
 
     # With no restarts, you just have five times as many requests per run, yielding 5x the runtime.
     # Both the in-process total restarts and the separate processes avoid this problem.
@@ -31,14 +34,16 @@
 
     cohort_runs = []
     runs[cohort_aliases[cohort]] = cohort_runs
-    span = 1.0 / d.size
-    d.each_with_index do |one_run, index|
-      # Each run is normally 30 total times. X is by run and sorted position, y is the time
-      run_coords = (0...one_run.size).each { |run_index|
-        frac = run_index.to_f / one_run.size
-        cohort_runs.concat(one_run.map { |time| { x: index * span + frac * span, y: time / divisor } })
-      }
+    all_cohort_data.each_with_index do |time, index|
+      cohort_runs.push({x: index.to_f / total_size, y: time / divisor})
     end
+    #d.each_with_index do |one_run, index|
+    #  # Each run is normally 30 total times. X is by run and sorted position, y is the time
+    #  (0...one_run.size).each { |run_index|
+    #    cohort_runs.concat(one_run.map { |time| { x: total_index.to_f / total_size, y: time / divisor } })
+    #    total_index += 1
+    #  }
+    #end
   end
 
   #palette = bluegreen_palette(cohort_aliases.size)
