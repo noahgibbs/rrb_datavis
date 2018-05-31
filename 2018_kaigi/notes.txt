@@ -1,0 +1,1 @@
+2017 Kaigi graph used the median throughput for showing the warmups.
