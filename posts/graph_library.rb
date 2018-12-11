@@ -1,18 +1,18 @@
 require "json"
 require "rgb"  # Color calculation library, gem is named "rgb"
 
-# Munin palette taken from Rickshaw code
+# Munin palette taken from Rickshaw code, lightly modified
 MUNIN_PALETTE = [
   '#00cc00',
   '#0066b3',
   '#ff8000',
-  '#ffcc00',
+  '#808080',
+  '#ff0000',
+  '#008f00',
   '#330099',
   '#990099',
   '#ccff00',
-  '#ff0000',
-  '#808080',
-  '#008f00',
+  '#ffcc00',
   '#00487d',
   '#b35a00',
   '#b38f00',
@@ -70,4 +70,25 @@ def bluegreen_palette(num_entries)
     simple_gradient_palette("#42B3D5", "#1A237E", num_entries: second_interpolated_entries + 2)[1..-1]
 
   palette
+end
+
+def contrast_palette(num_entries)
+  if num_entries > MUNIN_PALETTE.size
+    raise "Too many color entries requested: #{num_entries.inspect}!"
+  end
+  MUNIN_PALETTE[0..(num_entries-1)]
+end
+
+  # load_ab_csv returns 101 floating-point entries for the request time at that percentage - zero through 100.
+def load_ab_csv(filename)
+  contents = File.read filename
+  lines = contents.split("\n")
+  if lines[0] != "Percentage served,Time in ms"
+    raise "Expected ApacheBench CSV file, but first line was: #{lines[0]}.inspect!"
+  end
+  if lines.size != 102
+    raise "Expected full-length ApacheBench CSV w/ percentages, but got #{lines.size.inspect} lines instead of 102 lines!"
+  end
+  ms_timings = lines[1..-1].map { |line| line.split(",", 2)[1].to_f }
+  ms_timings
 end
