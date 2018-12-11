@@ -19,12 +19,12 @@
   # load_ab_csv returns 101 floating-point entries for the request time at that percentage - zero through 100.
   # Here, we trim the bottom and top 1% because we got noticeable noise in the data and we want "typical".
   cohort_data = {
-    "2.0" => load_ab_csv("1544477469_2.0.0p648_bench_rsb.csv")[min_pct..max_pct],
-    "2.1" => load_ab_csv("1544477504_2.1.10_bench_rsb.csv")[min_pct..max_pct],
-    "2.2" => load_ab_csv("1544477596_2.2.10_bench_rsb.csv")[min_pct..max_pct],
-    "2.3" => load_ab_csv("1544477677_2.3.8_bench_rsb.csv")[min_pct..max_pct],
-    "2.4" => load_ab_csv("1544477719_2.4.5_bench_rsb.csv")[min_pct..max_pct],
-    "2.5" => load_ab_csv("1544477793_2.5.3_bench_rsb.csv")[min_pct..max_pct],
+    "2.0" => load_ab_csv("data/1544477469_2.0.0p648_bench_rsb.csv")[min_pct..max_pct],
+    "2.1" => load_ab_csv("data/1544477504_2.1.10_bench_rsb.csv")[min_pct..max_pct],
+    "2.2" => load_ab_csv("data/1544477596_2.2.10_bench_rsb.csv")[min_pct..max_pct],
+    "2.3" => load_ab_csv("data/1544477677_2.3.8_bench_rsb.csv")[min_pct..max_pct],
+    "2.4" => load_ab_csv("data/1544477719_2.4.5_bench_rsb.csv")[min_pct..max_pct],
+    "2.5" => load_ab_csv("data/1544477793_2.5.3_bench_rsb.csv")[min_pct..max_pct],
   }
 
   cohorts = cohort_data.keys.sort
