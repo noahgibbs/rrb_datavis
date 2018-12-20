@@ -32,7 +32,7 @@ var graph_data = [
   
   {
     name: "2.0p648",
-    stroke: "#00cc00",
+    stroke: "#0066b3",
     coords: [
     
       { x: 0.01, y: 1.785 },
@@ -238,7 +238,7 @@ var graph_data = [
   
   {
     name: "2.1.10",
-    stroke: "#0066b3",
+    stroke: "#ff8000",
     coords: [
     
       { x: 0.01, y: 1.939 },
@@ -444,7 +444,7 @@ var graph_data = [
   
   {
     name: "2.2.10",
-    stroke: "#ff8000",
+    stroke: "#808080",
     coords: [
     
       { x: 0.01, y: 1.922 },
@@ -650,7 +650,7 @@ var graph_data = [
   
   {
     name: "2.3.8",
-    stroke: "#808080",
+    stroke: "#ff0000",
     coords: [
     
       { x: 0.01, y: 2.151 },
@@ -856,7 +856,7 @@ var graph_data = [
   
   {
     name: "2.4.5",
-    stroke: "#ff0000",
+    stroke: "#008f00",
     coords: [
     
       { x: 0.01, y: 1.487 },
@@ -1062,7 +1062,7 @@ var graph_data = [
   
   {
     name: "2.5.3",
-    stroke: "#008f00",
+    stroke: "#330099",
     coords: [
     
       { x: 0.01, y: 1.611 },
@@ -1306,27 +1306,16 @@ g.append("g")
   g.append("path")
       .datum(graph_data[0].coords)
       .attr("fill", "none")
-      .attr("stroke", "#00cc00")
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
-      .attr("stroke-width", 1.5)
-      .attr("d", line);
-
-  $("ul#legend").append("<li><span style='color: #00cc00'>2.0p648</span></li>");
-
-  g.append("path")
-      .datum(graph_data[1].coords)
-      .attr("fill", "none")
       .attr("stroke", "#0066b3")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #0066b3'>2.1.10</span></li>");
+  $("ul#legend").append("<li><span style='color: #0066b3'>2.0p648</span></li>");
 
   g.append("path")
-      .datum(graph_data[2].coords)
+      .datum(graph_data[1].coords)
       .attr("fill", "none")
       .attr("stroke", "#ff8000")
       .attr("stroke-linejoin", "round")
@@ -1334,10 +1323,10 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #ff8000'>2.2.10</span></li>");
+  $("ul#legend").append("<li><span style='color: #ff8000'>2.1.10</span></li>");
 
   g.append("path")
-      .datum(graph_data[3].coords)
+      .datum(graph_data[2].coords)
       .attr("fill", "none")
       .attr("stroke", "#808080")
       .attr("stroke-linejoin", "round")
@@ -1345,10 +1334,10 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #808080'>2.3.8</span></li>");
+  $("ul#legend").append("<li><span style='color: #808080'>2.2.10</span></li>");
 
   g.append("path")
-      .datum(graph_data[4].coords)
+      .datum(graph_data[3].coords)
       .attr("fill", "none")
       .attr("stroke", "#ff0000")
       .attr("stroke-linejoin", "round")
@@ -1356,10 +1345,10 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #ff0000'>2.4.5</span></li>");
+  $("ul#legend").append("<li><span style='color: #ff0000'>2.3.8</span></li>");
 
   g.append("path")
-      .datum(graph_data[5].coords)
+      .datum(graph_data[4].coords)
       .attr("fill", "none")
       .attr("stroke", "#008f00")
       .attr("stroke-linejoin", "round")
@@ -1367,7 +1356,18 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #008f00'>2.5.3</span></li>");
+  $("ul#legend").append("<li><span style='color: #008f00'>2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[5].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#330099")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #330099'>2.5.3</span></li>");
 
 
 </script>

@@ -48,11 +48,11 @@
 
   cohorts = cohort_data.keys.sort
 
-  # Set up a simple mutually-contrasty palette
+  # Set up a simple mutually-contrasty palette... For the mapping, *not* changed per-dataset
   num_palette_entries = cohorts.size
-  entries = contrast_palette(num_palette_entries)
+  entries = contrast_palette(cohort_mapping.size)
   stroke_by_ruby = {}
-  cohorts.each_with_index { |ruby, idx| stroke_by_ruby[ruby] = entries[idx] }
+  cohort_mapping.keys.each_with_index { |ruby, idx| stroke_by_ruby[ruby] = entries[idx] }
 %>
 
 var svg = d3.select("svg"),
