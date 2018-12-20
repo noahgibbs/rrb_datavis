@@ -42,7 +42,7 @@
       # Here, we trim the bottom and top few percent because we got noticeable noise in the data and we want "typical".
       cohort_data[graph_name] = load_ab_csv(files[0])[min_pct..max_pct]
     else
-      puts "No data for Ruby #{file_name}... skipping."
+      STDERR.puts "No data for Ruby #{file_name}... skipping."
     end
   end
 
@@ -139,3 +139,7 @@ g.append("g")
 <% end %>
 
 </script>
+
+<p>
+  Graphed for platform <%= platform.inspect %>, dataset <%= test_name %>. Percentages shown: <%= min_pct %> to <%= max_pct %>.
+</p>
