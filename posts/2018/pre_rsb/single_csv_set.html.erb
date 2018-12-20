@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rails Trivial App Request Times by Ruby Version </h1>
+<svg width="512" height="384"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require "json"
+  require_relative "graph_library"
+
+  # These can be set to trim extreme outliers
+  min_pct = ENV["MIN_PCT"] ? ENV["MIN_PCT"].to_f : 1
+  max_pct = ENV["MAX_PCT"] ? ENV["MAX_PCT"].to_f : 99
+
+  platform = ENV["PLATFORM"] ? ENV["PLATFORM"] : "ubuntu"
+  test_name = ENV["TEST_NAME"] ? ENV["TEST_NAME"] : "rails_10k"
+
+  dir = "#{platform}_data/#{test_name}"
+
+  cohort_mapping = {
+    "2.0p0" => "2.0.0_",
+    "2.0p648" => "2.0.0p648",
+    "2.1.10" => "2.1.10",
+    "2.2.10" => "2.2.10",
+    "2.3.8" => "2.3.8",
+    "2.4.5" => "2.4.5",
+    "2.5.3" => "2.5.3",
+    "2.6rc2" => "2.6.0rc2",
+  }
+
+  cohort_data = {}
+  cohort_mapping.each do |graph_name, file_name|
+    files = Dir[dir + "/*_#{file_name}*_rsb.csv"].to_a
+    if files.size > 1
+      raise "Found more than one matching data file in #{dir.inspect} for #{file_name}"
+    elsif files.size == 1
+      # load_ab_csv returns 101 floating-point entries for the request time at that percentage - zero through 100.
+      # Here, we trim the bottom and top few percent because we got noticeable noise in the data and we want "typical".
+      cohort_data[graph_name] = load_ab_csv(files[0])[min_pct..max_pct]
+    else
+      puts "No data for Ruby #{file_name}... skipping."
+    end
+  end
+
+  cohorts = cohort_data.keys.sort
+
+  # Set up a simple mutually-contrasty palette
+  num_palette_entries = cohorts.size
+  entries = contrast_palette(num_palette_entries)
+  stroke_by_ruby = {}
+  cohorts.each_with_index { |ruby, idx| stroke_by_ruby[ruby] = entries[idx] }
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime = d3.timeParse("%d-%b-%y");
+
+var x = d3.scaleLinear()
+    .rangeRound([0, width]);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+var line = d3.line()
+    .x(function(d) { return x(d.x); })
+    .y(function(d) { return y(d.y); });
+
+var graph_data = [
+  <% cohorts.each do |cohort| %>
+  {
+    name: <%= cohort.inspect %>,
+    stroke: <%= stroke_by_ruby[cohort].inspect %>,
+    coords: [
+    <% cohort_data[cohort].each_with_index do |req_time, idx|
+         fraction = (idx.to_f / cohort_data[cohort].size) * (100.0 / (max_pct - min_pct).to_f) + min_pct / 100.0
+     %>
+      { x: <%= fraction.inspect %>, y: <%= req_time.inspect %> },
+    <% end %>
+    ]
+  },
+  <% end %>
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+//x.domain([<%= min_pct / 100.0 %>, <%= max_pct / 100 %>]);  // We trimmed out the top and bottom 2% when we loaded data earlier
+//y.domain([0.0, max_y]);
+y.domain([0.0, 5.0])
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("time (millisec)");
+
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = stroke_by_ruby[cohort]
+%>
+  g.append("path")
+      .datum(graph_data[<%= index %>].coords)
+      .attr("fill", "none")
+      .attr("stroke", <%= stroke_color.inspect %>)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: <%= stroke_color %>'><%= cohort %></span></li>");
+<% end %>
+
+</script>
