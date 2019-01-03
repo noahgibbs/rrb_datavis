@@ -3,8 +3,8 @@
 set -e
 set -x
 
-MIN_PCT=1
-MAX_PCT=99
+export MIN_PCT=0
+export MAX_PCT=98
 
 PLATFORM=mac TEST_NAME=rails_10k erb single_csv_set.html.erb > output/mac_rails_10k.html
 PLATFORM=mac TEST_NAME=rack_10k erb single_csv_set.html.erb > output/mac_rack_10k.html
