@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<h1>Rails Simple App Throughput by Ruby Version </h1>
+<h1>Rack Simple App Throughput by Ruby Version </h1>
 <svg width="512" height="384"></svg>
 <ul id="legend">
 </ul>
@@ -21,8 +21,8 @@
     rails_aliases["ruby-#{ruby},100,rails server -p 4323,http://127.0.0.1:4323/simple_bench/static"] = "rails w/ #{ruby}"
     rack_aliases["ruby-#{ruby},100,rackup -p 4323,http://127.0.0.1:4323/simple_bench/static"] = "rack w/ #{ruby}"
   end
-  cohort_aliases = rails_aliases
-  #cohort_aliases = rack_aliases
+  #cohort_aliases = rails_aliases
+  cohort_aliases = rack_aliases
 
   # Set up a simple mutually-contrasty palette
   num_palette_entries = cohort_aliases.size
