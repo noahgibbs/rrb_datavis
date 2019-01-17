@@ -79,7 +79,14 @@ def contrast_palette(num_entries)
   MUNIN_PALETTE[0..(num_entries-1)]
 end
 
-  # load_ab_csv returns 101 floating-point entries for the request time at that percentage - zero through 100.
+# This isn't perfect - at some fixed number of entries it gives up and switches to a simple gradient palette.
+# But for now, it'll do.
+def some_palette(num_entries)
+  return contrast_palette(num_entries) if num_entries <= MUNIN_PALETTE.size
+  bluegreen_palette(num_entries)
+end
+
+# load_ab_csv returns 101 floating-point entries for the request time at that percentage - zero through 100.
 def load_ab_csv(filename)
   contents = File.read filename
   lines = contents.split("\n")
