@@ -50,6 +50,17 @@ def simple_gradient_palette(start_color_rgb_hex, end_color_rgb_hex, num_entries:
   entries
 end
 
+def gradient_of_hue(base_color_rgb_hex, min_value, max_value, num_entries)
+  entries = []
+  increment = max_value - min_value / num_entries
+  base_color = RGB::Color.from_rgb_hex(base_color_rgb_hex)
+
+  (1..num_entries).map do |i|
+    val = min_value + i * increment
+    (base_color * val).to_rgb_hex
+  end
+end
+
 def bluegreen_palette(num_entries)
   return [] if num_entries < 1
   return [ "#DCEDC8" ] if num_entries == 1
@@ -98,4 +109,39 @@ def load_ab_csv(filename)
   end
   ms_timings = lines[1..-1].map { |line| line.split(",", 2)[1].to_f }
   ms_timings
+end
+
+# TODO: replace all this bespoke logic with descriptive_statistics gem
+
+def percentile(list, pct)
+  len = list.length
+  how_far = pct * 0.01 * (len - 1)
+  prev_item = how_far.to_i
+  return list[prev_item] if prev_item >= len - 1
+  return list[0] if prev_item < 0
+
+  linear_combination = how_far - prev_item
+  list[prev_item] + (list[prev_item + 1] - list[prev_item]) * linear_combination
+end
+
+def array_mean(arr)
+  return nil if arr.empty?
+  arr.inject(0.0, &:+) / arr.size
+end
+
+# Calculate variance based on the Wikipedia article of algorithms for variance.
+# https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
+# Includes Bessel's correction.
+def array_variance(arr)
+  n = arr.size
+  return nil if arr.empty? || n < 2
+
+  ex = ex2 = 0
+  arr.each do |x|
+    diff = x - arr[0]
+    ex += diff
+    ex2 += diff * diff
+  end
+
+  (ex2 - (ex * ex) / arr.size) / (arr.size - 1)
 end
