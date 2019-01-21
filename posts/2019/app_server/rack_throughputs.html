@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rack Simple App Throughput by Ruby and App Server </h1>
+<svg width="1024" height="768"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var ruby_version_data = [
+  
+  {
+    col_title: "rack/WEBRick/2.0.0-p0",
+    cohort: "ruby-2.0.0-p0,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#006600",
+    throughput: 845.6666666666666
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.0.0-p0",
+    cohort: "ruby-2.0.0-p0,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#333333",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.0.0-p0",
+    cohort: "ruby-2.0.0-p0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#003A66",
+    throughput: 833.0
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.0.0-p0",
+    cohort: "ruby-2.0.0-p0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#663300",
+    throughput: 5833.333333333333
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.0.0-p0",
+    cohort: "ruby-2.0.0-p0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#660000",
+    throughput: 5000.0
+  },
+    
+      // Divider
+      { col_title: "2.0.0-p0" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.0.0-p648",
+    cohort: "ruby-2.0.0-p648,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#008000",
+    throughput: 779.6666666666666
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.0.0-p648",
+    cohort: "ruby-2.0.0-p648,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#404040",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.0.0-p648",
+    cohort: "ruby-2.0.0-p648,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#004980",
+    throughput: 822.3333333333334
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.0.0-p648",
+    cohort: "ruby-2.0.0-p648,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#804000",
+    throughput: 7500.0
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.0.0-p648",
+    cohort: "ruby-2.0.0-p648,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#800000",
+    throughput: 5000.0
+  },
+    
+      // Divider
+      { col_title: "2.0.0-p648" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.1.10",
+    cohort: "ruby-2.1.10,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#009900",
+    throughput: 858.3333333333334
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.1.10",
+    cohort: "ruby-2.1.10,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#4D4D4D",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.1.10",
+    cohort: "ruby-2.1.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#005799",
+    throughput: 858.3333333333334
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.1.10",
+    cohort: "ruby-2.1.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#994D00",
+    throughput: 8333.333333333334
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.1.10",
+    cohort: "ruby-2.1.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#990000",
+    throughput: 5000.0
+  },
+    
+      // Divider
+      { col_title: "2.1.10" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.2.10",
+    cohort: "ruby-2.2.10,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#00CC00",
+    throughput: 769.0
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.2.10",
+    cohort: "ruby-2.2.10,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#666666",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.2.10",
+    cohort: "ruby-2.2.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#0074CC",
+    throughput: 769.0
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.2.10",
+    cohort: "ruby-2.2.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#CC6600",
+    throughput: 8333.333333333334
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.2.10",
+    cohort: "ruby-2.2.10,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#CC0000",
+    throughput: 5000.0
+  },
+    
+      // Divider
+      { col_title: "2.2.10" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.3.8",
+    cohort: "ruby-2.3.8,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#00E600",
+    throughput: 801.0
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.3.8",
+    cohort: "ruby-2.3.8,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#737373",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.3.8",
+    cohort: "ruby-2.3.8,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#0083E6",
+    throughput: 769.0
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.3.8",
+    cohort: "ruby-2.3.8,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#E67300",
+    throughput: 8333.333333333334
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.3.8",
+    cohort: "ruby-2.3.8,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#E60000",
+    throughput: 6666.666666666667
+  },
+    
+      // Divider
+      { col_title: "2.3.8" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.4.5",
+    cohort: "ruby-2.4.5,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#00FF00",
+    throughput: 1586.6666666666667
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.4.5",
+    cohort: "ruby-2.4.5,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#808080",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.4.5",
+    cohort: "ruby-2.4.5,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#0091FF",
+    throughput: 1626.3333333333333
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.4.5",
+    cohort: "ruby-2.4.5,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FF8000",
+    throughput: 9166.666666666666
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.4.5",
+    cohort: "ruby-2.4.5,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FF0000",
+    throughput: 5833.333333333333
+  },
+    
+      // Divider
+      { col_title: "2.4.5" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.5.3",
+    cohort: "ruby-2.5.3,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#33FF33",
+    throughput: 1626.3333333333333
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.5.3",
+    cohort: "ruby-2.5.3,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#999999",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.5.3",
+    cohort: "ruby-2.5.3,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#33A7FF",
+    throughput: 1626.3333333333333
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.5.3",
+    cohort: "ruby-2.5.3,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FF9933",
+    throughput: 9166.666666666666
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.5.3",
+    cohort: "ruby-2.5.3,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FF3333",
+    throughput: 5833.333333333333
+  },
+    
+      // Divider
+      { col_title: "2.5.3" },
+    
+  
+  {
+    col_title: "rack/WEBRick/2.6.0",
+    cohort: "ruby-2.6.0,bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#66FF66",
+    throughput: 1833.0
+  },
+    
+  
+  {
+    col_title: "rack/passenger/2.6.0",
+    cohort: "ruby-2.6.0,bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#B3B3B3",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rack/unicorn/2.6.0",
+    cohort: "ruby-2.6.0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.unicorn,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#66BDFF",
+    throughput: 1833.0
+  },
+    
+  
+  {
+    col_title: "rack/puma/2.6.0",
+    cohort: "ruby-2.6.0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.puma,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FFB366",
+    throughput: 8333.333333333334
+  },
+    
+  
+  {
+    col_title: "rack/thin/2.6.0",
+    cohort: "ruby-2.6.0,bundle _1.17.3_ exec rackup -p 4323,Gemfile.thin,/home/ubuntu/rsb/rack_hello_world",
+    fill: "#FF6666",
+    throughput: 9166.666666666666
+  },
+    
+      // Divider
+      { col_title: "2.6.0" },
+    
+  
+  {}
+];
+
+ruby_version_data.pop();
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.throughput); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.throughput); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+
+var graph_data = [
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("time (sec)");
+
+
+  g.append("path")
+      .datum(graph_data[0].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#333333")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #333333'>rack/passenger/2.0.0-p0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[1].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[2].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#006600")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #006600'>rack/WEBRick/2.0.0-p0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[3].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#663300")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #663300'>rack/puma/2.0.0-p0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[4].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#660000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #660000'>rack/thin/2.0.0-p0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[5].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#003A66")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #003A66'>rack/unicorn/2.0.0-p0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[6].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[7].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[8].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[9].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[10].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#404040")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #404040'>rack/passenger/2.0.0-p648</span></li>");
+
+  g.append("path")
+      .datum(graph_data[11].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[12].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#008000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #008000'>rack/WEBRick/2.0.0-p648</span></li>");
+
+  g.append("path")
+      .datum(graph_data[13].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#804000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #804000'>rack/puma/2.0.0-p648</span></li>");
+
+  g.append("path")
+      .datum(graph_data[14].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#800000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #800000'>rack/thin/2.0.0-p648</span></li>");
+
+  g.append("path")
+      .datum(graph_data[15].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#004980")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #004980'>rack/unicorn/2.0.0-p648</span></li>");
+
+  g.append("path")
+      .datum(graph_data[16].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[17].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[18].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[19].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[20].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#4D4D4D")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #4D4D4D'>rack/passenger/2.1.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[21].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[22].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#009900")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #009900'>rack/WEBRick/2.1.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[23].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#994D00")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #994D00'>rack/puma/2.1.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[24].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#990000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #990000'>rack/thin/2.1.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[25].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#005799")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #005799'>rack/unicorn/2.1.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[26].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[27].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[28].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[29].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[30].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#666666")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #666666'>rack/passenger/2.2.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[31].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[32].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#00CC00")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #00CC00'>rack/WEBRick/2.2.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[33].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#CC6600")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #CC6600'>rack/puma/2.2.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[34].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#CC0000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #CC0000'>rack/thin/2.2.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[35].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#0074CC")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #0074CC'>rack/unicorn/2.2.10</span></li>");
+
+  g.append("path")
+      .datum(graph_data[36].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[37].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[38].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[39].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[40].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#737373")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #737373'>rack/passenger/2.3.8</span></li>");
+
+  g.append("path")
+      .datum(graph_data[41].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[42].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#00E600")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #00E600'>rack/WEBRick/2.3.8</span></li>");
+
+  g.append("path")
+      .datum(graph_data[43].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#E67300")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #E67300'>rack/puma/2.3.8</span></li>");
+
+  g.append("path")
+      .datum(graph_data[44].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#E60000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #E60000'>rack/thin/2.3.8</span></li>");
+
+  g.append("path")
+      .datum(graph_data[45].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#0083E6")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #0083E6'>rack/unicorn/2.3.8</span></li>");
+
+  g.append("path")
+      .datum(graph_data[46].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[47].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[48].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[49].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[50].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#808080")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #808080'>rack/passenger/2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[51].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[52].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#00FF00")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #00FF00'>rack/WEBRick/2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[53].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FF8000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FF8000'>rack/puma/2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[54].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FF0000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FF0000'>rack/thin/2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[55].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#0091FF")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #0091FF'>rack/unicorn/2.4.5</span></li>");
+
+  g.append("path")
+      .datum(graph_data[56].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[57].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[58].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[59].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[60].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#999999")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #999999'>rack/passenger/2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[61].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[62].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#33FF33")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #33FF33'>rack/WEBRick/2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[63].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FF9933")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FF9933'>rack/puma/2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[64].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FF3333")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FF3333'>rack/thin/2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[65].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#33A7FF")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #33A7FF'>rack/unicorn/2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[66].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[67].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[68].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[69].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[70].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#B3B3B3")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #B3B3B3'>rack/passenger/2.6.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[71].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[72].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#66FF66")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #66FF66'>rack/WEBRick/2.6.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[73].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FFB366")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FFB366'>rack/puma/2.6.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[74].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#FF6666")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #FF6666'>rack/thin/2.6.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[75].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#66BDFF")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #66BDFF'>rack/unicorn/2.6.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[76].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[77].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[78].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+  g.append("path")
+      .datum(graph_data[79].coords)
+      .attr("fill", "none")
+      .attr("stroke", nil)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: '></span></li>");
+
+
+</script>

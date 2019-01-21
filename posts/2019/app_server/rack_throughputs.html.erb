@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rack Simple App Throughput by Ruby and App Server </h1>
+<svg width="1024" height="768"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require "json"
+  require_relative "graph_library"
+
+  cohort_data = JSON.parse(File.read "six_data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  rails_aliases = {}
+  rack_aliases = {}
+  [ "2.0.0-p0", "2.0.0-p648", "2.1.10", "2.2.10", "2.3.8", "2.4.5", "2.5.3", "2.6.0" ].each do |ruby|
+    # First, WEBRick
+    rails_aliases["ruby-#{ruby},bundle _1.17.3_ exec rails server -p 4323,,/home/ubuntu/rsb/widget_tracker"] = "rails/WEBRick/#{ruby}"
+    rack_aliases["ruby-#{ruby},bundle _1.17.3_ exec rackup -p 4323,,/home/ubuntu/rsb/rack_hello_world"] = "rack/WEBRick/#{ruby}"
+
+    rails_aliases["ruby-#{ruby},bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker"] = "rails/passenger/#{ruby}"
+    rack_aliases["ruby-#{ruby},bundle _1.17.3_ exec passenger start -p 4323 --log-file /dev/null,Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world"] = "rack/passenger/#{ruby}"
+
+    [ "unicorn", "puma", "thin" ].each do |app_server|
+      rails_aliases["ruby-#{ruby},bundle _1.17.3_ exec rails server -p 4323,Gemfile.#{app_server},/home/ubuntu/rsb/widget_tracker"] = "rails/#{app_server}/#{ruby}"
+      rack_aliases["ruby-#{ruby},bundle _1.17.3_ exec rackup -p 4323,Gemfile.#{app_server},/home/ubuntu/rsb/rack_hello_world"] = "rack/#{app_server}/#{ruby}"
+    end
+  end
+
+  #cohort_aliases = rails_aliases
+  cohort_aliases = rack_aliases
+  #cohort_aliases = rails_aliases.merge(rack_aliases)
+
+  cohort_aliases.keys.each do |cohort|
+    data = cohort_data["throughput_by_cohort"][cohort]
+    if !data || data.size != 6
+      STDERR.puts "Expected six throughputs for #{cohort.inspect}, instead got #{data ? data.size : "no"} throughputs!"
+    end
+  end
+
+  # Set up five gradient palettes
+  lightness_by_ruby = {
+    "2.0.0-p0" => 0.2,
+    "2.0.0-p648" => 0.25,
+    "2.1.10" => 0.3,
+    "2.2.10" => 0.4,
+    "2.3.8" => 0.45,
+    "2.4.5" => 0.5,
+    "2.5.3" => 0.6,
+    "2.6.0" => 0.7,
+  }
+
+  base_color_by_appserver = {
+    "WEBRick"   => '#00cc00',
+    "unicorn"   => '#0066b3',
+    "puma"      => '#ff8000',
+    "passenger" => '#808080',
+    "thin"      => '#ff0000',
+  }
+
+  num_palette_entries = cohort_aliases.size
+  entries = some_palette(num_palette_entries)
+  color_by_appserver_ruby = {}
+  lightness_by_ruby.each do |ruby, lightness|
+    base_color_by_appserver.each do |appserver, base_color|
+      color_by_appserver_ruby[appserver] ||= {}
+      color = RGB::Color.from_rgb_hex(base_color)
+      color.l = lightness
+      color_by_appserver_ruby[appserver][ruby] = color.to_rgb_hex
+    end
+  end
+  color_by_cohort = {}
+  cohort_aliases.each do |cohort, cohort_alias|
+    app, appserver, ruby = cohort_alias.split("/")
+    color_by_cohort[cohort] = color_by_appserver_ruby[appserver][ruby]
+  end
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var ruby_version_data = [
+  <% cohort_aliases.each do |cohort, cohort_alias| %>
+  {
+    col_title: <%= cohort_alias.inspect %>,
+    cohort: <%= cohort.inspect %>,
+    fill: <%= color_by_cohort[cohort].inspect %>,
+    throughput: <%= array_mean(cohort_data["throughput_by_cohort"][cohort]) %>
+  },
+    <% if cohort_alias["thin"] %>
+      // Divider
+      { col_title: "<%= cohort_alias.split("/")[2] %>" },
+    <% end %>
+  <% end %>
+  {}
+];
+
+ruby_version_data.pop();
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.throughput); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.throughput); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+
+var graph_data = [
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("time (sec)");
+
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = color_by_cohort[cohort]
+%>
+  g.append("path")
+      .datum(graph_data[<%= index %>].coords)
+      .attr("fill", "none")
+      .attr("stroke", <%= stroke_color.inspect %>)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: <%= stroke_color %>'><%= cohort_aliases[cohort] %></span></li>");
+<% end %>
+
+</script>
