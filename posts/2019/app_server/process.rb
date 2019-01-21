@@ -65,6 +65,10 @@ INPUT_FILES.each do |f|
   end
 
   duration = d["requests"]["max_starttime"] - d["requests"]["min_starttime"]
+  if duration < 0.00001
+    STDERR.puts "Problem with duration (#{duration.inspect}), file #{f.inspect}, cohort #{cohort.inspect}"
+    duration = 0.001
+  end
   req_time_by_cohort[cohort] ||= []
   req_time_by_cohort[cohort].concat d["requests"]["benchmark"]
 
