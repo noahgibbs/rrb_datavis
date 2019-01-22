@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rails Simple App Throughput by Ruby Version </h1>
+<svg width="1024" height="768"></svg>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+
+<style type="text/css">
+  path.domain {
+    stroke-width: 4;
+    stroke: #606060;
+  };
+</style>
+<script>
+
+// TODO: fix the really janky way I'm handling spacers
+
+
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var ruby_version_data = [
+  
+  {
+    col_title: "rails/WEBRick/2.0.0-p0/Conc 6",
+    cohort: "ruby-2.0.0-p0,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#006600",
+    stroke: "#003300",
+    throughput: 357.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.0.0-p0/Conc 6",
+    cohort: "ruby-2.0.0-p0,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#333333",
+    stroke: "#1A1A1A",
+    throughput: 2500.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.0.0-p0/Conc 6",
+    cohort: "ruby-2.0.0-p0,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#003A66",
+    stroke: "#001D33",
+    throughput: 357.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.0.0-p0/Conc 6",
+    cohort: "ruby-2.0.0-p0,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#663300",
+    stroke: "#331A00",
+    throughput: 526.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.0.0-p0/Conc 6",
+    cohort: "ruby-2.0.0-p0,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#660000",
+    stroke: "#330000",
+    throughput: 714.0
+  },
+    
+      // Divider
+      { col_title: "2.0.0-p0", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.0.0-p648/Conc 6",
+    cohort: "ruby-2.0.0-p648,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#008000",
+    stroke: "#003300",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.0.0-p648/Conc 6",
+    cohort: "ruby-2.0.0-p648,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#404040",
+    stroke: "#1A1A1A",
+    throughput: 2500.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.0.0-p648/Conc 6",
+    cohort: "ruby-2.0.0-p648,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#004980",
+    stroke: "#001D33",
+    throughput: 357.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.0.0-p648/Conc 6",
+    cohort: "ruby-2.0.0-p648,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#804000",
+    stroke: "#331900",
+    throughput: 588.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.0.0-p648/Conc 6",
+    cohort: "ruby-2.0.0-p648,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#800000",
+    stroke: "#330000",
+    throughput: 666.0
+  },
+    
+      // Divider
+      { col_title: "2.0.0-p648", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.1.10/Conc 6",
+    cohort: "ruby-2.1.10,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#009900",
+    stroke: "#003300",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.1.10/Conc 6",
+    cohort: "ruby-2.1.10,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#4D4D4D",
+    stroke: "#1A1A1A",
+    throughput: 2500.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.1.10/Conc 6",
+    cohort: "ruby-2.1.10,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#005799",
+    stroke: "#001D33",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.1.10/Conc 6",
+    cohort: "ruby-2.1.10,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#994D00",
+    stroke: "#331A00",
+    throughput: 714.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.1.10/Conc 6",
+    cohort: "ruby-2.1.10,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#990000",
+    stroke: "#330000",
+    throughput: 769.0
+  },
+    
+      // Divider
+      { col_title: "2.1.10", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.2.10/Conc 6",
+    cohort: "ruby-2.2.10,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#00CC00",
+    stroke: "#003300",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.2.10/Conc 6",
+    cohort: "ruby-2.2.10,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#666666",
+    stroke: "#1A1A1A",
+    throughput: 2500.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.2.10/Conc 6",
+    cohort: "ruby-2.2.10,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#0074CC",
+    stroke: "#001D33",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.2.10/Conc 6",
+    cohort: "ruby-2.2.10,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#CC6600",
+    stroke: "#331A00",
+    throughput: 666.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.2.10/Conc 6",
+    cohort: "ruby-2.2.10,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#CC0000",
+    stroke: "#330000",
+    throughput: 769.0
+  },
+    
+      // Divider
+      { col_title: "2.2.10", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.3.8/Conc 6",
+    cohort: "ruby-2.3.8,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#00E600",
+    stroke: "#003300",
+    throughput: 384.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.3.8/Conc 6",
+    cohort: "ruby-2.3.8,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#737373",
+    stroke: "#1A1A1A",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.3.8/Conc 6",
+    cohort: "ruby-2.3.8,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#0083E6",
+    stroke: "#001D33",
+    throughput: 370.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.3.8/Conc 6",
+    cohort: "ruby-2.3.8,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#E67300",
+    stroke: "#331900",
+    throughput: 666.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.3.8/Conc 6",
+    cohort: "ruby-2.3.8,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#E60000",
+    stroke: "#330000",
+    throughput: 833.0
+  },
+    
+      // Divider
+      { col_title: "2.3.8", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.4.5/Conc 6",
+    cohort: "ruby-2.4.5,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#00FF00",
+    stroke: "#003300",
+    throughput: 526.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.4.5/Conc 6",
+    cohort: "ruby-2.4.5,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#808080",
+    stroke: "#1A1A1A",
+    throughput: 2500.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.4.5/Conc 6",
+    cohort: "ruby-2.4.5,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#0091FF",
+    stroke: "#001D33",
+    throughput: 555.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.4.5/Conc 6",
+    cohort: "ruby-2.4.5,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FF8000",
+    stroke: "#331A00",
+    throughput: 714.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.4.5/Conc 6",
+    cohort: "ruby-2.4.5,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FF0000",
+    stroke: "#330000",
+    throughput: 909.0
+  },
+    
+      // Divider
+      { col_title: "2.4.5", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.5.3/Conc 6",
+    cohort: "ruby-2.5.3,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#33FF33",
+    stroke: "#003300",
+    throughput: 555.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.5.3/Conc 6",
+    cohort: "ruby-2.5.3,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#999999",
+    stroke: "#1A1A1A",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.5.3/Conc 6",
+    cohort: "ruby-2.5.3,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#33A7FF",
+    stroke: "#001D33",
+    throughput: 588.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.5.3/Conc 6",
+    cohort: "ruby-2.5.3,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FF9933",
+    stroke: "#331A00",
+    throughput: 769.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.5.3/Conc 6",
+    cohort: "ruby-2.5.3,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FF3333",
+    stroke: "#330000",
+    throughput: 909.0
+  },
+    
+      // Divider
+      { col_title: "2.5.3", spacer: true },
+    
+  
+  {
+    col_title: "rails/WEBRick/2.6.0/Conc 6",
+    cohort: "ruby-2.6.0,,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#66FF66",
+    stroke: "#003300",
+    throughput: 588.0
+  },
+    
+  
+  {
+    col_title: "rails/passenger/2.6.0/Conc 6",
+    cohort: "ruby-2.6.0,Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#B3B3B3",
+    stroke: "#1A1A1A",
+    throughput: 3333.0
+  },
+    
+  
+  {
+    col_title: "rails/unicorn/2.6.0/Conc 6",
+    cohort: "ruby-2.6.0,Gemfile.unicorn,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#66BDFF",
+    stroke: "#001D33",
+    throughput: 588.0
+  },
+    
+  
+  {
+    col_title: "rails/puma/2.6.0/Conc 6",
+    cohort: "ruby-2.6.0,Gemfile.puma,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FFB366",
+    stroke: "#331A00",
+    throughput: 769.0
+  },
+    
+  
+  {
+    col_title: "rails/thin/2.6.0/Conc 6",
+    cohort: "ruby-2.6.0,Gemfile.thin,/home/ubuntu/rsb/widget_tracker,6",
+    fill: "#FF6666",
+    stroke: "#330000",
+    throughput: 909.0
+  },
+    
+      // Divider
+      { col_title: "2.6.0", spacer: true },
+    
+  
+  {}
+];
+
+ruby_version_data.pop();
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return d.spacer ? y(0.0) : y(d.throughput); })
+   .attr("rx", 4)
+   .attr("ry", 4)
+   .style("fill", function(d) { return d.fill })
+   .style("stroke", function(d) { return d.stroke })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - (d.spacer ? y(0.0) : y(d.throughput)); });
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+// X Axis
+//g.append("g")
+//    .attr("transform", "translate(0," + height + ")")
+//    .call(d3.axisBottom(x))
+//  .select(".domain")
+//    .remove();
+
+// Y Axis
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("iters/sec");
+
+</script>
