@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rails Simple App Throughput by Ruby Version </h1>
+<svg width="1024" height="768"></svg>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+
+<style type="text/css">
+  path.domain {
+    stroke-width: 4;
+    stroke: #606060;
+  };
+</style>
+<script>
+
+<%
+  require "json"
+  require_relative "graph_library"
+
+  concurrency = (ENV['CONCURRENCY'] || 1).to_i
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+  cohort_indices = cohort_data["cohort_indices"]
+
+  rails_aliases = {}
+  rack_aliases = {}
+  [ "2.0.0-p0", "2.0.0-p648", "2.1.10", "2.2.10", "2.3.8", "2.4.5", "2.5.3", "2.6.0" ].each do |ruby|
+    # First, WEBRick
+    rails_aliases["ruby-#{ruby},,/home/ubuntu/rsb/widget_tracker,#{concurrency}"] = "rails/WEBRick/#{ruby}/Conc #{concurrency}"
+    rack_aliases["ruby-#{ruby},,/home/ubuntu/rsb/rack_hello_world,#{concurrency}"] = "rack/WEBRick/#{ruby}/Conc #{concurrency}"
+
+    rails_aliases["ruby-#{ruby},Gemfile.passenger,/home/ubuntu/rsb/widget_tracker,#{concurrency}"] = "rails/passenger/#{ruby}/Conc #{concurrency}"
+    rack_aliases["ruby-#{ruby},Gemfile.passenger,/home/ubuntu/rsb/rack_hello_world,#{concurrency}"] = "rack/passenger/#{ruby}/Conc #{concurrency}"
+
+    [ "unicorn", "puma", "thin" ].each do |app_server|
+      rails_aliases["ruby-#{ruby},Gemfile.#{app_server},/home/ubuntu/rsb/widget_tracker,#{concurrency}"] = "rails/#{app_server}/#{ruby}/Conc #{concurrency}"
+      rack_aliases["ruby-#{ruby},Gemfile.#{app_server},/home/ubuntu/rsb/rack_hello_world,#{concurrency}"] = "rack/#{app_server}/#{ruby}/Conc #{concurrency}"
+    end
+  end
+
+  cohort_aliases = rails_aliases
+  #cohort_aliases = rack_aliases
+  #cohort_aliases = rails_aliases.merge(rack_aliases)
+
+  cohort_aliases.keys.each do |cohort|
+    data = cohort_data["throughput_by_cohort"][cohort]
+    if !data || data.size != 1
+      STDERR.puts "Expected one throughput for #{cohort.inspect}, instead got #{data ? data.size : "no"} throughputs!"
+    end
+  end
+
+  # Set up five gradient palettes
+  lightness_by_ruby = {
+    "2.0.0-p0" => 0.2,
+    "2.0.0-p648" => 0.25,
+    "2.1.10" => 0.3,
+    "2.2.10" => 0.4,
+    "2.3.8" => 0.45,
+    "2.4.5" => 0.5,
+    "2.5.3" => 0.6,
+    "2.6.0" => 0.7,
+  }
+  ruby_order = lightness_by_ruby.keys
+  num_rubies = ruby_order.size
+
+  base_color_by_appserver = {
+    "WEBRick"   => '#00cc00',
+    "unicorn"   => '#0066b3',
+    "puma"      => '#ff8000',
+    "passenger" => '#808080',
+    "thin"      => '#ff0000',
+  }
+  appserver_order = base_color_by_appserver.keys
+  num_appservers = appserver_order.size
+
+  num_palette_entries = cohort_aliases.size
+  entries = some_palette(num_palette_entries)
+  color_by_appserver_ruby = {}
+  lightness_by_ruby.each do |ruby, lightness|
+    base_color_by_appserver.each do |appserver, base_color|
+      color_by_appserver_ruby[appserver] ||= {}
+      color = RGB::Color.from_rgb_hex(base_color)
+      color.l = lightness
+      color_by_appserver_ruby[appserver][ruby] = color.to_rgb_hex
+    end
+  end
+  fill_by_cohort = {}
+  stroke_by_cohort = {}
+  cohort_aliases.each do |cohort, cohort_alias|
+    app, appserver, ruby, conc = cohort_alias.split("/")
+    fill_color = color_by_appserver_ruby[appserver][ruby]
+    stroke_color = RGB::Color.from_rgb_hex(fill_color)
+    stroke_color.l = 0.1
+    fill_by_cohort[cohort] = fill_color
+    stroke_by_cohort[cohort] = stroke_color.to_rgb_hex
+  end
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var ruby_version_data = [
+  <% cohort_aliases.each do |cohort, cohort_alias|
+    framework, app_server, ruby_version, conc = cohort_alias.split("/")
+    ruby_index = ruby_order.index(ruby_version)
+    appserver_index = appserver_order.index(app_server)
+    %>
+  {
+    col_title: <%= cohort_alias.inspect %>,
+    cohort: <%= cohort.inspect %>,
+    x: <%= ruby_index * num_appservers + appserver_index %>,
+    fill: <%= fill_by_cohort[cohort].inspect %>,
+    stroke: <%= stroke_by_cohort[cohort].inspect %>,
+    throughput: <%= array_mean(cohort_data["throughput_by_cohort"][cohort]) %>
+  },
+    <% if cohort_alias["thin"] %>
+      // Divider
+      { col_title: "<%= cohort_alias.split("/")[2] %>", spacer: true },
+    <% end %>
+  <% end %>
+  {}
+];
+
+ruby_version_data.pop();
+
+//x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+x.domain(ruby_version_data.map(function(d) { return d.x; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return d.spacer ? y(0.0) : y(d.throughput); })
+   .attr("rx", 4)
+   .attr("ry", 4)
+   .style("fill", function(d) { return d.fill })
+   .style("stroke", function(d) { return d.stroke })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - (d.spacer ? y(0.0) : y(d.throughput)); });
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+// X Axis
+//g.append("g")
+//    .attr("transform", "translate(0," + height + ")")
+//    .call(d3.axisBottom(x))
+//  .select(".domain")
+//    .remove();
+
+// Y Axis
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("iters/sec");
+
+</script>
