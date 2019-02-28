@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<tt><span style="font-size: 24pt">Rails Ruby Bench Throughput<br/> by Ruby Version </span></tt>
+<svg width="512" height="384"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require "json"
+  require_relative "graph_library"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+
+  # Set up a simple mutually-contrasty palette
+  num_palette_entries = cohorts.size
+  entries = contrast_palette(num_palette_entries)
+  stroke_by_ruby = {}
+  cohorts.each_with_index { |ruby, idx| stroke_by_ruby[ruby] = entries[idx] }
+
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var ruby_version_data = [
+  <% cohorts.each do |cohort| %>
+  {
+    col_title: <%= cohort.inspect %>,
+    cohort: <%= cohort.inspect %>,
+    fill: <%= stroke_by_ruby[cohort].inspect %>,
+    throughput: <%= cohort_data["throughput_by_cohort"][cohort][0] %>
+  },
+  <% end %>
+  {}
+];
+
+ruby_version_data.pop();
+
+x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
+y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+g.selectAll(".bar")
+ .data(ruby_version_data)
+ .enter().append("rect")
+   .attr("class", "bar")
+   .attr("x", function(d) { return x(d.col_title); })
+   .attr("y", function(d) { return y(d.throughput); })
+   .style("fill", function(d) { return d.fill })
+   .attr("width", x.bandwidth())
+   .attr("height", function(d) { return height - y(d.throughput); });
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+
+var graph_data = [
+  {} // Final empty element, added for comma-related convenience.
+];
+
+graph_data.pop();
+
+var min_x = graph_data[0].coords[0].x;
+var max_x = graph_data[0].coords[0].x;
+var min_y = graph_data[0].coords[0].y;
+var max_y = graph_data[0].coords[0].y;
+graph_data.forEach(function(single_line) {
+  min_x = Math.min(min_x, single_line.coords[0].x);
+  max_x = Math.max(max_x, single_line.coords[single_line.coords.length - 1].x);
+  min_y = Math.min(min_y, single_line.coords[0].y);
+  max_y = Math.max(max_y, single_line.coords[single_line.coords.length - 1].y);
+});
+x.domain([min_x, max_x]);
+y.domain([min_y, max_y]);
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+  .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+  .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("time (sec)");
+
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = stroke_by_ruby[cohort]
+%>
+  g.append("path")
+      .datum(graph_data[<%= index %>].coords)
+      .attr("fill", "none")
+      .attr("stroke", <%= stroke_color.inspect %>)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: <%= stroke_color %>'><%= cohort %></span></li>");
+<% end %>
+
+</script>
