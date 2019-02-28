@@ -1,0 +1,46 @@
+
+"2.0.0,100,a6ef10d61374a4d420799e7410a67b0afaeec637": {
+"req_pct_median": 0.194339325,
+"run_pct_median": 22.468092566999985,
+"throughput_median": 127.607896272785,
+
+"2.1.10,100,a6ef10d61374a4d420799e7410a67b0afaeec637": {
+"req_pct_median": 0.1402637275,
+"run_pct_median": 17.034812066,
+"throughput_median": 168.31544958612918,
+
+"2.2.7,100,a6ef10d61374a4d420799e7410a67b0afaeec637": {
+"req_pct_median": 0.12174032300000001,
+"run_pct_median": 15.285584917999998,
+"throughput_median": 187.67207907929088,
+
+"2.3.4,100,a6ef10d61374a4d420799e7410a67b0afaeec637": {
+"req_pct_median": 0.120728238,
+"run_pct_median": 15.064300346499998,
+"throughput_median": 190.34554735811912,
+
+"2.3.4,100,02fb86916f5265ad8318c4415229753428c68eaf": {
+"req_pct_median": 0.1495884015,
+"run_pct_median": 18.863417819000002,
+"throughput_median": 151.06504141152504,
+
+"2.4.1,100,02fb86916f5265ad8318c4415229753428c68eaf": {
+"req_pct_median": 0.1428576105,
+"run_pct_median": 18.327373953,
+"throughput_median": 155.84161995187452,
+
+### Article about 2.5.0:
+
+Median throughput:
+2.4.3: 171.0
+2.5.0: 179.6 (5.0% faster)
+
+Median request:
+2.4.3: 33.98
+2.5.0: 32.39 (4.7% faster)
+
+NOT CALCULATED: any speed diff between 2.4.1 and 2.4.3. Expected very small, but hard to say for sure.
+
+### 2.6.0: same speed as 2.5.3
+
+NOT CALCULATED: any speed diff between 2.5.0 and 2.5.3.
