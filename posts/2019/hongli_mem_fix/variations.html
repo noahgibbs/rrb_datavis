@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rails Simple App Throughput by Ruby Version </h1>
+<svg width="512" height="384"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleLinear().rangeRound([0, width]),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var graph_data = [
+  
+  {
+    col_title: "Variant 1",
+    cohort: "ext-ruby-hongli-1-26",
+    color: "#00cc00",
+    throughputs: [ { x: 0.43477321394809354, y: 184.833795200665 },{ x: 0.5112872749081356, y: 181.37573774804446 },{ x: 0.6555002428852402, y: 182.1838329017353 },{ x: 0.8286779281347394, y: 182.90369719904075 },{ x: 0.3791868643225007, y: 182.1793033869089 },{ x: 0.7918478656150452, y: 183.4737933341393 },{ x: 0.9101209863739544, y: 182.443383429735 },{ x: 0.09321403603001266, y: 184.00985822942764 },{ x: 0.09229276272948406, y: 183.84616025000608 },{ x: 0.0412798221327334, y: 181.24559005475695 },{ x: 0.735247123274789, y: 182.9547178602675 },{ x: 0.5494023716510457, y: 181.8514772531314 },{ x: 0.09810784214754187, y: 182.98330471440372 },{ x: 0.12290970947693236, y: 182.2956028721287 },{ x: 0.6618350857711721, y: 184.17655655937673 } ],
+    max_throughput: 184.833795200665,
+    min_throughput: 181.24559005475695
+  },
+  
+  {
+    col_title: "Variant 2",
+    cohort: "ext-ruby-hongli-2-26",
+    color: "#0066b3",
+    throughputs: [ { x: 0.685487051935088, y: 182.71515591375433 },{ x: 0.42822055348340315, y: 182.608400289597 },{ x: 0.13679116738985297, y: 182.5423709772657 },{ x: 0.5988436008252916, y: 183.757494091243 },{ x: 0.49532417692176123, y: 181.95323003742263 },{ x: 0.9895505667069604, y: 181.96039977615143 },{ x: 0.16616184621688235, y: 185.75838419892312 },{ x: 0.8422978325252543, y: 183.56800377296003 },{ x: 0.2507553828116045, y: 182.3531412367811 },{ x: 0.3556792354164855, y: 182.09241228588994 },{ x: 0.3810472135172315, y: 181.16604776397742 },{ x: 0.3484545265217638, y: 183.8801799623671 },{ x: 0.3667075646669429, y: 184.38441411403275 },{ x: 0.6408420403998987, y: 181.91873828831373 },{ x: 0.7504080388927452, y: 181.05684408847063 } ],
+    max_throughput: 185.75838419892312,
+    min_throughput: 181.05684408847063
+  },
+  
+  {
+    col_title: "Ruby 2.6 Released",
+    cohort: "ruby-2.6.0",
+    color: "#ff8000",
+    throughputs: [ { x: 0.3512164932798595, y: 181.5399113719967 },{ x: 0.3289013998282113, y: 177.6872464500237 },{ x: 0.11288624899587607, y: 177.4507858423528 },{ x: 0.47770713274195675, y: 176.82926642260563 },{ x: 0.5320187820509634, y: 177.55459643745414 },{ x: 0.2814526656278743, y: 176.8588288768916 },{ x: 0.7341642743265229, y: 180.08663968379312 },{ x: 0.22542077582200304, y: 176.23090352069315 },{ x: 0.9241238011044115, y: 176.37277988333273 },{ x: 0.48288022346430537, y: 176.2371912272184 },{ x: 0.986515413807963, y: 177.94670330239114 },{ x: 0.3308099803722926, y: 175.4334746144996 },{ x: 0.7738315476528627, y: 174.72750184515738 },{ x: 0.1364181177983853, y: 178.60006782265057 },{ x: 0.9235858431283582, y: 177.17282330393016 } ],
+    max_throughput: 181.5399113719967,
+    min_throughput: 174.72750184515738
+  },
+  
+  {}
+];
+graph_data.pop();
+
+x.domain([0, 1.0]);
+y.domain([d3.min(graph_data, function(d) { return d.min_throughput; }), d3.max(graph_data, function(d) { return d.max_throughput; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+
+
+g.selectAll(".scatter-0")
+ .data(graph_data[0].throughputs)
+ .enter().append("circle")
+   .attr("class", "scatter-0")
+   .attr("cx", function(d) { return x(d.x); })
+   .attr("cy", function(d) { return y(d.y); })
+   .style("fill", function(d) { return graph_data[0].color; })
+   .attr("r", 5.0);
+
+$("ul#legend").append("<li><span style='color: " + graph_data[0].color + "'>Variant 1</span></li>");
+
+
+g.selectAll(".scatter-1")
+ .data(graph_data[1].throughputs)
+ .enter().append("circle")
+   .attr("class", "scatter-1")
+   .attr("cx", function(d) { return x(d.x); })
+   .attr("cy", function(d) { return y(d.y); })
+   .style("fill", function(d) { return graph_data[1].color; })
+   .attr("r", 5.0);
+
+$("ul#legend").append("<li><span style='color: " + graph_data[1].color + "'>Variant 2</span></li>");
+
+
+g.selectAll(".scatter-2")
+ .data(graph_data[2].throughputs)
+ .enter().append("circle")
+   .attr("class", "scatter-2")
+   .attr("cx", function(d) { return x(d.x); })
+   .attr("cy", function(d) { return y(d.y); })
+   .style("fill", function(d) { return graph_data[2].color; })
+   .attr("r", 5.0);
+
+$("ul#legend").append("<li><span style='color: " + graph_data[2].color + "'>Ruby 2.6 Released</span></li>");
+
+
+</script>

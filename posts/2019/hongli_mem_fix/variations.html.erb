@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Rails Simple App Throughput by Ruby Version </h1>
+<svg width="512" height="384"></svg>
+<ul id="legend">
+</ul>
+<script src="d3.v4.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+<%
+  require "json"
+  require_relative "graph_library"
+
+  cohort_data = JSON.parse(File.read "data/process_output.json")
+
+  cohorts = cohort_data["processed"]["cohort"].keys.sort
+  cohort_aliases = {
+    "ext-ruby-hongli-1-26" => "Variant 1",
+    "ext-ruby-hongli-2-26" => "Variant 2",
+    "ruby-2.6.0" => "Ruby 2.6 Released",
+  }
+
+  # Set up a simple mutually-contrasty palette
+  num_palette_entries = cohort_aliases.size
+  entries = contrast_palette(num_palette_entries)
+  stroke_by_ruby = {}
+  cohort_aliases.values.each_with_index { |ruby, idx| stroke_by_ruby[ruby] = entries[idx] }
+
+%>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 180, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleLinear().rangeRound([0, width]),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var graph_data = [
+  <% cohort_aliases.each do |cohort, cohort_alias| %>
+  {
+    col_title: <%= cohort_alias.inspect %>,
+    cohort: <%= cohort.inspect %>,
+    color: <%= stroke_by_ruby[cohort_alias].inspect %>,
+    throughputs: [ <%= cohort_data["throughput_by_cohort"][cohort].map { |y| "{ x: #{rand}, y: #{y} }" }.join(",") %> ],
+    max_throughput: <%= cohort_data["throughput_by_cohort"][cohort].max.inspect %>,
+    min_throughput: <%= cohort_data["throughput_by_cohort"][cohort].min.inspect %>
+  },
+  <% end %>
+  {}
+];
+graph_data.pop();
+
+x.domain([0, 1.0]);
+y.domain([d3.min(graph_data, function(d) { return d.min_throughput; }), d3.max(graph_data, function(d) { return d.max_throughput; })]);
+
+g.append("g")
+   .attr("class", "axis axis--x")
+   .attr("transform", "translate(0," + height + ")")
+   .call(customXaxis);
+   //.call(d3.axisBottom(x));
+
+function customXaxis(g) {
+  g.call(d3.axisBottom(x));
+  //g.selectAll(".axis--x .tick").attr("transform", "translate(0,100)");
+  g.selectAll(".axis--x .tick text").attr("transform", "translate(-15,90)rotate(-90)");
+}
+
+g.append("g")
+   .attr("class", "axis axis--y")
+   .call(d3.axisLeft(y))
+
+<% cohorts.each_with_index do |cohort, index|
+  stroke_color = stroke_by_ruby[cohort_aliases[cohort]]
+%>
+
+g.selectAll(".scatter-<%= index %>")
+ .data(graph_data[<%= index %>].throughputs)
+ .enter().append("circle")
+   .attr("class", "scatter-<%= index %>")
+   .attr("cx", function(d) { return x(d.x); })
+   .attr("cy", function(d) { return y(d.y); })
+   .style("fill", function(d) { return graph_data[<%= index %>].color; })
+   .attr("r", 5.0);
+
+$("ul#legend").append("<li><span style='color: " + graph_data[<%= index %>].color + "'><%= cohort_aliases[cohort] %></span></li>");
+<% end %>
+
+</script>
