@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<tt><span style="font-size: 24pt">Rails Ruby Bench Throughput<br/> by Ruby Version </span></tt>
+<tt><b><span style="font-size: 24pt">Rails Ruby Bench Throughput<br/> by Ruby Version </span></b></tt>
 <svg width="512" height="384"></svg>
 <ul id="legend">
 </ul>
@@ -15,6 +15,7 @@
   cohort_data = JSON.parse(File.read "data/process_output.json")
 
   cohorts = cohort_data["processed"]["cohort"].keys.sort
+  cohorts -= [ "ruby-2.6.1" ]
 
   # Set up a simple mutually-contrasty palette
   num_palette_entries = cohorts.size
@@ -41,7 +42,7 @@ var ruby_version_data = [
     col_title: <%= cohort.inspect %>,
     cohort: <%= cohort.inspect %>,
     fill: <%= stroke_by_ruby[cohort].inspect %>,
-    throughput: <%= cohort_data["throughput_by_cohort"][cohort][0] %>
+    throughput: <%= cohort_data["processed"]["cohort"][cohort]["throughput_median"] %>
   },
   <% end %>
   {}
@@ -50,7 +51,7 @@ var ruby_version_data = [
 ruby_version_data.pop();
 
 x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
-y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+y.domain([140.0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
 
 g.append("g")
    .attr("class", "axis axis--x")

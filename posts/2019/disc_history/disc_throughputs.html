@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<tt><span style="font-size: 24pt">Rails Ruby Bench Throughput<br/> by Ruby Version </span></tt>
+<tt><b><span style="font-size: 24pt">Rails Ruby Bench Throughput<br/> by Ruby Version </span></b></tt>
 <svg width="512" height="384"></svg>
 <ul id="legend">
 </ul>
@@ -27,28 +27,42 @@ var ruby_version_data = [
     col_title: "ruby-2.3.4",
     cohort: "ruby-2.3.4",
     fill: "#00cc00",
-    throughput: 155.71692135322536
+    throughput: 158.34255379561208
+  },
+  
+  {
+    col_title: "ruby-2.4.0",
+    cohort: "ruby-2.4.0",
+    fill: "#0066b3",
+    throughput: 164.31107167293493
   },
   
   {
     col_title: "ruby-2.4.1",
     cohort: "ruby-2.4.1",
-    fill: "#0066b3",
-    throughput: 157.3457503103527
+    fill: "#ff8000",
+    throughput: 164.13653722151685
   },
   
   {
     col_title: "ruby-2.5.0",
     cohort: "ruby-2.5.0",
-    fill: "#ff8000",
-    throughput: 169.14130555794569
+    fill: "#808080",
+    throughput: 175.08663633646967
+  },
+  
+  {
+    col_title: "ruby-2.5.3",
+    cohort: "ruby-2.5.3",
+    fill: "#ff0000",
+    throughput: 174.4058472262189
   },
   
   {
     col_title: "ruby-2.6.0",
     cohort: "ruby-2.6.0",
-    fill: "#808080",
-    throughput: 182.65345453368943
+    fill: "#008f00",
+    throughput: 182.33429838863424
   },
   
   {}
@@ -57,7 +71,7 @@ var ruby_version_data = [
 ruby_version_data.pop();
 
 x.domain(ruby_version_data.map(function(d) { return d.col_title; }));
-y.domain([0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
+y.domain([140.0, d3.max(ruby_version_data, function(d) { return d.throughput; })]);
 
 g.append("g")
    .attr("class", "axis axis--x")
@@ -142,7 +156,7 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #0066b3'>ruby-2.4.1</span></li>");
+  $("ul#legend").append("<li><span style='color: #0066b3'>ruby-2.4.0</span></li>");
 
   g.append("path")
       .datum(graph_data[2].coords)
@@ -153,7 +167,7 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #ff8000'>ruby-2.5.0</span></li>");
+  $("ul#legend").append("<li><span style='color: #ff8000'>ruby-2.4.1</span></li>");
 
   g.append("path")
       .datum(graph_data[3].coords)
@@ -164,7 +178,29 @@ g.append("g")
       .attr("stroke-width", 1.5)
       .attr("d", line);
 
-  $("ul#legend").append("<li><span style='color: #808080'>ruby-2.6.0</span></li>");
+  $("ul#legend").append("<li><span style='color: #808080'>ruby-2.5.0</span></li>");
+
+  g.append("path")
+      .datum(graph_data[4].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#ff0000")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #ff0000'>ruby-2.5.3</span></li>");
+
+  g.append("path")
+      .datum(graph_data[5].coords)
+      .attr("fill", "none")
+      .attr("stroke", "#008f00")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
+
+  $("ul#legend").append("<li><span style='color: #008f00'>ruby-2.6.0</span></li>");
 
 
 </script>
