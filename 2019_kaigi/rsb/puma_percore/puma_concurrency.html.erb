@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<h1>Rails Simple App Throughput by Puma Concurrency</h1>
+<%
+require "json"
+
+svg_width, svg_height = 1024, 768
+
+# Calculate row heights and column widths
+row = []
+col = []
+num_cols = 7
+num_rows = 6
+row_height = 100
+col_width = 150
+num_cols.times { |i| col.push(20 + i * col_width) }
+num_rows.times { |i| row.push(40 + i * row_height) }
+
+rsb_data = JSON.parse(File.read "conc_comparison_data/process_output.json")
+
+# Values range from about 600 (barely anything) to almost 5500.
+# We want radius to cap out around 80 and color to max out around
+# 255 (#ff). Log-scale makes more sense for both.
+#
+# If we divide val by 600.0, then log(600.0 / 600.0) will be zero,
+# and log(5500.0 / 600.0) will be about 2.2. So if we divide by 2.2,
+# there's a nice log scale going from 600 to 5500.
+#
+# We'll cap the radius around 80 (so the shown radii will be a bit
+# smaller than that.)
+#
+def value_to_r_col(val)
+  intensity = Math.log(val / 600.0) / 2.2
+  radius = intensity * 80.0
+  redness = intensity * 240.0 + 15.0   # Floor redness is #0f.
+  color = "##{red.to_s(16)}ffff"
+
+  [radius, color]
+end
+
+%>
+
+<svg width="<%= svg_width %>" height="<%= svg_height %>">
+<% num_rows.times do |row_num|
+     num_cols.times do |col_num|
+       y, x = row[row_num], col[col_num]
+       r = 10
+       color = "red"
+%>
+  <circle cx="<%= x %>" cy="<%= y %>" r="<%= r %>" style='color: <%= color %>'"/>
+<%   end
+   end %>
+
+</svg>
+</body>
+</html>
