@@ -4,94 +4,181 @@
   <meta charset="utf-8">
 </head>
 <body>
-<h1>Rails Simple App Throughput by Puma Concurrency</h1>
+<h1>Rails Simple App Iters/Sec by Puma Concurrency</h1>
 
 
-<svg width="1024" height="768">
+<svg width="1040" height="768">
+  <style>
+    .header {
+      text-anchor: middle;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .concurrency {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .ips_data {
+      text-anchor: middle;
+      font-size: 80%;
+    }
+  </style>
 
-  <circle cx="20" cy="40" r="0.7024169746748523" style='fill: #13ecec'"/>
+    <text x="80" y="20" class="header">Ruby 2.0.0</text>
 
-  <circle cx="170" cy="40" r="2.9132257654302984" style='fill: #20dfdf'"/>
+    <text x="230" y="20" class="header">Ruby 2.1.10</text>
 
-  <circle cx="320" cy="40" r="4.133761544855968" style='fill: #27d8d8'"/>
+    <text x="380" y="20" class="header">Ruby 2.2.10</text>
 
-  <circle cx="470" cy="40" r="4.458748141422081" style='fill: #29d6d6'"/>
+    <text x="530" y="20" class="header">Ruby 2.3.8</text>
 
-  <circle cx="620" cy="40" r="5.16493445687389" style='fill: #2dd2d2'"/>
+    <text x="680" y="20" class="header">Ruby 2.4.5</text>
 
-  <circle cx="770" cy="40" r="6.729210124119084" style='fill: #37c8c8'"/>
+    <text x="830" y="20" class="header">Ruby 2.5.3</text>
 
-  <circle cx="920" cy="40" r="7.232161844976254" style='fill: #3ac5c5'"/>
+    <text x="980" y="20" class="header">Ruby 2.6.0</text>
 
-  <circle cx="20" cy="140" r="28.07366590248172" style='fill: #b74848'"/>
 
-  <circle cx="170" cy="140" r="30.182568120575077" style='fill: #c43b3b'"/>
 
-  <circle cx="320" cy="140" r="31.332856840589606" style='fill: #ca3535'"/>
+  <circle cx="80" cy="100" r="5.6146148528404956" style='fill: #13ecec'"/>
+  <text x="80" y="110" class="ips_data" >623</text>
 
-  <circle cx="470" cy="140" r="31.68705524783375" style='fill: #cd3232'"/>
+  <circle cx="230" cy="100" r="7.549072544751511" style='fill: #20dfdf'"/>
+  <text x="230" y="110" class="ips_data" >704</text>
 
-  <circle cx="620" cy="140" r="32.32869718217097" style='fill: #d02f2f'"/>
+  <circle cx="380" cy="100" r="8.617041351748972" style='fill: #27d8d8'"/>
+  <text x="380" y="110" class="ips_data" >753</text>
 
-  <circle cx="770" cy="140" r="33.145334960286874" style='fill: #d52a2a'"/>
+  <circle cx="530" cy="100" r="8.901404623744321" style='fill: #29d6d6'"/>
+  <text x="530" y="110" class="ips_data" >766</text>
 
-  <circle cx="920" cy="140" r="34.19759631477659" style='fill: #dc2323'"/>
+  <circle cx="680" cy="100" r="9.519317649764655" style='fill: #2dd2d2'"/>
+  <text x="680" y="110" class="ips_data" >797</text>
 
-  <circle cx="20" cy="240" r="20.309546575913366" style='fill: #887777'"/>
+  <circle cx="830" cy="100" r="10.888058858604198" style='fill: #37c8c8'"/>
+  <text x="830" y="110" class="ips_data" >868</text>
 
-  <circle cx="170" cy="240" r="23.187285913446445" style='fill: #9a6565'"/>
+  <circle cx="980" cy="100" r="11.328141614354223" style='fill: #3ac5c5'"/>
+  <text x="980" y="110" class="ips_data" >893</text>
 
-  <circle cx="320" cy="240" r="26.61504567695352" style='fill: #ae5151'"/>
+  <circle cx="80" cy="220" r="29.564457664671508" style='fill: #b74848'"/>
+  <text x="80" y="230" class="ips_data" >2810</text>
 
-  <circle cx="470" cy="240" r="25.770100730202508" style='fill: #a95656'"/>
+  <circle cx="230" cy="220" r="31.40974710550319" style='fill: #c43b3b'"/>
+  <text x="230" y="230" class="ips_data" >3155</text>
 
-  <circle cx="620" cy="240" r="28.099097283666982" style='fill: #b74848'"/>
+  <circle cx="380" cy="220" r="32.416249735515905" style='fill: #ca3535'"/>
+  <text x="380" y="230" class="ips_data" >3361</text>
 
-  <circle cx="770" cy="240" r="28.594422590280374" style='fill: #ba4545'"/>
+  <circle cx="530" cy="220" r="32.72617334185453" style='fill: #cd3232'"/>
+  <text x="530" y="230" class="ips_data" >3427</text>
 
-  <circle cx="920" cy="240" r="28.904047539234913" style='fill: #bc4343'"/>
+  <circle cx="680" cy="220" r="33.287610034399606" style='fill: #d02f2f'"/>
+  <text x="680" y="230" class="ips_data" >3551</text>
 
-  <circle cx="20" cy="340" r="30.323657376927553" style='fill: #c43b3b'"/>
+  <circle cx="830" cy="220" r="34.00216809025102" style='fill: #d52a2a'"/>
+  <text x="830" y="230" class="ips_data" >3714</text>
 
-  <circle cx="170" cy="340" r="31.06077516774071" style='fill: #c93636'"/>
+  <circle cx="980" cy="220" r="34.922896775429514" style='fill: #dc2323'"/>
+  <text x="980" y="230" class="ips_data" >3935</text>
 
-  <circle cx="320" cy="340" r="32.40831048301347" style='fill: #d12e2e'"/>
+  <circle cx="80" cy="340" r="22.770853253924194" style='fill: #887777'"/>
+  <text x="80" y="350" class="ips_data" >1833</text>
 
-  <circle cx="470" cy="340" r="32.86281982601251" style='fill: #d42b2b'"/>
+  <circle cx="230" cy="340" r="25.28887517426564" style='fill: #9a6565'"/>
+  <text x="230" y="350" class="ips_data" >2147</text>
 
-  <circle cx="620" cy="340" r="33.311095302354424" style='fill: #d62929'"/>
+  <circle cx="380" cy="340" r="28.28816496733433" style='fill: #ae5151'"/>
+  <text x="380" y="350" class="ips_data" >2593</text>
 
-  <circle cx="770" cy="340" r="34.903351237004465" style='fill: #e01f1f'"/>
+  <circle cx="530" cy="340" r="27.548838138927195" style='fill: #a95656'"/>
+  <text x="530" y="350" class="ips_data" >2475</text>
 
-  <circle cx="920" cy="340" r="36.32970120545474" style='fill: #e81717'"/>
+  <circle cx="680" cy="340" r="29.58671012320861" style='fill: #b74848'"/>
+  <text x="680" y="350" class="ips_data" >2814</text>
 
-  <circle cx="20" cy="440" r="32.692986088473866" style='fill: #d32c2c'"/>
+  <circle cx="830" cy="340" r="30.020119766495327" style='fill: #ba4545'"/>
+  <text x="830" y="350" class="ips_data" >2891</text>
 
-  <circle cx="170" cy="440" r="35.70646018239296" style='fill: #e51a1a'"/>
+  <circle cx="980" cy="340" r="30.29104159683055" style='fill: #bc4343'"/>
+  <text x="980" y="350" class="ips_data" >2941</text>
 
-  <circle cx="320" cy="440" r="36.847224320928845" style='fill: #ec1313'"/>
+  <circle cx="80" cy="460" r="31.53320020481161" style='fill: #c43b3b'"/>
+  <text x="80" y="470" class="ips_data" >3180</text>
 
-  <circle cx="470" cy="440" r="37.40078648928948" style='fill: #ef1010'"/>
+  <circle cx="230" cy="460" r="32.17817827177312" style='fill: #c93636'"/>
+  <text x="230" y="470" class="ips_data" >3311</text>
 
-  <circle cx="620" cy="440" r="38.11520389152038" style='fill: #f30c0c'"/>
+  <circle cx="380" cy="460" r="33.357271672636784" style='fill: #d12e2e'"/>
+  <text x="380" y="470" class="ips_data" >3566</text>
 
-  <circle cx="770" cy="440" r="38.756106595097044" style='fill: #f70808'"/>
+  <circle cx="530" cy="460" r="33.754967347760946" style='fill: #d42b2b'"/>
+  <text x="530" y="470" class="ips_data" >3656</text>
 
-  <circle cx="920" cy="440" r="39.28827462134888" style='fill: #fa0505'"/>
+  <circle cx="680" cy="460" r="34.14720838956012" style='fill: #d62929'"/>
+  <text x="680" y="470" class="ips_data" >3748</text>
 
-  <circle cx="20" cy="540" r="34.78945004180607" style='fill: #df2020'"/>
+  <circle cx="830" cy="460" r="35.54043233237891" style='fill: #e01f1f'"/>
+  <text x="830" y="470" class="ips_data" >4091</text>
 
-  <circle cx="170" cy="540" r="35.48916462585802" style='fill: #e31c1c'"/>
+  <circle cx="980" cy="460" r="36.7884885547729" style='fill: #e81717'"/>
+  <text x="980" y="470" class="ips_data" >4425</text>
 
-  <circle cx="320" cy="540" r="36.91153776955497" style='fill: #ec1313'"/>
+  <circle cx="80" cy="580" r="33.606362827414635" style='fill: #d32c2c'"/>
+  <text x="80" y="590" class="ips_data" >3622</text>
 
-  <circle cx="470" cy="540" r="37.39252076417039" style='fill: #ef1010'"/>
+  <circle cx="230" cy="580" r="36.24315265959384" style='fill: #e51a1a'"/>
+  <text x="230" y="590" class="ips_data" >4276</text>
 
-  <circle cx="620" cy="540" r="38.290398099695025" style='fill: #f40b0b'"/>
+  <circle cx="380" cy="580" r="37.24132128081274" style='fill: #ec1313'"/>
+  <text x="380" y="590" class="ips_data" >4552</text>
 
-  <circle cx="770" cy="540" r="39.444957458411594" style='fill: #fb0404'"/>
+  <circle cx="530" cy="580" r="37.725688178128294" style='fill: #ef1010'"/>
+  <text x="530" y="590" class="ips_data" >4693</text>
 
-  <circle cx="920" cy="540" r="39.952343389411176" style='fill: #fe0101'"/>
+  <circle cx="680" cy="580" r="38.350803405080335" style='fill: #f30c0c'"/>
+  <text x="680" y="590" class="ips_data" >4881</text>
+
+  <circle cx="830" cy="580" r="38.911593270709915" style='fill: #f70808'"/>
+  <text x="830" y="590" class="ips_data" >5056</text>
+
+  <circle cx="980" cy="580" r="39.37724029368027" style='fill: #fa0505'"/>
+  <text x="980" y="590" class="ips_data" >5207</text>
+
+  <circle cx="80" cy="700" r="35.44076878658031" style='fill: #df2020'"/>
+  <text x="80" y="710" class="ips_data" >4065</text>
+
+  <circle cx="230" cy="700" r="36.05301904762577" style='fill: #e31c1c'"/>
+  <text x="230" y="710" class="ips_data" >4225</text>
+
+  <circle cx="380" cy="700" r="37.2975955483606" style='fill: #ec1313'"/>
+  <text x="380" y="710" class="ips_data" >4569</text>
+
+  <circle cx="530" cy="700" r="37.71845566864909" style='fill: #ef1010'"/>
+  <text x="530" y="710" class="ips_data" >4691</text>
+
+  <circle cx="680" cy="700" r="38.504098337233145" style='fill: #f40b0b'"/>
+  <text x="680" y="710" class="ips_data" >4929</text>
+
+  <circle cx="830" cy="700" r="39.514337776110146" style='fill: #fb0404'"/>
+  <text x="830" y="710" class="ips_data" >5252</text>
+
+  <circle cx="980" cy="700" r="39.95830046573478" style='fill: #fe0101'"/>
+  <text x="980" y="710" class="ips_data" >5400</text>
+
+
+
+    <text x="60" y="60" class="concurrency" >1 proc, 4 threads</text>
+
+    <text x="60" y="180" class="concurrency" >4 proc, 1 threads</text>
+
+    <text x="60" y="300" class="concurrency" >4 proc, 8 threads</text>
+
+    <text x="60" y="420" class="concurrency" >6 proc, 4 threads</text>
+
+    <text x="60" y="540" class="concurrency" >8 proc, 1 threads</text>
+
+    <text x="60" y="660" class="concurrency" >8 proc, 4 threads</text>
 
 
 </svg>

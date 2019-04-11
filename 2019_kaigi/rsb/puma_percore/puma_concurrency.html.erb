@@ -4,21 +4,21 @@
   <meta charset="utf-8">
 </head>
 <body>
-<h1>Rails Simple App Throughput by Puma Concurrency</h1>
+<h1>Rails Simple App Iters/Sec by Puma Concurrency</h1>
 <%
 require "json"
 
-svg_width, svg_height = 1024, 768
+svg_width, svg_height = 1040, 768
 
 # Calculate row heights and column widths
 row = []
 col = []
 num_cols = 7
 num_rows = 6
-row_height = 100
+row_height = 120
 col_width = 150
-num_cols.times { |i| col.push(20 + i * col_width) }
-num_rows.times { |i| row.push(40 + i * row_height) }
+num_cols.times { |i| col.push(80 + i * col_width) }
+num_rows.times { |i| row.push(100 + i * row_height) }
 
 rsb_data = JSON.parse(File.read "conc_comparison_data/process_output.json")
 
@@ -35,7 +35,7 @@ rsb_data = JSON.parse(File.read "conc_comparison_data/process_output.json")
 #
 def value_to_r_col(val)
   intensity = Math.log(val / 600.0) / 2.2
-  radius = intensity * 40.0
+  radius = intensity * 35.0 + 5.0
   redness = (intensity * 240.0 + 15.0).to_i   # Minimum redness is #0f for visibility.
   antiredness = 255 - redness
   color = "##{"%02x" % redness}#{"%02x" % antiredness}#{"%02x" % antiredness}"
@@ -62,9 +62,46 @@ col_mapping = {
   6 => "ruby-2.6.0",
 }
 
+header_mapping = {
+  0 => "Ruby 2.0.0",
+  1 => "Ruby 2.1.10",
+  2 => "Ruby 2.2.10",
+  3 => "Ruby 2.3.8",
+  4 => "Ruby 2.4.5",
+  5 => "Ruby 2.5.3",
+  6 => "Ruby 2.6.0",
+}
+
+conc_mapping = {
+  0 => "1 proc, 4 threads",
+  1 => "4 proc, 1 threads",
+  2 => "4 proc, 8 threads",
+  3 => "6 proc, 4 threads",
+  4 => "8 proc, 1 threads",
+  5 => "8 proc, 4 threads",
+}
 %>
 
 <svg width="<%= svg_width %>" height="<%= svg_height %>">
+  <style>
+    .header {
+      text-anchor: middle;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .concurrency {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .ips_data {
+      text-anchor: middle;
+      font-size: 80%;
+    }
+  </style>
+<% num_cols.times do |col_num| %>
+    <text x="<%= col[col_num] %>" y="<%= row[0] - 80 %>" class="header"><%= header_mapping[col_num] %></text>
+<% end %>
+
 <% num_rows.times do |row_num|
      num_cols.times do |col_num|
        cohort_name = col_mapping[col_num] + "," + row_mapping[row_num]
@@ -73,8 +110,13 @@ col_mapping = {
        r, color = value_to_r_col(value)
 %>
   <circle cx="<%= x %>" cy="<%= y %>" r="<%= r %>" style='fill: <%= color %>'"/>
+  <text x="<%= x %>" y="<%= y + 10 %>" class="ips_data" ><%= "%d" % value %></text>
 <%   end
    end %>
+
+<% num_rows.times do |row_num| %>
+    <text x="<%= col[0] - 20 %>" y="<%= row[row_num] - 40 %>" class="concurrency" ><%= conc_mapping[row_num] %></text>
+<% end %>
 
 </svg>
 </body>
