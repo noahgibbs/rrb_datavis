@@ -30,28 +30,49 @@ rsb_data = JSON.parse(File.read "conc_comparison_data/process_output.json")
 # and log(5500.0 / 600.0) will be about 2.2. So if we divide by 2.2,
 # there's a nice log scale going from 600 to 5500.
 #
-# We'll cap the radius around 80 (so the shown radii will be a bit
+# We'll cap the radius around 40 (so the shown radii will be a bit
 # smaller than that.)
 #
 def value_to_r_col(val)
   intensity = Math.log(val / 600.0) / 2.2
-  radius = intensity * 80.0
-  redness = intensity * 240.0 + 15.0   # Floor redness is #0f.
-  color = "##{red.to_s(16)}ffff"
+  radius = intensity * 40.0
+  redness = (intensity * 240.0 + 15.0).to_i   # Minimum redness is #0f for visibility.
+  antiredness = 255 - redness
+  color = "##{"%02x" % redness}#{"%02x" % antiredness}#{"%02x" % antiredness}"
 
   [radius, color]
 end
+
+row_mapping = {
+  0 => "bundle && bundle exec rake db:migrate,1,4",
+  1 => "bundle && bundle exec rake db:migrate,4,1",
+  2 => "bundle && bundle exec rake db:migrate,4,8",
+  3 => "bundle && bundle exec rake db:migrate,6,4",
+  4 => "bundle && bundle exec rake db:migrate,8,1",
+  5 => "bundle && bundle exec rake db:migrate,8,4",
+}
+
+col_mapping = {
+  0 => "ruby-2.0.0-p0",
+  1 => "ruby-2.1.10",
+  2 => "ruby-2.2.10",
+  3 => "ruby-2.3.8",
+  4 => "ruby-2.4.5",
+  5 => "ruby-2.5.3",
+  6 => "ruby-2.6.0",
+}
 
 %>
 
 <svg width="<%= svg_width %>" height="<%= svg_height %>">
 <% num_rows.times do |row_num|
      num_cols.times do |col_num|
+       cohort_name = col_mapping[col_num] + "," + row_mapping[row_num]
+       value = rsb_data["processed"]["cohort"][cohort_name]["throughput_median"]
        y, x = row[row_num], col[col_num]
-       r = 10
-       color = "red"
+       r, color = value_to_r_col(value)
 %>
-  <circle cx="<%= x %>" cy="<%= y %>" r="<%= r %>" style='color: <%= color %>'"/>
+  <circle cx="<%= x %>" cy="<%= y %>" r="<%= r %>" style='fill: <%= color %>'"/>
 <%   end
    end %>
 
