@@ -1297,6 +1297,8 @@
           624.6666666666666,
           625.4333333333333
         ],
+        "cohort_samples": 187037,
+        "cohort_batches": 5,
         "latency_mean": 0.006418692130434139,
         "latency_median": 0.005376,
         "latency_variance": 3.448149155409265e-05,
@@ -1450,6 +1452,8 @@
           2822.2166666666667,
           2834.8
         ],
+        "cohort_samples": 768326,
+        "cohort_batches": 5,
         "latency_mean": 0.0014035935241048147,
         "latency_median": 0.001103,
         "latency_variance": 9.046159879378031e-06,
@@ -1603,6 +1607,8 @@
           1835.8833333333334,
           1860.6666666666667
         ],
+        "cohort_samples": 550570,
+        "cohort_batches": 5,
         "latency_mean": 0.01711820857838278,
         "latency_median": 0.015074,
         "latency_variance": 9.894070220038978e-05,
@@ -1756,6 +1762,8 @@
           3183.366666666667,
           3188.15
         ],
+        "cohort_samples": 953916,
+        "cohort_batches": 5,
         "latency_mean": 0.009396422040305495,
         "latency_median": 0.003901,
         "latency_variance": 0.00018783254102203967,
@@ -1909,6 +1917,8 @@
           3641.1833333333334,
           3866.65
         ],
+        "cohort_samples": 1099191,
+        "cohort_batches": 5,
         "latency_mean": 0.002281211026115003,
         "latency_median": 0.001653,
         "latency_variance": 2.6608939270516996e-05,
@@ -2062,6 +2072,8 @@
           4085.9333333333334,
           4086.75
         ],
+        "cohort_samples": 1214218,
+        "cohort_batches": 5,
         "latency_mean": 0.011618060069113749,
         "latency_median": 0.002435,
         "latency_variance": 0.0003085588835518796,
@@ -2215,6 +2227,8 @@
           8537.466666666667,
           8541.333333333334
         ],
+        "cohort_samples": 2552666,
+        "cohort_batches": 5,
         "latency_mean": 0.00047296835778797616,
         "latency_median": 0.000312,
         "latency_variance": 7.195817101475027e-07,
@@ -2368,6 +2382,8 @@
           34077.63333333333,
           34675.583333333336
         ],
+        "cohort_samples": 9671391,
+        "cohort_batches": 5,
         "latency_mean": 0.00011505905189169706,
         "latency_median": 9.3e-05,
         "latency_variance": 8.497005489200158e-08,
@@ -2521,6 +2537,8 @@
           33693.51666666667,
           34035.98333333333
         ],
+        "cohort_samples": 10031815,
+        "cohort_batches": 5,
         "latency_mean": 0.0010921549856136548,
         "latency_median": 0.00064,
         "latency_variance": 1.7528642362931126e-06,
@@ -2674,6 +2692,8 @@
           57027.65,
           58161.78333333333
         ],
+        "cohort_samples": 16843537,
+        "cohort_batches": 5,
         "latency_mean": 0.0008605438610091398,
         "latency_median": 0.000243,
         "latency_variance": 4.438983625804109e-06,
@@ -2827,6 +2847,8 @@
           50268.416666666664,
           50683.63333333333
         ],
+        "cohort_samples": 15057721,
+        "cohort_batches": 5,
         "latency_mean": 0.00020183152357780551,
         "latency_median": 0.000115,
         "latency_variance": 3.425614655910699e-07,
@@ -2980,6 +3002,8 @@
           70085.51666666666,
           72992.73333333334
         ],
+        "cohort_samples": 21016187,
+        "cohort_batches": 5,
         "latency_mean": 0.001653505486176748,
         "latency_median": 0.000246,
         "latency_variance": 1.762848596008754e-05,
@@ -3133,6 +3157,8 @@
           678.8,
           683.05
         ],
+        "cohort_samples": 203070,
+        "cohort_batches": 5,
         "latency_mean": 0.005909676727237014,
         "latency_median": 0.005064,
         "latency_variance": 2.2176388656612948e-05,
@@ -3286,6 +3312,8 @@
           2934.9166666666665,
           2967.9
         ],
+        "cohort_samples": 747369,
+        "cohort_batches": 5,
         "latency_mean": 0.0013626504872451162,
         "latency_median": 0.001088,
         "latency_variance": 7.201679940148582e-06,
@@ -3439,6 +3467,8 @@
           2042.0666666666666,
           2046.15
         ],
+        "cohort_samples": 611311,
+        "cohort_batches": 5,
         "latency_mean": 0.015719593818857982,
         "latency_median": 0.014024,
         "latency_variance": 8.005916341091203e-05,
@@ -3592,6 +3622,8 @@
           3280.8333333333335,
           3290.8333333333335
         ],
+        "cohort_samples": 927038,
+        "cohort_batches": 5,
         "latency_mean": 0.008326779894675016,
         "latency_median": 0.005392,
         "latency_variance": 0.00011708236619728003,
@@ -3745,6 +3777,8 @@
           4001.483333333333,
           4001.5833333333335
         ],
+        "cohort_samples": 1122117,
+        "cohort_batches": 5,
         "latency_mean": 0.0020782487726251388,
         "latency_median": 0.00163,
         "latency_variance": 1.877871367257185e-05,
@@ -3898,6 +3932,8 @@
           4255.583333333333,
           4256.95
         ],
+        "cohort_samples": 1269776,
+        "cohort_batches": 5,
         "latency_mean": 0.010880141559612536,
         "latency_median": 0.002524,
         "latency_variance": 0.0002623298532165579,
@@ -4051,6 +4087,8 @@
           8588.683333333332,
           8619.616666666667
         ],
+        "cohort_samples": 2565988,
+        "cohort_batches": 5,
         "latency_mean": 0.0004739108125217852,
         "latency_median": 0.000312,
         "latency_variance": 8.065512772413937e-07,
@@ -4204,6 +4242,8 @@
           34557.28333333333,
           35079.65
         ],
+        "cohort_samples": 10301483,
+        "cohort_batches": 5,
         "latency_mean": 0.00011642315887472279,
         "latency_median": 9.0e-05,
         "latency_variance": 9.825906150932061e-08,
@@ -4357,6 +4397,8 @@
           33797.316666666666,
           33880.65
         ],
+        "cohort_samples": 10066221,
+        "cohort_batches": 5,
         "latency_mean": 0.0011287939862439922,
         "latency_median": 0.000642,
         "latency_variance": 1.935113810179617e-06,
@@ -4510,6 +4552,8 @@
           57547.78333333333,
           57560.65
         ],
+        "cohort_samples": 17176230,
+        "cohort_batches": 5,
         "latency_mean": 0.0009349776175582577,
         "latency_median": 0.000245,
         "latency_variance": 5.613618619361672e-06,
@@ -4663,6 +4707,8 @@
           49610.05,
           49673.583333333336
         ],
+        "cohort_samples": 14858224,
+        "cohort_batches": 5,
         "latency_mean": 0.0002092621964152642,
         "latency_median": 0.000115,
         "latency_variance": 3.8720886828566224e-07,
@@ -4816,6 +4862,8 @@
           70168.01666666666,
           71523.43333333333
         ],
+        "cohort_samples": 20926470,
+        "cohort_batches": 5,
         "latency_mean": 0.0017154173099437307,
         "latency_median": 0.00025,
         "latency_variance": 1.9133763887047128e-05,
@@ -4969,6 +5017,8 @@
           705.45,
           706.6666666666666
         ],
+        "cohort_samples": 211263,
+        "cohort_batches": 5,
         "latency_mean": 0.005680557319549963,
         "latency_median": 0.005346,
         "latency_variance": 4.819731380078712e-06,
@@ -5122,6 +5172,8 @@
           3183.383333333333,
           3193.883333333333
         ],
+        "cohort_samples": 908633,
+        "cohort_batches": 5,
         "latency_mean": 0.0012495059853631534,
         "latency_median": 0.00118,
         "latency_variance": 4.909931491733391e-07,
@@ -5275,6 +5327,8 @@
           2195.516666666667,
           2299.233333333333
         ],
+        "cohort_samples": 625899,
+        "cohort_batches": 5,
         "latency_mean": 0.01284287488077172,
         "latency_median": 0.012863,
         "latency_variance": 4.6597591136349134e-05,
@@ -5428,6 +5482,8 @@
           3312.7833333333333,
           3348.5666666666666
         ],
+        "cohort_samples": 994631,
+        "cohort_batches": 5,
         "latency_mean": 0.007541483766341457,
         "latency_median": 0.004953,
         "latency_variance": 7.442919289072796e-05,
@@ -5581,6 +5637,8 @@
           4282.15,
           4305.266666666666
         ],
+        "cohort_samples": 1283905,
+        "cohort_batches": 5,
         "latency_mean": 0.0018788883858222325,
         "latency_median": 0.001774,
         "latency_variance": 1.25583348713559e-06,
@@ -5734,6 +5792,8 @@
           4225.533333333334,
           4231.483333333334
         ],
+        "cohort_samples": 1228935,
+        "cohort_batches": 5,
         "latency_mean": 0.008814690984469558,
         "latency_median": 0.001933,
         "latency_variance": 0.0001346493215643592,
@@ -5887,6 +5947,8 @@
           9264.65,
           9331.1
         ],
+        "cohort_samples": 2760506,
+        "cohort_batches": 5,
         "latency_mean": 0.0004339107605629397,
         "latency_median": 0.000322,
         "latency_variance": 3.5281756883004287e-07,
@@ -6040,6 +6102,8 @@
           38274.583333333336,
           38891.066666666666
         ],
+        "cohort_samples": 11404038,
+        "cohort_batches": 5,
         "latency_mean": 9.623511698119898e-05,
         "latency_median": 9.3e-05,
         "latency_variance": 8.019186067294833e-10,
@@ -6193,6 +6257,8 @@
           35190.0,
           35479.86666666667
         ],
+        "cohort_samples": 10532910,
+        "cohort_batches": 5,
         "latency_mean": 0.00087169688699557,
         "latency_median": 0.000668,
         "latency_variance": 5.633749910696087e-07,
@@ -6346,6 +6412,8 @@
           62004.4,
           62101.38333333333
         ],
+        "cohort_samples": 18229956,
+        "cohort_batches": 5,
         "latency_mean": 0.0004002169271831133,
         "latency_median": 0.000336,
         "latency_variance": 2.8410749752604636e-07,
@@ -6499,6 +6567,8 @@
           55886.85,
           56134.03333333333
         ],
+        "cohort_samples": 16581709,
+        "cohort_batches": 5,
         "latency_mean": 0.00013032240712427745,
         "latency_median": 0.000119,
         "latency_variance": 2.3658230256413468e-09,
@@ -6652,6 +6722,8 @@
           72804.5,
           72975.95
         ],
+        "cohort_samples": 21661570,
+        "cohort_batches": 5,
         "latency_mean": 0.0005179547839318109,
         "latency_median": 0.000361,
         "latency_variance": 1.3559608377879826e-06,
@@ -6805,6 +6877,8 @@
           753.7166666666667,
           755.7166666666667
         ],
+        "cohort_samples": 225645,
+        "cohort_batches": 5,
         "latency_mean": 0.0053185595470758755,
         "latency_median": 0.005269,
         "latency_variance": 3.9064201440466714e-07,
@@ -6958,6 +7032,8 @@
           3376.6,
           3415.366666666667
         ],
+        "cohort_samples": 1008253,
+        "cohort_batches": 5,
         "latency_mean": 0.001184479758555253,
         "latency_median": 0.001151,
         "latency_variance": 4.483961522735761e-08,
@@ -7111,6 +7187,8 @@
           2608.45,
           2619.0
         ],
+        "cohort_samples": 736123,
+        "cohort_batches": 5,
         "latency_mean": 0.010103482219683444,
         "latency_median": 0.012093,
         "latency_variance": 3.268399582017179e-05,
@@ -7264,6 +7342,8 @@
           3567.35,
           3579.1666666666665
         ],
+        "cohort_samples": 1069369,
+        "cohort_batches": 5,
         "latency_mean": 0.006816501430282538,
         "latency_median": 0.00466,
         "latency_variance": 5.1054821261265526e-05,
@@ -7417,6 +7497,8 @@
           4556.583333333333,
           4560.9
         ],
+        "cohort_samples": 1364722,
+        "cohort_batches": 5,
         "latency_mean": 0.001751675775726537,
         "latency_median": 0.001712,
         "latency_variance": 8.607811957817228e-08,
@@ -7570,6 +7652,8 @@
           4583.966666666666,
           4587.016666666666
         ],
+        "cohort_samples": 1357717,
+        "cohort_batches": 5,
         "latency_mean": 0.007727084034449163,
         "latency_median": 0.001792,
         "latency_variance": 8.961594706362376e-05,
@@ -7723,6 +7807,8 @@
           9197.2,
           9241.166666666666
         ],
+        "cohort_samples": 2755693,
+        "cohort_batches": 5,
         "latency_mean": 0.0004338733846617703,
         "latency_median": 0.000323,
         "latency_variance": 3.1236454465668627e-07,
@@ -7876,6 +7962,8 @@
           36591.48333333333,
           36859.0
         ],
+        "cohort_samples": 10925276,
+        "cohort_batches": 5,
         "latency_mean": 0.00010031044176515373,
         "latency_median": 9.7e-05,
         "latency_variance": 6.630969001423355e-10,
@@ -8029,6 +8117,8 @@
           35588.35,
           35938.083333333336
         ],
+        "cohort_samples": 10547144,
+        "cohort_batches": 5,
         "latency_mean": 0.0008583778439926996,
         "latency_median": 0.000663,
         "latency_variance": 5.411690861652975e-07,
@@ -8182,6 +8272,8 @@
           60405.683333333334,
           61475.25
         ],
+        "cohort_samples": 17907241,
+        "cohort_batches": 5,
         "latency_mean": 0.0004029609539503219,
         "latency_median": 0.000337,
         "latency_variance": 2.5464091683262115e-07,
@@ -8335,6 +8427,8 @@
           55680.61666666667,
           55866.46666666667
         ],
+        "cohort_samples": 16657187,
+        "cohort_batches": 5,
         "latency_mean": 0.00013312953076274114,
         "latency_median": 0.000121,
         "latency_variance": 2.043435112273211e-09,
@@ -8488,6 +8582,8 @@
           71944.18333333333,
           72205.95
         ],
+        "cohort_samples": 21471870,
+        "cohort_batches": 5,
         "latency_mean": 0.0005376464762491497,
         "latency_median": 0.000372,
         "latency_variance": 1.5264690471720813e-06,
@@ -8641,6 +8737,8 @@
           768.9,
           771.2833333333333
         ],
+        "cohort_samples": 229984,
+        "cohort_batches": 5,
         "latency_mean": 0.0052179509009318325,
         "latency_median": 0.005172,
         "latency_variance": 3.2323597947509686e-07,
@@ -8794,6 +8892,8 @@
           3470.25,
           3510.0
         ],
+        "cohort_samples": 1034784,
+        "cohort_batches": 5,
         "latency_mean": 0.001153953167036346,
         "latency_median": 0.001123,
         "latency_variance": 3.661692101474115e-08,
@@ -8947,6 +9047,8 @@
           2693.866666666667,
           2703.0333333333333
         ],
+        "cohort_samples": 734601,
+        "cohort_batches": 5,
         "latency_mean": 0.010531837534934335,
         "latency_median": 0.011714,
         "latency_variance": 2.2245243476587502e-05,
@@ -9100,6 +9202,8 @@
           3658.6666666666665,
           3669.366666666667
         ],
+        "cohort_samples": 1097577,
+        "cohort_batches": 5,
         "latency_mean": 0.006667903311567733,
         "latency_median": 0.004619,
         "latency_variance": 4.87636118569915e-05,
@@ -9253,6 +9357,8 @@
           4705.166666666667,
           4706.1
         ],
+        "cohort_samples": 1366376,
+        "cohort_batches": 5,
         "latency_mean": 0.0016619292559279918,
         "latency_median": 0.001658,
         "latency_variance": 8.090763042646529e-08,
@@ -9406,6 +9512,8 @@
           4694.65,
           4702.55
         ],
+        "cohort_samples": 1358788,
+        "cohort_batches": 5,
         "latency_mean": 0.007287138011226977,
         "latency_median": 0.001756,
         "latency_variance": 8.191176144422208e-05,
@@ -9559,6 +9667,8 @@
           9266.8,
           9278.783333333333
         ],
+        "cohort_samples": 2765041,
+        "cohort_batches": 5,
         "latency_mean": 0.0004321859715644218,
         "latency_median": 0.000323,
         "latency_variance": 3.1537668970060807e-07,
@@ -9712,6 +9822,8 @@
           37016.11666666667,
           37720.61666666667
         ],
+        "cohort_samples": 11100908,
+        "cohort_batches": 5,
         "latency_mean": 9.885304382025259e-05,
         "latency_median": 9.6e-05,
         "latency_variance": 6.346988446751322e-10,
@@ -9865,6 +9977,8 @@
           35572.083333333336,
           35632.0
         ],
+        "cohort_samples": 10594761,
+        "cohort_batches": 5,
         "latency_mean": 0.0008679290787215398,
         "latency_median": 0.000678,
         "latency_variance": 5.413954302712248e-07,
@@ -10018,6 +10132,8 @@
           62300.1,
           62371.083333333336
         ],
+        "cohort_samples": 18511316,
+        "cohort_batches": 5,
         "latency_mean": 0.0003997493391065989,
         "latency_median": 0.000337,
         "latency_variance": 2.6992889054402055e-07,
@@ -10171,6 +10287,8 @@
           55463.4,
           55501.11666666667
         ],
+        "cohort_samples": 16579333,
+        "cohort_batches": 5,
         "latency_mean": 0.00013373500213469252,
         "latency_median": 0.000121,
         "latency_variance": 1.8483172000393343e-09,
@@ -10324,6 +10442,8 @@
           72875.1,
           73234.58333333333
         ],
+        "cohort_samples": 21859342,
+        "cohort_batches": 5,
         "latency_mean": 0.0005116167040155499,
         "latency_median": 0.000366,
         "latency_variance": 1.2945376322663993e-06,
@@ -10477,6 +10597,8 @@
           798.95,
           800.95
         ],
+        "cohort_samples": 236926,
+        "cohort_batches": 5,
         "latency_mean": 0.005065579185061992,
         "latency_median": 0.005017,
         "latency_variance": 3.48972359793847e-07,
@@ -10630,6 +10752,8 @@
           3613.8333333333335,
           3630.3166666666666
         ],
+        "cohort_samples": 1062316,
+        "cohort_batches": 5,
         "latency_mean": 0.0011238480480389409,
         "latency_median": 0.001072,
         "latency_variance": 3.929509518247977e-08,
@@ -10783,6 +10907,8 @@
           2827.233333333333,
           2845.766666666667
         ],
+        "cohort_samples": 828100,
+        "cohort_batches": 5,
         "latency_mean": 0.009051629293563901,
         "latency_median": 0.010773,
         "latency_variance": 3.155265434107607e-05,
@@ -10936,6 +11062,8 @@
           3782.8333333333335,
           3785.0666666666666
         ],
+        "cohort_samples": 1123073,
+        "cohort_batches": 5,
         "latency_mean": 0.006201079730346787,
         "latency_median": 0.003939,
         "latency_variance": 4.535267117003731e-05,
@@ -11089,6 +11217,8 @@
           4888.8,
           4905.3
         ],
+        "cohort_samples": 1463046,
+        "cohort_batches": 5,
         "latency_mean": 0.0016334693304199508,
         "latency_median": 0.001597,
         "latency_variance": 6.576766603783244e-08,
@@ -11242,6 +11372,8 @@
           4983.983333333334,
           5122.8
         ],
+        "cohort_samples": 1478240,
+        "cohort_batches": 5,
         "latency_mean": 0.00756299685030883,
         "latency_median": 0.001645,
         "latency_variance": 8.686074688243568e-05,
@@ -11395,6 +11527,8 @@
           9450.183333333332,
           9598.05
         ],
+        "cohort_samples": 2829267,
+        "cohort_batches": 5,
         "latency_mean": 0.00042309283252455957,
         "latency_median": 0.000351,
         "latency_variance": 2.90173063412192e-07,
@@ -11548,6 +11682,8 @@
           38659.45,
           38861.683333333334
         ],
+        "cohort_samples": 11509070,
+        "cohort_batches": 5,
         "latency_mean": 9.482102706440401e-05,
         "latency_median": 9.4e-05,
         "latency_variance": 4.313346970543171e-10,
@@ -11701,6 +11837,8 @@
           39307.75,
           39685.63333333333
         ],
+        "cohort_samples": 11724607,
+        "cohort_batches": 5,
         "latency_mean": 0.0007880078981751007,
         "latency_median": 0.000612,
         "latency_variance": 4.705885432708536e-07,
@@ -11854,6 +11992,8 @@
           70476.13333333333,
           70980.25
         ],
+        "cohort_samples": 21061663,
+        "cohort_batches": 5,
         "latency_mean": 0.0003594402132407555,
         "latency_median": 0.000304,
         "latency_variance": 3.1553157885414816e-07,
@@ -12007,6 +12147,8 @@
           58670.11666666667,
           58794.433333333334
         ],
+        "cohort_samples": 17581824,
+        "cohort_batches": 5,
         "latency_mean": 0.000126500912936636,
         "latency_median": 0.000119,
         "latency_variance": 1.0607088066273673e-09,
@@ -12160,6 +12302,8 @@
           82580.45,
           82881.5
         ],
+        "cohort_samples": 24750937,
+        "cohort_batches": 5,
         "latency_mean": 0.00041462245809027894,
         "latency_median": 0.000305,
         "latency_variance": 8.272776534141586e-07,
@@ -12313,6 +12457,8 @@
           874.4333333333333,
           885.6666666666666
         ],
+        "cohort_samples": 261775,
+        "cohort_batches": 5,
         "latency_mean": 0.004584342565179986,
         "latency_median": 0.00329,
         "latency_variance": 1.7201060397179967e-05,
@@ -12466,6 +12612,8 @@
           3749.733333333333,
           3797.9
         ],
+        "cohort_samples": 1118512,
+        "cohort_batches": 5,
         "latency_mean": 0.0010670818158467084,
         "latency_median": 0.001021,
         "latency_variance": 3.216806032024519e-08,
@@ -12619,6 +12767,8 @@
           2946.45,
           3007.133333333333
         ],
+        "cohort_samples": 876474,
+        "cohort_batches": 5,
         "latency_mean": 0.008842305917802466,
         "latency_median": 0.007719,
         "latency_variance": 5.5082340463680515e-05,
@@ -12772,6 +12922,8 @@
           4098.25,
           4105.866666666667
         ],
+        "cohort_samples": 1226275,
+        "cohort_batches": 5,
         "latency_mean": 0.0060422938305024505,
         "latency_median": 0.002208,
         "latency_variance": 5.35284142036528e-05,
@@ -12925,6 +13077,8 @@
           5057.583333333333,
           5057.883333333333
         ],
+        "cohort_samples": 1515135,
+        "cohort_batches": 5,
         "latency_mean": 0.001576567660977791,
         "latency_median": 0.001535,
         "latency_variance": 6.474147198210204e-08,
@@ -13078,6 +13232,8 @@
           5275.066666666667,
           5331.883333333333
         ],
+        "cohort_samples": 1567088,
+        "cohort_batches": 5,
         "latency_mean": 0.007280765540289212,
         "latency_median": 0.001606,
         "latency_variance": 8.562939380005347e-05,
@@ -13231,6 +13387,8 @@
           11445.483333333334,
           11546.383333333333
         ],
+        "cohort_samples": 3420599,
+        "cohort_batches": 5,
         "latency_mean": 0.001006799263228639,
         "latency_median": 0.000173,
         "latency_variance": 4.118667618712676e-05,
@@ -13384,6 +13542,8 @@
           38912.48333333333,
           39743.75
         ],
+        "cohort_samples": 11630971,
+        "cohort_batches": 5,
         "latency_mean": 9.333098792580993e-05,
         "latency_median": 9.2e-05,
         "latency_variance": 4.363136459300709e-10,
@@ -13537,6 +13697,8 @@
           43485.96666666667,
           44057.65
         ],
+        "cohort_samples": 13031403,
+        "cohort_batches": 5,
         "latency_mean": 0.0007303188472486638,
         "latency_median": 0.000538,
         "latency_variance": 5.401207189962867e-07,
@@ -13690,6 +13852,8 @@
           75121.31666666667,
           75140.06666666667
         ],
+        "cohort_samples": 21941147,
+        "cohort_batches": 5,
         "latency_mean": 0.00033369323426994663,
         "latency_median": 0.000282,
         "latency_variance": 3.3581976222400695e-07,
@@ -13843,6 +14007,8 @@
           59566.76666666667,
           59613.85
         ],
+        "cohort_samples": 17832058,
+        "cohort_batches": 5,
         "latency_mean": 0.00012453544750886338,
         "latency_median": 0.000117,
         "latency_variance": 1.2563833392943384e-09,
@@ -13996,6 +14162,8 @@
           83759.65,
           83870.91666666667
         ],
+        "cohort_samples": 25041575,
+        "cohort_batches": 5,
         "latency_mean": 0.0003617520035379584,
         "latency_median": 0.000295,
         "latency_variance": 3.644852897892725e-07,
@@ -14149,6 +14317,8 @@
           901.5333333333333,
           905.9166666666666
         ],
+        "cohort_samples": 268238,
+        "cohort_batches": 5,
         "latency_mean": 0.004472584838837215,
         "latency_median": 0.003941,
         "latency_variance": 6.5023688920210285e-06,
@@ -14302,6 +14472,8 @@
           3939.4166666666665,
           3948.35
         ],
+        "cohort_samples": 1174229,
+        "cohort_batches": 5,
         "latency_mean": 0.0010179704580612384,
         "latency_median": 0.000949,
         "latency_variance": 3.859218986297626e-07,
@@ -14455,6 +14627,8 @@
           2944.3166666666666,
           3021.45
         ],
+        "cohort_samples": 881278,
+        "cohort_batches": 5,
         "latency_mean": 0.010665947902931888,
         "latency_median": 0.009352,
         "latency_variance": 7.730907435146308e-05,
@@ -14608,6 +14782,8 @@
           4425.683333333333,
           4432.133333333333
         ],
+        "cohort_samples": 1327507,
+        "cohort_batches": 5,
         "latency_mean": 0.006756506423694186,
         "latency_median": 0.001442,
         "latency_variance": 0.00011252086139217218,
@@ -14761,6 +14937,8 @@
           5209.266666666666,
           5211.65
         ],
+        "cohort_samples": 1560691,
+        "cohort_batches": 5,
         "latency_mean": 0.0015303767613321227,
         "latency_median": 0.00144,
         "latency_variance": 3.565408006994778e-07,
@@ -14914,6 +15092,8 @@
           5401.316666666667,
           5430.866666666667
         ],
+        "cohort_samples": 1613930,
+        "cohort_batches": 5,
         "latency_mean": 0.007825761453719484,
         "latency_median": 0.001517,
         "latency_variance": 0.00012429926749421357,
@@ -15067,6 +15247,8 @@
           10756.316666666668,
           10804.116666666667
         ],
+        "cohort_samples": 3210358,
+        "cohort_batches": 5,
         "latency_mean": 0.0003948982350216711,
         "latency_median": 0.000365,
         "latency_variance": 8.580102802547013e-07,
@@ -15220,6 +15402,8 @@
           39602.11666666667,
           40288.21666666667
         ],
+        "cohort_samples": 11850129,
+        "cohort_batches": 5,
         "latency_mean": 9.129386464479476e-05,
         "latency_median": 9.0e-05,
         "latency_variance": 1.8302342925101313e-09,
@@ -15373,6 +15557,8 @@
           44074.53333333333,
           44216.3
         ],
+        "cohort_samples": 13178515,
+        "cohort_batches": 5,
         "latency_mean": 0.000906242799207281,
         "latency_median": 0.000735,
         "latency_variance": 2.895503324608606e-06,
@@ -15526,6 +15712,8 @@
           74742.25,
           75587.65
         ],
+        "cohort_samples": 22299633,
+        "cohort_batches": 5,
         "latency_mean": 0.00032513470109152444,
         "latency_median": 0.000287,
         "latency_variance": 1.5047122999999922e-07,
@@ -15679,6 +15867,8 @@
           59203.95,
           59232.2
         ],
+        "cohort_samples": 17692430,
+        "cohort_batches": 5,
         "latency_mean": 0.00012590714882328952,
         "latency_median": 0.000117,
         "latency_variance": 5.9535201485869166e-09,
@@ -15832,6 +16022,8 @@
           83829.35,
           84047.61666666667
         ],
+        "cohort_samples": 24974721,
+        "cohort_batches": 5,
         "latency_mean": 0.0003619187016739348,
         "latency_median": 0.000296,
         "latency_variance": 1.9469388988461146e-07,
