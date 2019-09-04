@@ -1,0 +1,2 @@
+11.04user 3.98system 0:15.03elapsed 99%CPU (0avgtext+0avgdata 11632maxresident)k
+0inputs+8outputs (0major+1932minor)pagefaults 0swaps

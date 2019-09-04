@@ -1,0 +1,2 @@
+15.04user 13.01system 0:09.43elapsed 297%CPU (0avgtext+0avgdata 11304maxresident)k
+0inputs+8outputs (0major+16073minor)pagefaults 0swaps

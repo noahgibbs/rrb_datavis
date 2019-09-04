@@ -1,0 +1,2 @@
+22.95user 16.04system 0:22.90elapsed 170%CPU (0avgtext+0avgdata 12256maxresident)k
+0inputs+8outputs (0major+1969minor)pagefaults 0swaps
