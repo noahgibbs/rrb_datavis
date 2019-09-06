@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-DATA_DIRS = [ "data/2_0", "data/2_1", "data/2_2_up" ]
+#DATA_DIRS = [ "data/2_0", "data/2_1", "data/2_2_up" ]
+DATA_DIRS = [ "data/2_0", "data/2_1", "data/2_2_up", "data/2_7" ]
+#DATA_DIRS = [ "data/redundant_2_6", "data/2_7" ]
 
 data = {
     "thread_test" => {},
@@ -54,7 +56,7 @@ end
 
 data.each do |test_name, test_data|
     ruby_vers = test_data.keys.sort
-    worker_specs = test_data["2.1.10"].keys.sort_by { |ws| ws.split(" ")[0].to_i }
+    worker_specs = test_data["2.6.2"].keys.sort_by { |ws| ws.split(" ")[0].to_i }
 
     worker_specs.each do |ws|
         ruby_vers.each do |rv|

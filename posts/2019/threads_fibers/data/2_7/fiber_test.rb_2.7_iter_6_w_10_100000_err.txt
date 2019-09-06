@@ -1,0 +1,2 @@
+28.20user 7.04system 0:20.18elapsed 174%CPU (0avgtext+0avgdata 15172maxresident)k
+0inputs+8outputs (0major+2635minor)pagefaults 0swaps
