@@ -1,0 +1,2 @@
+20.86user 10.19system 0:17.33elapsed 179%CPU (0avgtext+0avgdata 10804maxresident)k
+0inputs+8outputs (0major+1600minor)pagefaults 0swaps

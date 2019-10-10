@@ -1,0 +1,2 @@
+12.04user 4.07system 0:16.12elapsed 99%CPU (0avgtext+0avgdata 10616maxresident)k
+0inputs+8outputs (0major+1578minor)pagefaults 0swaps

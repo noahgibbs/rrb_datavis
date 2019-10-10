@@ -1,0 +1,2 @@
+18.19user 14.18system 0:18.15elapsed 178%CPU (0avgtext+0avgdata 11548maxresident)k
+0inputs+8outputs (0major+1850minor)pagefaults 0swaps

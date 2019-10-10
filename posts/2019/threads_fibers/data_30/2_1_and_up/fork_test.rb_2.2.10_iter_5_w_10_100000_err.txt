@@ -1,0 +1,2 @@
+19.19user 11.04system 0:09.87elapsed 306%CPU (0avgtext+0avgdata 10172maxresident)k
+0inputs+8outputs (0major+11497minor)pagefaults 0swaps

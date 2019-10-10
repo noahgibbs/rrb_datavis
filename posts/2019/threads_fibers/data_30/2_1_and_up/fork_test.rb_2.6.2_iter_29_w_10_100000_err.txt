@@ -1,0 +1,2 @@
+9.13user 20.04system 0:09.37elapsed 311%CPU (0avgtext+0avgdata 14640maxresident)k
+0inputs+8outputs (0major+11265minor)pagefaults 0swaps

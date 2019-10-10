@@ -1,0 +1,2 @@
+3.27user 5.04system 0:02.87elapsed 289%CPU (0avgtext+0avgdata 12808maxresident)k
+0inputs+8outputs (0major+2245minor)pagefaults 0swaps

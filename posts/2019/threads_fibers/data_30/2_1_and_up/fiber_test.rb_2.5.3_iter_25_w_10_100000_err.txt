@@ -1,0 +1,2 @@
+22.04user 9.07system 0:17.48elapsed 177%CPU (0avgtext+0avgdata 10556maxresident)k
+0inputs+8outputs (0major+1585minor)pagefaults 0swaps

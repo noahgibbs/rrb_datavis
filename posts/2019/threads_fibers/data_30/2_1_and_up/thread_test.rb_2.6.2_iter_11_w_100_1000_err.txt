@@ -1,0 +1,2 @@
+3.04user 2.95system 0:02.22elapsed 269%CPU (0avgtext+0avgdata 17576maxresident)k
+0inputs+8outputs (0major+3347minor)pagefaults 0swaps

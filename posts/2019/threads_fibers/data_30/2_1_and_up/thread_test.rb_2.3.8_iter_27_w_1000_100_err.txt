@@ -1,0 +1,2 @@
+4.61user 4.04system 0:03.20elapsed 270%CPU (0avgtext+0avgdata 38256maxresident)k
+0inputs+8outputs (0major+9544minor)pagefaults 0swaps

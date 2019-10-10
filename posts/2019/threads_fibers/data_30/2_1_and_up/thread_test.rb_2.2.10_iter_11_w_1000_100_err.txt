@@ -1,0 +1,2 @@
+5.06user 3.04system 0:03.04elapsed 266%CPU (0avgtext+0avgdata 37492maxresident)k
+0inputs+8outputs (0major+9486minor)pagefaults 0swaps
