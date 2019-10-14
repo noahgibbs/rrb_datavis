@@ -1,0 +1,3561 @@
+{
+  "collector_ruby_version": "2.6.2",
+  "reps_per_config": 10,
+  "configs": [
+    [
+      5,
+      200000
+    ],
+    [
+      10,
+      100000
+    ],
+    [
+      100,
+      10000
+    ],
+    [
+      1000,
+      1000
+    ]
+  ],
+  "benchmarks": [
+    "fiber_test.rb",
+    "fork_test.rb",
+    "thread_test.rb",
+    "thread_test_multi_master.rb",
+    "williams_fiber_test.rb"
+  ],
+  "preambles": [
+    "echo nop"
+  ],
+  "summary": {
+    "successes": 200,
+    "failures": 0,
+    "skips": 0,
+    "no_data": 0,
+    "total_configs": 200
+  },
+  "results": [
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.186076,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 19.823508,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 12.503383,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 12.149489,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.932651,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 20.493916,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.897652,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.575611,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.594581,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.290106,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.7094,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 11.36179,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.152735,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.803408,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 18.629263,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.327132,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.290309,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 27.97715,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.817811,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 29.463978,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.46957,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 19.145593,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.320744,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.966259,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.109566,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 27.791224,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.394432,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.03983,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.456074,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.144651,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.417586,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.085196,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.322802,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.004905,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.308047,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 5.998297,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.654651,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.326934,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 18.740228,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.433753,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 59.359674,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 59.004306,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.511835,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.182724,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.201636,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 28.858445,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.740368,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 27.420245,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.340533,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 29.009015,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 28.621204,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 28.307996,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.045489,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.728659,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 58.396116,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 58.050927,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 19.118232,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.768151,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.100401,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.75651,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 28.662429,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 28.338341,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.947824,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.590962,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 58.261135,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 57.934829,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 60.815004,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 60.485064,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 19.108845,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.754052,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.893504,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.553967,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.661547,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.324726,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.283374,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 27.976647,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.053257,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.708102,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.907859,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.575169,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 6.760796,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.417179,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.018093,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.67208,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.185257,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.868754,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.332147,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.016939,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.403201,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.085351,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.001217,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.66886,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.012218,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.706643,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 26.795378,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.45308,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.141522,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 19.834218,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.730278,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 20.401537,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.73652,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.417498,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 8.130253,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.79835,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.7276,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.416534,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.139413,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 22.803072,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 28.695849,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 28.366815,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.818392,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 20.507655,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 6.746332,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.41829,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 58.719846,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 58.386091,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.735244,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 20.422245,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 26.998335,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 26.632231,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 19.038728,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.711056,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 28.471604,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 28.158724,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 16.918051,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 16.604986,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.553723,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.222037,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.708171,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.398079,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 18.977242,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.621711,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.101516,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 15.793695,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 26.703719,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.382253,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.141482,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 26.829236,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 7.421714,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 7.104569,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 59.624223,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 59.271637,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 21.692021,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.350776,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.847937,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.484486,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.000559,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 27.658309,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 29.374193,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 29.020499,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 7.087516,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.759158,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.497785,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 29.145517,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.75165,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.423608,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.623827,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.322377,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.82398,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.497869,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.258088,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.957929,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 6.677707,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.376176,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.128465,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.825257,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.418037,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.115883,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.732402,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.420037,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.425199,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.106378,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 25.47781,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 25.174544,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.143341,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.822326,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 23.295336,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 22.947906,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.112124,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.803525,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 28.492134,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 28.188397,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 58.974824,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 58.646124,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.194618,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 28.855852,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.315211,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.996464,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 24.739969,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 24.386576,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.995823,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.653179,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.287028,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.920507,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 25.794852,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 25.490555,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.19487,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.876166,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.304319,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.870833,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.576591,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 20.221986,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 18.857198,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 18.556364,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.497776,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.198733,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 6.990803,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.690591,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.923327,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.602767,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.130866,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 26.801859,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.239146,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.925171,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 16.549829,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 16.243248,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.532364,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.216202,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.683109,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.37633,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.316981,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.013294,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 6.892585,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.553714,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 22.952809,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 22.615243,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.592041,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.292728,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.075048,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.775688,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.99714,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.693847,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.570796,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 27.26852,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 26.353014,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 26.031508,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 26.437622,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.129512,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 27.584879,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 27.280647,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.854998,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.550742,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.745465,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.436737,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 19.655386,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 19.351257,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 26.859508,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.547981,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.164134,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.860791,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.877268,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 29.555413,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.606863,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.294736,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 33.067503,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 32.654056,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 32.134755,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 31.799325,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 29.008046,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.642999,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 8.193569,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 7.858142,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 21.322366,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 20.955928,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 32.181593,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 31.859317,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.606919,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.25597,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.847368,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 27.538631,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.188513,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.879923,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 22.832497,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 22.506011,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.174094,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.838186,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 21.333761,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 21.023859,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.987231,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.679981,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 27.05298,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 26.748167,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 7.394466,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.081539,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.511996,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.178366,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 26.709261,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 26.403444,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 7.175137,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.861394,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 23.93617,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 23.607951,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 29.039496,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 28.715397,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 24.653806,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 24.328197,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 7.318551,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.012452,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.576447,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.264876,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 61.574117,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 61.246296,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.859032,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 22.554912,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.40883,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.107381,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.961385,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 27.656086,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.832218,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.52019,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.61578,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 20.283541,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 26.497311,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 26.179351,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.132345,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 17.830298,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 26.985332,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 26.68325,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.883406,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.577556,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 7.68327,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.37178,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 19.969511,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 19.650698,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 26.378473,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 26.076831,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.625241,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.307546,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 19.576853,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.246511,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.485132,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.168802,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 1,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 18.129358,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 17.807931,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 62.486745,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 62.124025,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 29.902841,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 29.529566,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 22.396647,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 22.057417,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 24.095199,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 23.765663,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 31.989815,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 31.63348,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.981477,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.652716,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.814288,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.495085,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 3,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.952013,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.653498,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.018086,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 27.71686,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.348864,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.040911,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.102214,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.797132,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.672158,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 20.365773,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.651011,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.31111,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.619038,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 19.285509,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 6.463924,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.158678,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 22.915705,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 22.60555,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 2,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.101898,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.799913,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.348573,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 19.038203,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 20.055004,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 19.754875,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 59.123,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 58.803518,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 9,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 28.731893,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.421074,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 7,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.221161,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.894971,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.263241,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.960195,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 7.013776,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 6.632694,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 26.294031,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 25.982525,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.377534,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.076605,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 20.238701,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 19.932329,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.714635,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.404941,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 6,
+      "preamble": "echo nop",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 21.370952,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.003256,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 4,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 27.933063,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 27.606706,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 5,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 6.751384,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 6.42929,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "echo nop",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 27.599654,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 27.280175,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 8,
+      "preamble": "echo nop",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 7.03221,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 6.716884,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    }
+  ]
+}

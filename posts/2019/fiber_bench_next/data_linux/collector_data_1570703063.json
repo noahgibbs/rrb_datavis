@@ -1,0 +1,2423 @@
+{
+  "collector_ruby_version": "2.7.0",
+  "reps_per_config": 1,
+  "configs": [
+    [
+      5,
+      200000
+    ],
+    [
+      10,
+      100000
+    ],
+    [
+      100,
+      10000
+    ],
+    [
+      1000,
+      1000
+    ]
+  ],
+  "benchmarks": [
+    "fiber_test.rb",
+    "fork_test.rb",
+    "thread_test.rb",
+    "thread_test_multi_master.rb",
+    "williams_fiber_test.rb"
+  ],
+  "preambles": [
+    "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+    "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+    "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+    "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+    "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+    "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+    "ulimit -Sn 10240 && rvm use 2.6.5 --install"
+  ],
+  "summary": {
+    "successes": 135,
+    "failures": 0,
+    "skips": 5,
+    "no_data": 0,
+    "total_configs": 140
+  },
+  "results": [
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 8.905071131,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 8.517770002,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 19.934017206,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 19.544269681,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 9.764336566,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 9.325274767,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 15.420199751,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 15.029989304,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 83.631970777,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 80.221442829,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 13.60550582,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 13.168834473,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 17.526965176,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 17.042576024,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.819137123,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.483206479,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 23.019501339,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 22.629392923,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.687763561,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.251880739,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 28.443538714,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 28.005944371,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 31.395379287,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 31.007632257,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 16.282498943,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 15.893941703,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 17.957239528,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 17.466250786,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 12.652818244,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 12.216328393,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 37.795904062,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 37.450653652,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 26.680563021,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 26.288054891,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 31.013140421,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 30.666967278,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 32.254416629,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 31.867357694,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 21.769553879,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.379211761,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 22.400742771,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 22.010048806,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 27.741413517,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 27.399642505,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 80.507269169,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 80.021496491,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 24.884786486,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 24.53930197,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 8.216522086,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.829141766,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 21.610475,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 21.221889854,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 79.660115139,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 79.271393918,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 30.024428759,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 29.684964821,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 24.459616883,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 24.022601352,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.008107786,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.661166339,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 34.724524476,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 34.383117153,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 16.476763249,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.995775843,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 25.571097209,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 25.122195828,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 30.402262845,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 30.008452958,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 29.51062918,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 29.076885041,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 8.117620931,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 7.6338655,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 10.130177337,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.745152928,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 30.15864905,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 29.774377338,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 71.471738799,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 70.987591665,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 24.240870157,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 23.855580332,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 44.47560618,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 44.089117583,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 42.117221483,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 41.730021227,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.011014383,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 27.673587517,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.931199483,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 8.446603754,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 77.652369979,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 77.317305528,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 70.762066659,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 70.372210736,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 32.395665828,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 32.000343021,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.486750925,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 9.993870331,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 16.906367636,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.423400768,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 79.194461468,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 78.846083794,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 24.394124965,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 24.001603527,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.427699801,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 28.972741465,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 10.212028765,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 9.873130436,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 79.5369216,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 79.143112581,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 10.483885732,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.085919703,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 9.53357955,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.19577246,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 77.450212494,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 77.110586688,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 43.721492899,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 43.373165619,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 34.777254629,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 34.381791297,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 9.375507446,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 9.035584751,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.51585826,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.180586194,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 9.659177819,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 9.273219157,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 31.475250356,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 31.091210605,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 29.698499753,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 29.208084903,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 29.548824129,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 29.161880423,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 15.415070046,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 14.978762637,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 18.375433361,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 18.037955684,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 10.0259845,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.591279238,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 17.838029321,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 17.397387796,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 79.153035395,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 78.764028456,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 72.097042041,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 71.711995726,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 78.492988652,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 78.146889832,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 44.285531497,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 43.900242141,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 22.364532702,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 21.977409368,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 17.794092604,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 17.302099477,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 25.687288702,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 25.250466981,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 79.388713563,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 79.001288742,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 79.93456537,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 79.547994897,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 30.912544324,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 30.570900485,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 80.44256016,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 80.049950871,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 37.956853284,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 37.608509133,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 24.091223866,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 23.748535333,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 29.271631081,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 28.934843022,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 23.936869864,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 23.544945082,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 79.916031221,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 79.529204838,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 11.038419178,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 10.694810364,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 18.564050992,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 18.079825907,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 9.730699632,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 9.288921541,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 76.415454635,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 76.077670519,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 24.990446597,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 24.552424415,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 23.477279319,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 23.090803748,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 30.385182539,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 30.045414834,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 30.756655686,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 30.36424513,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 30.81761975,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 30.429439162,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.136066638,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.750379086,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 8.953988422,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 8.568048211,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 9.998631083,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.513295584,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 30.413321572,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 30.016980017,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 10.592740653,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 10.157643653,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.821293905,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.337950653,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 30.408371527,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 29.925070146,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 31.121318001,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 30.783050975,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 15.884092395,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 15.497347335,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 31.151009206,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 30.811233884,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.0.0-p0 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 31.068346167,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 30.681914995,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 17.709585732,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 17.224483789,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 79.405805136,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 78.915807084,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 15.361974549,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 14.924668284,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 30.425776675,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 30.083201981,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.773028365,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 8.387733278,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 9.055833801,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 8.713970097,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 71.235168205,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 70.895153154,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 72.155087929,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 71.817126776,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 9.801241606,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.458417621,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 30.301519226,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 29.915217471,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 29.674541053,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 29.188603036,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 13.607631194,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 13.163405399,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 27.456915554,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 27.120180458,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 79.177759239,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 78.790826528,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 79.034029269,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 78.692574449,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.328228988,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 7.990957821,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 17.119497861,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 16.783373517,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 10.047763126,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 9.657642929,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 100,
+      "messages": 10000,
+      "result_status": true,
+      "whole_process_time": 8.463370336,
+      "result_data": {
+        "workers": 100,
+        "requests_per_batch": 10000,
+        "time": 8.074189692,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "thread_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 28.835290433,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 28.492395042,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 22.133291423,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 21.744604121,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "fork_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 9.516031726,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 9.120759984,
+        "success": true,
+        "pending_write_failures": [
+
+        ],
+        "pending_read_failures": [
+
+        ]
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.3.8 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 27.979318015,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 27.578325689,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 28.297676593,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 27.903561884,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.2.10 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 10,
+      "messages": 100000,
+      "result_status": true,
+      "whole_process_time": 31.183273643,
+      "result_data": {
+        "workers": 10,
+        "requests_per_batch": 100000,
+        "time": 30.840962043,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 13.673209951,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 13.238782773,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.4.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 71.137990968,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 70.750715113,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.5.3 --install",
+      "benchmark": "williams_fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 19.673827851,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 19.184003021,
+        "success": true
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.6.5 --install",
+      "benchmark": "thread_test_multi_master.rb",
+      "workers": 5,
+      "messages": 200000,
+      "result_status": true,
+      "whole_process_time": 33.79270934,
+      "result_data": {
+        "workers": 5,
+        "requests_per_batch": 200000,
+        "time": 33.357405299,
+        "success": true,
+        "pending_failures": 0
+      }
+    },
+    {
+      "rep_num": 0,
+      "preamble": "ulimit -Sn 10240 && rvm use 2.1.10 --install",
+      "benchmark": "fiber_test.rb",
+      "workers": 1000,
+      "messages": 1000,
+      "result_status": true,
+      "whole_process_time": 20.715451047,
+      "result_data": {
+        "workers": 1000,
+        "requests_per_batch": 1000,
+        "time": 20.369020468,
+        "success": true
+      }
+    }
+  ]
+}
