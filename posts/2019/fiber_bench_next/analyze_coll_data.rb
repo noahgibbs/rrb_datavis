@@ -60,7 +60,10 @@ end
 
 preamble_keys = by_pre_bench_workers_msgs.keys.sort
 preamble_keys.each do |preamble|
+    puts "\n== Ruby: #{preamble.scan(/\d\.\d\.\d/)[0]}"
     benchmark_keys = by_pre_bench_workers_msgs[preamble].keys.sort
+    #benchmark_keys = ["thread_test.rb", "thread_test_multi_master.rb"]
+    #benchmark_keys = ["fiber_test.rb", "williams_fiber_test.rb"]
     benchmark_keys.each do |benchmark|
         workers_keys = by_pre_bench_workers_msgs[preamble][benchmark].keys.sort
         workers_keys.each do |workers|
@@ -68,25 +71,17 @@ preamble_keys.each do |preamble|
             msgs_keys = workers_hash.keys.sort
             msgs_keys.each do |msgs|
                 data_array = workers_hash[msgs]
-                config_description = "Pre: #{preamble.inspect} Bench: #{benchmark.inspect} W: #{workers.inspect} Msg: #{msgs.inspect}"
+                config_description = "Ruby: #{preamble.scan(/\d\.\d\.\d/)[0]} Bench: #{benchmark.inspect} W: #{workers.inspect} Msg: #{msgs.inspect}"
                 if data_array.empty?
                     puts "No data for configuration #{config_description}"
                     workers_hash.delete(msgs)
                 else
-                    whole_process_data = data_array.map { |result| result["whole_process_time"] }
+                    #whole_process_data = data_array.map { |result| result["whole_process_time"] }
                     working_data = data_array.map { |result| result["result_data"]["time"] }
-                    puts "Messages-only data for configuration #{config_description} (#{data_array.size} runs):"
-                    puts "  mean:     #{array_mean(working_data)}"
-                    puts "  median:   #{percentile(working_data, 50)}"
-                    puts "  variance: #{array_variance(working_data)}"
-                    puts "  std_dev:  #{Math.sqrt array_variance(working_data)}"
-                    puts "-----"
-                    puts "Whole-process data for configuration #{config_description} (#{data_array.size} runs):"
-                    puts "  mean:     #{array_mean(whole_process_data)}"
-                    puts "  median:   #{percentile(whole_process_data, 50)}"
-                    puts "  variance: #{array_variance(whole_process_data)}"
-                    puts "  std_dev:  #{Math.sqrt array_variance(whole_process_data)}"
-                    puts "\n\n====="
+                    puts "Conf #{config_description} (#{data_array.size} runs): #{"%.2f" % percentile(working_data, 50)} std_dev #{"%.2f" % Math.sqrt(array_variance(working_data))}"
+                    #puts "  median:   #{percentile(working_data, 50)}"
+                    #puts "  std_dev:  #{Math.sqrt array_variance(working_data)}"
+                    #puts "====="
                 end
             end
         end
